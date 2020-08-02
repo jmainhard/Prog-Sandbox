@@ -17,7 +17,7 @@ public class Distancia {
         double resultado;
         Scanner input = new Scanner(System.in);
         
-//FIXME sólo números enteros !Fixed, p1 y p2 cambiados a double
+//todo/fixme ciclo iterativo para evitar string inputs
         System.out.println("Bienvenido, el siguiente programa calcula");
         System.out.println("distancia entre dos puntos.");
         System.out.println("----< >----");
@@ -42,12 +42,9 @@ public class Distancia {
 //Proceso
         dX = x2-x1;//calcular distancia en eje x
         dY = y2-y1;//d(y)
-//        dX = Math.pow(dX, 2);
-//        dY = Math.pow(dY, 2);
         resultado = Math.hypot(dX, dY);
-        resultado=Math.floor(resultado*100); //truncar 2 a la centésima
+        resultado=Math.floor(resultado*100); //truncar a la centésima
         resultado/=100;
-        
 //Salida
         System.out.println("La distancia entre A y B es:");
         System.out.println("d(A,B) = "+ resultado); 
