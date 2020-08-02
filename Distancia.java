@@ -24,25 +24,29 @@ public class Distancia {
         
 //Entrada
         System.out.println("A continuación Ingrese las coordenadas del P1(A)");
-        System.out.println("X=");
+        System.out.println("X =");
         x1 = input.nextDouble();
         System.out.println("A = "+ "("+(int)x1+","+"Y"+")");
+        System.out.println("Y =");
         y1 = input.nextDouble();
         System.out.println("A = "+ "("+(int)x1+","+(int)y1+")");
         
         System.out.println("A continuación Ingrese las coordenadas del P2(B)");
-        System.out.println("X=");
+        System.out.println("X =");
         x2 = input.nextDouble();
         System.out.println("B = "+ "("+(int)x2+","+"Y"+")");
+        System.out.println("Y =");
         y2 = input.nextDouble();
-        System.out.print("B = "+ "("+(int)x2+","+(int)y2+") ");
-        System.out.println("A = "+ "("+(int)x1+","+(int)y1+")");
+        System.out.print("A = "+ "("+(int)x1+","+(int)y1+") ");
+        System.out.println("B = "+ "("+(int)x2+","+(int)y2+")");
 //Proceso
-        dX = x2-x1;//calcular distancia en eje x e y
-        dY = y2-y1;
+        dX = x2-x1;//calcular distancia en eje x
+        dY = y2-y1;//d(y)
 //        dX = Math.pow(dX, 2);
 //        dY = Math.pow(dY, 2);
         resultado = Math.hypot(dX, dY);
+        resultado=Math.floor(resultado*100); //truncar 2 a la centésima
+        resultado/=100;
         
 //Salida
         System.out.println("La distancia entre A y B es:");
