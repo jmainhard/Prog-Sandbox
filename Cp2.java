@@ -11,7 +11,7 @@ public class Cp2 {
     public static int numeroJuez;
     public static double grado;
 
-    //todo, matar la evaluación más alta y las más baja
+//función: validar el input hasta que se cumpla ejectuar = true;
     public static int validadorJuez() {
         int evaluacion = 0;
         boolean ejecutar = false;
@@ -20,7 +20,7 @@ public class Cp2 {
         while (ejecutar == false) {
             try {
                 while (evaluacion < 1 || evaluacion > 10) {
-                    System.out.println("Evalúe al/la clavadista de 1 a 10 (Número entero):");
+                    System.out.println("Evalúe el/la clavadista de 1 a 10 (Número entero):");
                     evaluacion = userInput.nextInt();
                 }
                 ejecutar = true;
@@ -32,16 +32,26 @@ public class Cp2 {
         return evaluacion;
     }
 
-    //todo idea, almacenar todas las notas (array hechizo) y compararlas para cortar
-    public static int cortarEvaluaciones(int puntajeIngresado) {
-        int nuevaSuma = 0, n1, n2, n3, n4, n5, n6, n7;//nX -> n° evaluación
-//        puntajeIngresado
-        return nuevaSuma;
+//evalúa y elimina el número en caso de ser el menor o mayor, intento de corte
+    public static int puntajeCorte(int varEvaluacion) {
+        int nuevaSuma = 0, mayor = 0, menor = 0;
+        
+        if (varEvaluacion>mayor) {
+            mayor = varEvaluacion;
+            varEvaluacion = 0;
+        } else {
+            menor = varEvaluacion;
+            varEvaluacion = 0;
+        }
+        
+        return varEvaluacion;
     }
-
-    //recibe cada evaluación, calcular y retornar el puntaje total
+    
+//recibe cada evaluación, calcular y retornar el puntaje total
     public static double procesaEvaluacion(int evaluacion) {
         double contador = 0;
+        int mayor = 0, menor = 0;
+
         contador += evaluacion;
         contador *= (double) 0.6;
         return contador;
@@ -50,27 +60,26 @@ public class Cp2 {
     public static void main(String[] args) {
         Scanner mainInput = new Scanner(System.in);
         int numeroJuez = 0;
-        double evaluacionMain = 0;//almacena evaluacion F. calculada
+        double evaluacionMain = 0;//almacena evaluacion calculada
 
         System.out.println("Bienvenido/a, evalúe el/la clavadista segun grado de dificultad");
         System.out.println("ingrese grado de dificultad del salto para este clavadista");
 
+//todo agregar validador de 1.6<grados<3.6
         System.out.println("Grado de dificultad:");
         grado = mainInput.nextDouble();//grado de dificultad que tendrá este salto
 
         for (numeroJuez = 1; numeroJuez < 8; numeroJuez++) {
             System.out.println("\n" + "Juez N°" + numeroJuez + " Ingrese su evaluación");
-            //procesaEvaluacion(validadorJuez());//recibe evaluacion
             evaluacionMain += procesaEvaluacion(validadorJuez());//añade evaluacion al stack
         }
 
-        evaluacionMain *= (double)grado;//ajusta evaluación según grado
-        evaluacionMain = Math.floor(evaluacionMain*100); //truncar a la centésima
+        evaluacionMain *= (double) grado;//ajusta evaluación según grado
+        evaluacionMain = Math.floor(evaluacionMain * 100); //truncar a la centésima
         evaluacionMain /= 100;
-        
-        //output de puntaje
-        System.out.println("Puntaje del clavadista:" + evaluacionMain);
 
+        //output de puntaje
+        System.out.println("Puntaje del clavadista: " + evaluacionMain);
     }
 
 }
