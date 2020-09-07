@@ -216,6 +216,52 @@ public class Libreria {
         }
         System.out.println("Lista generada: "+ arr+ "\n");
     }
+    
+    public static void searchInList(ArrayList arr) { //buscar
+        Scanner input = new Scanner(System.in);
+        boolean is = true;
+        int x = -300;
+        while (x < -99 || x > 99 || !is) {
+            x = -300;
+            try {
+                System.out.println("Ingrese búsqueda");
+                x = input.nextInt();
+                if (arr.contains(x)) {
+                    System.out.print("\nEncontrado en el índice N°: ");
+                    System.out.println(arr.indexOf(x));
+                    is = true;
+                } else {
+                    System.out.println("\nEl elemento no se encuentra en la "
+                            + "lista \n");
+                    is = false;
+                }
+            } catch (Exception e) {
+                System.out.println("No válido\n");
+                input.next();
+            }
+        }
+    }
+    
+    public static int contar(String palabra) {
+        int contador = 0;
+        for (int i=0; i<palabra.length(); i++) {
+           if (palabra.charAt(i)=='a') {
+                contador ++;
+            }
+        }
+        return contador;
+    }
+    
+    public static int buscar(int[] arr, int x) {
+        int pos = -1;
+        for (int i=0; i < arr.length; i++) {
+            if (arr[i] == x) {
+                pos = i;
+                break;
+            }
+        }
+        return pos;
+    }
 
     public static void main(String[] args) {
         int[] arr = new int[200];
@@ -224,6 +270,11 @@ public class Libreria {
         
         mergeSort(arr, arr.length);
         System.out.println(Arrays.toString(arr));
+        
+        int[] arr2 = {65, 43, 23, 78, 4, 3, 9, 10, 12, 8, 6};
+        printArray(arr2);
+        
+        System.out.println("índice: "+ buscar(arr2, 6));
         
     }
 
