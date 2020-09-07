@@ -217,10 +217,11 @@ public class Libreria {
         System.out.println("Lista generada: "+ arr+ "\n");
     }
     
-    public static void searchInList(ArrayList arr) { //buscar
+    public static void searchInList(ArrayList arr) { //buscar primera coinc.
         Scanner input = new Scanner(System.in);
-        boolean is = true;
+        boolean is = false;
         int x = -300;
+        
         while (x < -99 || x > 99 || !is) {
             x = -300;
             try {
@@ -230,6 +231,7 @@ public class Libreria {
                     System.out.print("\nEncontrado en el índice N°: ");
                     System.out.println(arr.indexOf(x));
                     is = true;
+                    break;
                 } else {
                     System.out.println("\nEl elemento no se encuentra en la "
                             + "lista \n");
@@ -269,12 +271,13 @@ public class Libreria {
         randomFillArray(arr, 1000);
         
         mergeSort(arr, arr.length);
-        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(arr)+ "\n");
         
-        int[] arr2 = {65, 43, 23, 78, 4, 3, 9, 10, 12, 8, 6};
-        printArray(arr2);
+        ArrayList list = new ArrayList();
         
-        System.out.println("índice: "+ buscar(arr2, 6));
+        randomFillList(list, 10, 5);
+        
+        searchInList(list);
         
     }
 
