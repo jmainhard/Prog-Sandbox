@@ -18,8 +18,9 @@ public class Libreria {
     
     public static void printArray(char[] arr) {
         for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i]);
+            System.out.print(arr[i]+ " ");
         }
+        System.out.println("\n");
     }
 
     public static void printMatrix(int[][] matrix) {
@@ -29,6 +30,16 @@ public class Libreria {
             }
             System.out.println();
         }
+    }
+    
+    public static void printMatrix(char[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.print("\n");
     }
     
     public static void printMatrix(int[][][] matrix) {
@@ -262,10 +273,21 @@ public class Libreria {
         return contador;
     }
     
-    public static int buscar(int[] arr, int x) {
+    public static int searchIn(int[] arr, int x) {
         int pos = -1;
         for (int i=0; i < arr.length; i++) {
             if (arr[i] == x) {
+                pos = i;
+                break;
+            }
+        }
+        return pos;
+    }
+    
+    public static int searchIn(char[] arr, char car) {
+        int pos = -1;
+        for (int i=0; i < arr.length; i++) {
+            if (arr[i] == car) {
                 pos = i;
                 break;
             }
