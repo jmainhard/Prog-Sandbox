@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class CPractico3 {
 
     public static char[] separar(String texto) {
-        char[] asd = new char[texto.length()];
-        return asd;
+        char[] arr = new char[texto.length()];
+        return arr;
     }
 
     //13.00 Ingreso de textos
@@ -23,7 +23,7 @@ public class CPractico3 {
             System.out.println("Traducción Imprenta -> Braille\n");
             texto = teclado.nextLine();
             System.out.println(texto);
-            traducir(separar(texto));
+            traducirTexto(separar(texto));
         } catch (Exception e) {
             teclado.next();
         }
@@ -36,18 +36,18 @@ public class CPractico3 {
         //num 3
         //otro 4
         if (esLetra(car)) {
-            return mayuscParser(car); //ver documentación
+            return esMayusc(car); //ver documentación
         } else if (esPunt(car)) {
             return 2;
         } else if (esNum(car)) {
             return 3;
         } else {
-            return 4;
+            return -1;
         }
     }
 
     public static boolean esLetra(char car) {
-        //todo pasar char[] -> char[][]
+        //todo, evaluar pasar char[] coleccion a char[][]
         char[] coleccion = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
                             'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
                             'q', 'r', 's', 't', 'u', 'v', 'x', 'y',
@@ -61,7 +61,7 @@ public class CPractico3 {
         return false;
     }
     
-    public static int mayuscParser(char car) {
+    public static int esMayusc(char car) {
         char[] coleccion = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
                             'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
                             'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y',
@@ -102,17 +102,31 @@ public class CPractico3 {
         return false;
     }
 
-    public static void traducir(char[] arr) {
+    public static void traducirTexto(char[] arr) {
         Libreria.printArray(arr);
         for (int i = 0; i < arr.length; i++) {
             switch (parser(arr[i])) {
                 case 0:
-                    
+                    //letra minusc
+                    break;
+                case 1:
+                    //letra mayusc
+                    break;
+                case 2:
+                    //puntuación
+                    break;
+                case 3:
+                    //número
                     break;
                 default:
+                    //otro
                     throw new AssertionError();
             }
         }
+    }
+    
+    public static void traducirCaracter(char car) {
+        
     }
 
     public static void main(String[] args) {
@@ -135,8 +149,8 @@ public class CPractico3 {
         System.out.println("Es punt: "+ esPunt(c));
         System.out.println("Es num: "+ esNum(c));
         
-        System.out.println(mayuscParser(a));
-        System.out.println(mayuscParser(d));
+        System.out.println(esMayusc(a));
+        System.out.println(esMayusc(d));
     }
 
 }
