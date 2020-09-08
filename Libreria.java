@@ -15,6 +15,12 @@ public class Libreria {
         }
         System.out.println("\n");
     }
+    
+    public static void printArray(char[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+        }
+    }
 
     public static void printMatrix(int[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
@@ -77,7 +83,7 @@ public class Libreria {
         }
     }
 
-    public static void randomFillArray(int[] arr, int random) {
+    public static void randomFill(int[] arr, int random) {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) (Math.random() * random);
         }
@@ -85,7 +91,7 @@ public class Libreria {
         System.out.println(Arrays.toString(arr)+"\n");
     }
 
-    public static void randomFillMatrix(int[][] matrix, int random) {
+    public static void randomFill(int[][] matrix, int random) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 matrix[i][j] = (int) (Math.random() * random);
@@ -200,7 +206,7 @@ public class Libreria {
         return fibon;
     }
     
-    public static void randomFillList(ArrayList arr, int random, int tamaño) {
+    public static void randomFill(ArrayList arr, int random, int tamaño) {
         /* Nota a futuro:
         *  i < arr.size() no funcionaba porque no me generaba el ArrList 
          * con 10 (o más) elementos, como se supone que debería :(
@@ -217,15 +223,17 @@ public class Libreria {
         System.out.println("Lista generada: "+ arr+ "\n");
     }
     
-    public static void searchInList(ArrayList arr) { //buscar primera coinc.
+    public static void searchIn(ArrayList arr, int limInf, int limSup) {
+        //buscar primera coincidencia
         Scanner input = new Scanner(System.in);
         boolean is = false;
-        int x = -300;
+        int x = limInf - 1;
         
-        while (x < -99 || x > 99 || !is) {
-            x = -300;
+        while (x < limInf || x > limSup || !is) {
+            x = limInf - 1;
             try {
-                System.out.println("Ingrese búsqueda");
+                System.out.println
+                           ("Búsqueda de enteros entre "+ limInf+" y "+ limSup);
                 x = input.nextInt();
                 if (arr.contains(x)) {
                     System.out.print("\nEncontrado en el índice N°: ");
@@ -264,21 +272,5 @@ public class Libreria {
         }
         return pos;
     }
-
-    public static void main(String[] args) {
-        int[] arr = new int[200];
-        
-        randomFillArray(arr, 1000);
-        
-        mergeSort(arr, arr.length);
-        System.out.println(Arrays.toString(arr)+ "\n");
-        
-        ArrayList list = new ArrayList();
-        
-        randomFillList(list, 10, 5);
-        
-        searchInList(list);
-        
-    }
-
+    
 }
