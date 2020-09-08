@@ -62,8 +62,17 @@ public class CPractico3 {
     }
     
     public static int mayuscParser(char car) {
-        
-        return 1;
+        char[] coleccion = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+                            'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+                            'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y',
+                            'Z', 'N', 'W'};
+
+        for (int i = 0; i < coleccion.length; i++) {
+            if (car == coleccion[i]) {
+                return 1;
+            }    
+        }
+        return 0;
     }
 
     public static boolean esPunt(char car) {
@@ -110,6 +119,7 @@ public class CPractico3 {
         char a = 'a';
         char b = '?';
         char c = '8';
+        char d = 'A';
         System.out.println(a);
         System.out.println("Es letra: "+ esLetra(a));
         System.out.println("Es punt: "+ esPunt(a));
@@ -124,6 +134,9 @@ public class CPractico3 {
         System.out.println("Es letra: "+ esLetra(c));
         System.out.println("Es punt: "+ esPunt(c));
         System.out.println("Es num: "+ esNum(c));
+        
+        System.out.println(mayuscParser(a));
+        System.out.println(mayuscParser(d));
     }
 
 }
