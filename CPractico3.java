@@ -4,22 +4,18 @@ package com.mycompany.disenomodular;
  * @author Jorge M. Control práctico 3 Traductor imprenta -> braille 08-09-2020
  * 12.50
  */
-import static com.mycompany.disenomodular.Libreria.*;//printMatrix y printArray
+import static com.mycompany.disenomodular.Libreria.printMatrix;//printMatrix
 import java.util.Scanner;
 
 public class CPractico3 {
-    
-    //Colecciones de carácteres, usadas en la separación y traducción
+    //Declaración de colecciones (de carácteres)
+    //Usados en la separación y traducción del texto
     //todo, evaluar pasar char[] coleccion a char[][]
     public static char[] colMinusc = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
                                       'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o',
                                       'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 
-                                      'x', 'y', 'z', 'á', 'é', 'í', 'ó', 'ú',};
-    
-//    public static char[] colMayusc = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-//                                      'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O',
-//  Alto ahorro de memoria              'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
-//           (char.toUppercase)         'X', 'Y', 'Z', 'Á', 'É', 'Í', 'Ó', 'Ú'};
+                                      'x', 'y', 'z', 'á', 'é', 'í', 'ó', 'ú',
+                                      'ü'};
     
     public static char[] colPunt = {'.', ',', ';', ':', '-', '¿',
                                     '?', '¡', '!', '"', '(', ')', '\''};
@@ -33,22 +29,29 @@ public class CPractico3 {
         String texto = "";
         while (texto.equals("")) {
            try {
-                System.out.println("Traducción Imprenta a Braille\n");
+                System.out.println("Traducción de Imprenta a Braille\n");
+                System.out.println("        Ingrese texto\n"+ 
+                                   "         ----< >----");
                 texto = teclado.nextLine();
                 traducirTexto(texto.toCharArray());
-                printArray(texto.toCharArray());
            } catch (Exception e) { //esto (catch) no debiera pasar nunca xd
                 teclado.next();
             } 
         }
     }
     
+    /**
+     * Analizador sintáctico de los carácteres
+     * @param car Carácter individual del texto
+     * @return 0, 1, 2, 3 o default -1
+     */
+    
     public static int parser(char car) {
         //letra minusc 0 
         //      mayusc 1
         //      punt   2
         //      num    3
-        //      otro   4
+        //      otro   -1
         if (esLetra(car)) {
             if (Character.isUpperCase(car)) {
                 return 1;
@@ -63,7 +66,13 @@ public class CPractico3 {
             return -1;
         }
     }
-
+    
+    /**
+     * Retorna bool si es (o no) letra, no importan mayusc ni minusc
+     * @param car Carácter individual del texto
+     * @return boolean
+     */
+    
     public static boolean esLetra(char car) {
         for (int i = 0; i < colMinusc.length; i++) {
             if (car == colMinusc[i] ||
@@ -73,6 +82,12 @@ public class CPractico3 {
         } 
         return false;
     }
+    
+    /**
+     * Retorna bool si es (o no) signo de puntuación
+     * @param car Carácter individual del texto
+     * @return boolean
+     */
     
     public static boolean esPunt(char car) {
         //array que funciona como colección de chars de puntuación
@@ -85,7 +100,13 @@ public class CPractico3 {
         }
         return false;
     }
-
+    
+    /**
+     * Retorna bool si es (o no) número
+     * @param car Carácter individual del texto
+     * @return boolean
+     */
+    
     public static boolean esNum(char car) {
         for (int i = 0; i < 10; i++) {
             if (car == colNum[i]) {
@@ -94,7 +115,12 @@ public class CPractico3 {
         }
         return false;
     }
-
+    
+    /**
+     * Función de traducción, depende de los valores que tome parser(char car) 
+     * @param arr Texto ingresado por teclado
+     */
+    
     public static void traducirTexto(char[] arr) {
         for (int i = 0; i < arr.length; i++) {
             switch (parser(arr[i])) {
@@ -115,13 +141,20 @@ public class CPractico3 {
                     //caso número
                     break;
                 default:
-                    System.out.println(" -> (Espacio"+ arr[i]+ ")\n");
+                    System.out.println(" (Espacio "+ arr[i]+ ")\n");
                     //otro
             }
         }
     }
     
-    //alfabeto de letras minúsculas en braille (como)
+    //From here: Alfabetos de carácteres
+    /**
+     * Retorna el arreglo (2d) de la traducción que corresponda según 
+     * la posición del carácter relativo a su colección
+     * @param pos Posición del char relativa a la colección de carácteres
+     * @return Array de dos dimensiones en braille
+     */
+    
     public static char[][] alfabetoMinusc(int pos) {
         char[][] traduccion = new char[3][2];
         switch (pos) {
@@ -256,125 +289,156 @@ public class CPractico3 {
             case 32:
                 char[][] uuu = {{'O', '.'}, {'O', 'O'}, {'.', 'O'}};
                 traduccion = uuu;
-                break;    
+                break;
+            case 33:
+                char[][] ucremilla = {{'O', '.'}, {'O', 'O'}, {'.', 'O'}};
+                traduccion = ucremilla;
+                break;     
         }
                 return traduccion;
     }
+    
+    /**
+     * @param pos Posición del char relativa a la colección de carácteres
+     * @return Array de dos dimensiones en braille
+     */
     
     public static char[][] alfabetoPunt(int pos) {
         char[][] traduccion = new char[3][2];
         switch (pos) {
             case 0:
-                char[][] punto  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] punto  = {{'.', '.'}, {'.', '.'}, {'O', '.'}};
                 traduccion = punto;
                 break;
             case 1:
-                char[][] coma  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] coma  = {{'.', '.'}, {'O', '.'}, {'.', '.'}};
                 traduccion = coma;
                 break;
             case 2:
-                char[][] puncoma  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] puncoma  = {{'.', '.'}, {'O', '.'}, {'O', '.'}};
                 traduccion = puncoma;
                 break;
             case 3:
-                char[][] dpuntos  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] dpuntos  = {{'.', '.'}, {'O', 'O'}, {'.', '.'}};
                 traduccion = dpuntos;
                 break;
             case 4:
-                char[][] guion  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] guion  = {{'.', '.'}, {'.', '.'}, {'O', 'O'}};
                 traduccion = guion;
                 break;
             case 5:
-                char[][] interr1  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] interr1  = {{'.', '.'}, {'O', '.'}, {'.', 'O'}};
                 traduccion = interr1;
                 break;
             case 6:
-                char[][] interr2  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] interr2  = {{'.', '.'}, {'O', '.'}, {'.', 'O'}};
                 traduccion = interr2;
                 break;
             case 7:
-                char[][] exc1  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] exc1  = {{'.', '.'}, {'O', 'O'}, {'O', '.'}};
                 traduccion = exc1;
                 break;
             case 8:
-                char[][] exc2  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] exc2  = {{'.', '.'}, {'O', 'O'}, {'O', '.'}};
                 traduccion = exc2;
                 break;
             case 9:
-                char[][] comillas  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] comillas  = {{'.', '.'}, {'O', '.'}, {'O', 'O'}};
                 traduccion = comillas;
                 break;
             case 10:
-                char[][] parentesis1  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] parentesis1  = {{'O', '.'}, {'O', '.'}, {'.', 'O'}};
                 traduccion = parentesis1;
                 break;
             case 11:
-                char[][] parentesis2  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] parentesis2  = {{'.', 'O'}, {'.', 'O'}, {'O', '.'}};
                 traduccion = parentesis2;
                 break;
             case 12:
-                char[][] apost  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] apost  = {{'.', '.'}, {'.', '.'}, {'O', '.'}};
                 traduccion = apost;
                 break;      
         }
         return traduccion;
     }
     
+    /**
+     * @param pos Posición del char relativa a la colección de carácteres
+     * @return Array de dos dimensiones en braille
+     */
+    
     public static char[][] alfabetoNum(int pos) {
         char[][] traduccion = new char[3][2];
         switch (pos) {
             case 0:
-                char[][] cero  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] cero  = {{'.', 'O'}, {'O', 'O'}, {'.', '.'}};
                 traduccion = cero;
                 break;
             case 1:
-                char[][] uno  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] uno  = {{'O', '.'}, {'.', '.'}, {'.', '.'}};
                 traduccion = uno;
                 break;
             case 2:
-                char[][] dos  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] dos  = {{'O', '.'}, {'O', '.'}, {'.', '.'}};
                 traduccion = dos;
                 break;
             case 3:
-                char[][] tres  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] tres  = {{'O', 'O'}, {'.', '.'}, {'.', '.'}};
                 traduccion = tres;
                 break;
             case 4:
-                char[][] cuatro  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] cuatro  = {{'O', 'O'}, {'.', 'O'}, {'.', '.'}};
                 traduccion = cuatro;
                 break;
             case 5:
-                char[][] cinco  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] cinco  = {{'O', '.'}, {'.', 'O'}, {'.', '.'}};
                 traduccion = cinco;
                 break;
             case 6:
-                char[][] seis  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] seis  = {{'O', 'O'}, {'O', '.'}, {'.', '.'}};
                 traduccion = seis;
                 break;
             case 7:
-                char[][] siete  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] siete  = {{'O', 'O'}, {'O', 'O'}, {'.', '.'}};
                 traduccion = siete;
                 break;
             case 8:
-                char[][] ocho  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] ocho  = {{'O', '.'}, {'O', 'O'}, {'.', '.'}};
                 traduccion = ocho;
                 break;
             case 9:
-                char[][] nueve  = {{'.', '.'}, {'.', '.'}, {'.', '.'}};
+                char[][] nueve  = {{'.', 'O'}, {'O', '.'}, {'.', '.'}};
                 traduccion = nueve;
                 break;    
         }
         return traduccion;
     }
     
-    //From here: QUE carácter traducir y como
+    //From here: Qué carácter traducir y como
+    /**
+     * me cansé de documentar
+     * @param car Caracter que será traducido, entregado por ciclos
+     */
+    
     public static void traducirMinusc(char car) {
         char[][] traduccion = new char[3][2];
+        /* importante: arr[][] traducción es el array que tomará cada traducción
+         * que sea llamada
+         */ 
+        
+        /** Esta estructura recorre las colecciones y mientras
+            el caracter que se quiera traducir tenga su equivalente en la 
+            respectiva colección (colMinusc, colPunt, colNum), 'traducción'
+            tomará tomara los valores que entrege la búsqueda de alfabetoX(pos)
+            importante: esto último hace al programa dependiente de la integridad
+            de las posicicones de los carácteres en sus respectivas colecciones
+                ***aplica para todas las funciones restantes***
+        */
         for (int i = 0; i < colMinusc.length; i++) {
             if (car == colMinusc[i]) {
-                traduccion = alfabetoMinusc(i);
-                System.out.println(colMinusc[i]);
-                printMatrix(traduccion);
+                traduccion = alfabetoMinusc(i); //traspaso de arrays
+                System.out.println(colMinusc[i]); //muestra el caracter trad.
+                printMatrix(traduccion); //Libreria.printMatrix
                 }
             }
         }
@@ -383,6 +447,7 @@ public class CPractico3 {
         char[][] traduccion = new char[3][2];
         char[][] prefMayusc = {{'.', 'O'}, {'.', '.'}, {'.', 'O'}};
         char lowerCar = Character.toLowerCase(car);
+        
         for (int i = 0; i < colMinusc.length; i++) {
             if (lowerCar == colMinusc[i]) {
                 traduccion = alfabetoMinusc(i);
@@ -407,6 +472,7 @@ public class CPractico3 {
     public static void traducirNum(char car) {
         char[][] prefijoNum = {{'.', 'O'}, {'.', 'O'}, {'O', 'O'}};
         char[][] traduccion = new char[3][2];
+        
         for (int i = 0; i < colNum.length; i++) {
             if (car == colNum[i]) {
                 traduccion = alfabetoNum(i);
@@ -418,15 +484,7 @@ public class CPractico3 {
     }
     
     public static void main(String[] args) {
-        char a = 'A';
-        char b = '?';
-        char c = '8';
-        char d = 'A';
-        
         input();
-        
-
-
     }
-
+    
 }
