@@ -3,6 +3,7 @@ package com.mycompany.disenomodular;
 /**
  * @author Jorge M. Control práctico 3 Traductor imprenta -> braille 08-09-2020
  * 12.50
+ * 21.00
  */
 import static com.mycompany.disenomodular.Libreria.printMatrix;//printMatrix
 import java.util.Scanner;
@@ -268,33 +269,29 @@ public class CPractico3 {
                 break;
             case 27:
                 char[][] aa = {{'O', '.'}, {'O', 'O'}, {'O', 'O'}};
-                traduccion = aa;
+                traduccion = aa; //á
                 break;
             case 28:
                 char[][] ee = {{'.', 'O'}, {'O', '.'}, {'O', 'O'}};
-                traduccion = ee;
+                traduccion = ee; //é
                 break;
             case 29:
                 char[][] iii = {{'.', 'O'}, {'.', '.'}, {'O', '.'}};
-                traduccion = iii;
+                traduccion = iii; //í
                 break;
             case 30:
                 char[][] oo = {{'.', 'O'}, {'.', '.'}, {'O', 'O'}};
-                traduccion = oo;
+                traduccion = oo; //ó
                 break;
             case 31:
                 char[][] uu = {{'.', 'O'}, {'O', 'O'}, {'O', 'O'}};
-                traduccion = uu;
+                traduccion = uu; //ú
                 break; 
             case 32:
                 char[][] uuu = {{'O', '.'}, {'O', 'O'}, {'.', 'O'}};
-                traduccion = uuu;
-                break;
-            case 33:
-                char[][] ucremilla = {{'O', '.'}, {'O', 'O'}, {'.', 'O'}};
-                traduccion = ucremilla;
-                break;     
-        }
+                traduccion = uuu; //ü
+                break; 
+            }
                 return traduccion;
     }
     
