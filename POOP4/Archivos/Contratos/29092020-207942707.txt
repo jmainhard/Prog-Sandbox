@@ -1,1 +1,8 @@
-asdasd
+Rut Cliente: 207942707
+Servicios Contratados: [Soporte Web, Platinum]
+Valor servicios: 0
+Tiempo vigencia: 2
+Rut Cliente: 207942707
+Servicios Contratados: [Soporte Web, Platinum, Hosting, Platinum]
+Valor servicios: 0
+Tiempo vigencia: 4

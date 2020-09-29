@@ -125,7 +125,14 @@ public class Contrato { // extends Cliente
     public void addServicio(String servicio, String nivel) {
         listaServicios.add(servicio);
         listaServicios.add(nivel);
-        listaServicios.add("-");
+    }
+    
+    public int calcularValorServicio(byte tipoSer, byte nvlSer) {
+        Servicios servicio = new Servicios(tipoSer, nvlSer);
+        int valorServicio = 0;
+        valorServicio = (int) servicio.getValor();
+        
+        return valorServicio;
     }
     
     

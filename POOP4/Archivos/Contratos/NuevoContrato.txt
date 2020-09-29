@@ -1,0 +1,4 @@
+Rut Cliente: 
+Servicios: [Hosting, Platinum, -]
+Valor servicios: 0
+Tiempo vigencia: 4

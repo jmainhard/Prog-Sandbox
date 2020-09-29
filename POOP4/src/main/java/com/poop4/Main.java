@@ -113,6 +113,9 @@ public class Main {
         byte cantSer = -1; // cantidad de servicios
         byte numSer =  1; // análogo a cantSer en menuContrato()
         byte tiempoContrato = 0;
+        int valorServicio = 0;
+        int valorServ1 = 0; // valores de servicio individuales
+        int valorServ2 = 0;
         ga.readServicios(); // mostrar servicios
         Servicios servicio = new Servicios();
         
@@ -173,17 +176,20 @@ public class Main {
             }
         }
         
-//        valor += servicio.calcular(tipoSer, nivelSer);
+        valorServicio += contrato0.calcularValorServicio(tipoSer, nivelSer);
+//        valor1 = valorServicio;
         
-        ga.saveData(cliente0.getRut()
+//        if (numSer == 1) {
+            ga.saveData(cliente0.getRut()
                 , contrato0.getServicios()
-                , contrato0.getValor() 
+                , valorServicio 
                 , tiempoContrato //tiempo de contrato en meses (bytes)
                 , contrato0.getIdContrato());
+//        } else {
+//            ga.saveData(rut, serviciosContratados, valorServicio, tiempoContrato, idContrato);
+//        }
         
-        // contrato0.setServicio1(servicio.getTipo(tipoSer));
-        // contrato0.setS
-                  
+        
             
         }
         
@@ -200,8 +206,6 @@ public class Main {
 //        } while (repetir);
     
 
-    
-    
     public static void main(String[] args) {
         String nombreCliente = "";
         String domCliente = ""; // domicilio Cliente
@@ -216,52 +220,48 @@ public class Main {
         
         System.out.println("\nIngrese Datos del cliente");
         
-//        // entrada de datos cliente
-//        while (nombreCliente.equals("")) {
-//            System.out.println("\n< Nombre del cliente >");
-//            nombreCliente = teclado.nextLine();
-//        }
-//        while (domCliente.equals("")) {
-//            System.out.println("\n< Domicilio cliente >");
-//            domCliente = teclado.nextLine();
-//        }
-//        while (rutCliente <= -1) { // TODO cambiar por RUT válidos}
-//            rutCliente = -1;
-//            try {
-//                System.out.println("\n< RUT cliente > Sin puntos ni guión");
-//                rutCliente = teclado.nextInt();
-//                rutString = String.valueOf(rutCliente);
-//            } catch (Exception e) {
-//                System.out.println("\nError: rut no válido "+ e+ "\n");
-//                teclado.next();
-//            }
-//        }
-        //set atributos cliente
-//        cliente0.setRut(rutString);
-//        System.out.println(cliente0.getRut());
-//        cliente0.setDomicilio(domCliente);
-//        cliente0.setNombre(nombreCliente);
+        // entrada de datos cliente
+        while (nombreCliente.equals("")) {
+            System.out.println("\n< Nombre del cliente >");
+            nombreCliente = teclado.nextLine();
+        }
+        while (domCliente.equals("")) {
+            System.out.println("\n< Domicilio cliente >");
+            domCliente = teclado.nextLine();
+        }
+        while (rutCliente <= -1) { // TODO cambiar por RUT válidos}
+            rutCliente = -1;
+            try {
+                System.out.println("\n< RUT cliente > Sin puntos ni guión");
+                rutCliente = teclado.nextInt();
+                rutString = String.valueOf(rutCliente);
+            } catch (Exception e) {
+                System.out.println("\nError: rut no válido "+ e+ "\n");
+                teclado.next();
+            }
+        }
+        
+//        set atributos cliente
+        cliente0.setRut(rutString);
+        System.out.println(cliente0.getRut());
+        cliente0.setDomicilio(domCliente);
+        cliente0.setNombre(nombreCliente);
         
         //guarda los datos en la base clientes a través del ArrayList dataClient
-//        dataClient.add(nombreCliente);
-//        dataClient.add(rutString);
-//        dataClient.add(domCliente);
-//        //añade al archivo client.txt
-//        ga.saveData(dataClient);
+        dataClient.add(nombreCliente);
+        dataClient.add(rutString);
+        dataClient.add(domCliente);
+        //añade al archivo client.txt
+        ga.saveData(dataClient);
         
         //este método creará el archivo de contrato para cada cliente nuevo
-//        contrato0.setIdContrato(lcd, cliente0.getRut());
+        contrato0.setIdContrato(lcd, cliente0.getRut());
         
         // genera contrato
-//        do {
-            menuContrato();
-
+        menuContrato();
 
         System.out.println("Contrato guardado como: "+ contrato0.getIdContrato());
         
-
-        
-        
-    }
+    } // fin main
 
 }

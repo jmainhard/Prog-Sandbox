@@ -7,6 +7,7 @@ public class Servicios extends Contrato{
     
     private byte tipoServicio;
     private byte nivelServicio;
+    private int gold = 20000;
     
     public Servicios() {
         this.tipoServicio = -1;
@@ -61,6 +62,48 @@ public class Servicios extends Contrato{
         
         return nvl;
     }
+    
+    public int getValor() {
+        int valorServicio = 0;
+        
+        if (tipoServicio == 1) {
+            switch (nivelServicio) {
+                case 1: // soporte silver
+                    return valorServicio = (int) (gold - (gold*0.1));
+                case 2: // soporte gold
+                    return valorServicio = gold;
+                case 3: // soporte platinum
+                    return valorServicio = (int) (gold + (gold*0.3)); 
+                default:
+                    throw new AssertionError();
+            }
+                    
+        } else if (tipoServicio == 2) { // hosting values
+            switch (nivelServicio) {
+                case 1: // hosting silver
+                    return valorServicio = (int) (gold - (gold*0.15));
+                case 2: // gold
+                    return valorServicio = gold;
+                case 3: // platinum
+                    return valorServicio = (int) (gold + (gold*0.1));
+                default:
+                    throw new AssertionError();
+            }
+        } else if (tipoServicio == 3) { // redes values
+            switch (nivelServicio) {
+                case 1: // silver
+                    return valorServicio = (int) (gold - (gold*0.2));
+                case 2: // gold
+                    return valorServicio = gold;
+                case 3: // platinum
+                     return valorServicio = (int) (gold + (gold*0.4));
+                default:
+                    throw new AssertionError();
+            }
+        }
+        
+        return valorServicio;
+    } 
     
     
 }

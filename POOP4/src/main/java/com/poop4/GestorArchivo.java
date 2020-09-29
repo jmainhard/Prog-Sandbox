@@ -144,12 +144,8 @@ public class GestorArchivo {
             System.out.println("          \n----< Servicios disponibles >----");
             texto = new String(Files.readAllBytes(archivo));
             System.out.println("\n"+ texto+ "\n");
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: Ese contrato no existe :( "+ e);
-        } catch (NoSuchFileException e) {
-            System.out.println("Error: El archivo no se pudo leer "+ e);
         } catch (IOException e) {
-            System.out.println("Error: El archivo no se pudo leer "+ e);
+            System.out.println("Error: Error al leer archivo "+ e);
         }
     }
     
@@ -223,7 +219,7 @@ public class GestorArchivo {
             Files.writeString(
                     archivo, //dir contrato
                     "Rut Cliente: "+ rut+ "\r\n"
-                    + "Servicios: "+ serviciosContratados.toString() + "\r\n"
+                    + "Servicios Contratados: "+ serviciosContratados.toString() + "\r\n"
                     + "Valor servicios: "+ String.valueOf(valorTotal)+ "\r\n" //todo, probar total pelao int
                     + "Tiempo vigencia: "+ String.valueOf(tiempoContrato)+ "\r\n",
                     StandardOpenOption.APPEND); //añade al final
