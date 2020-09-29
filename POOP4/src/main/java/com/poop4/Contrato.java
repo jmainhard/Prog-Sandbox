@@ -1,6 +1,7 @@
 package com.poop4;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -20,6 +21,7 @@ public class Contrato { // extends Cliente
     private byte servicio1, servicio2; // servicios contratados
     private byte lvlService1, lvlService2; // nivel de cada servicio
     private int valor;
+    private ArrayList listaServicios;
     
     public Contrato() {
         super();
@@ -30,7 +32,8 @@ public class Contrato { // extends Cliente
         this.servicio2 = -1;
         this.lvlService1 = -1;
         this.lvlService2 = -1;
-        this.valor = -1;
+        this.valor = 0;
+        this.listaServicios = new ArrayList();
     }
     
     public Contrato(Date fechaContrato, String rutCliente) {
@@ -68,6 +71,10 @@ public class Contrato { // extends Cliente
     public String getIdContrato() {
         return idContrato;
     }
+    
+    public ArrayList getServicios() {
+        return listaServicios;
+    }
 
     //setters
     public void setTiempoContrato(byte tiempo) {
@@ -79,24 +86,46 @@ public class Contrato { // extends Cliente
         File file = new File("Archvos/Contratos" + idContrato + ".txt");
     }
     
-    public void setServicio1() {
-
+    public void setServicio(byte numSer, byte tipoSer) {
+        if (numSer == 1) {
+            setServicio1(tipoSer);
+        } else if (numSer == 2) {
+            setServicio2(tipoSer);
+        }
     }
     
-    public void setServicio2() {
-
+    public void setNivel(byte numSer, byte nivelSer) {
+        if (numSer == 1) {
+            setLvlService1(nivelSer);
+        } else if (numSer == 2) {
+            setLvlService2(nivelSer);
+        }
     }
     
-    public void setLvlService1() {
-
+    public void setServicio1(byte tipoSer) {
+        this.servicio1 = tipoSer;
     }
     
-    public void setLvlService2() {
-
+    public void setServicio2(byte tipoSer) {
+        this.servicio2 = tipoSer;
+    }
+    
+    public void setLvlService1(byte nivelSer) {
+        this.lvlService1 = nivelSer;
+    }
+    
+    public void setLvlService2(byte nivelSer) {
+        this.lvlService2 = nivelSer;
     }
     
     public void setValor() {
 
+    }
+    
+    public void addServicio(String servicio, String nivel) {
+        listaServicios.add(servicio);
+        listaServicios.add(nivel);
+        listaServicios.add("-");
     }
     
     

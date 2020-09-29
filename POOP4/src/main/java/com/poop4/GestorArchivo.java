@@ -211,4 +211,26 @@ public class GestorArchivo {
         }
     }
     
+    public void saveData(String rut
+            , ArrayList serviciosContratados
+            , int valorTotal
+            , byte tiempoContrato
+            , String idContrato) {
+            
+        try {
+            String ruta = "Archivos/Contratos/"+ idContrato+ ".txt";
+            Path archivo = Paths.get(ruta);
+            Files.writeString(
+                    archivo, //dir contrato
+                    "Rut Cliente: "+ rut+ "\r\n"
+                    + "Servicios: "+ serviciosContratados.toString() + "\r\n"
+                    + "Valor servicios: "+ String.valueOf(valorTotal)+ "\r\n" //todo, probar total pelao int
+                    + "Tiempo vigencia: "+ String.valueOf(tiempoContrato)+ "\r\n",
+                    StandardOpenOption.APPEND); //añade al final
+            
+        } catch (IOException e) {
+            System.out.println("Error: No pudo ser añadido "+ e);
+        }
+    }
+    
 }

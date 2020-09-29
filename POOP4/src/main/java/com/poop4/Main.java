@@ -26,12 +26,13 @@ public class Main {
     
     public static Cliente cliente0 = new Cliente();
     public static Contrato contrato0 = new Contrato();
-    public static Servicios servicio = new Servicios();
+//    public static Servicios servicio = new Servicios();
     
     public static void menuContrato() {
         boolean seleccionado;
         boolean repetir = true;
         int opcion = -1;
+        int cantSer = 0;
         Scanner teclado = new Scanner(System.in);
         GestorArchivo ga = new GestorArchivo();
         String respuesta = "";
@@ -53,7 +54,15 @@ public class Main {
                 switch (opcion) {
                     case 1: // nuevo contrato
                         System.out.println(hall+ "Crear contrato");
-                        llenarContrato();
+                        if (cantSer < 2) {
+                            llenarContrato();
+                            cantSer++;
+                        } else  {
+                            System.out.println("\nNo se pudo crear contrato:"
+                                    + "este cliente alcanzó el máximo"
+                                    + " de servicios contratados simultáneamente"
+                                    + " (2)");
+                        }
                         seleccionado = true;
                         break;
                     case 2: // leer contrato
@@ -102,53 +111,76 @@ public class Main {
         byte tipoSer = -1; // tipo de servicio, soporte web, hosting..
         byte nivelSer = -1; //nivel servicio, silver, gold, platinum
         byte cantSer = -1; // cantidad de servicios
+        byte numSer =  1; // análogo a cantSer en menuContrato()
+        byte tiempoContrato = 0;
         ga.readServicios(); // mostrar servicios
+        Servicios servicio = new Servicios();
         
-        
-        while (cantSer < 0 || cantSer > 2) {
-            cantSer = -1;
+        while (tipoSer < 0 || tipoSer > 3) {
+            tipoSer = -1;
             try {
-                System.out.println("Cuánto servicios desea contratar (MÁX 2)");
-                cantSer = teclado.nextByte(); 
+                System.out.println("Seleccione tipo servicio");
+                System.out.println("1 - Soporte Web");
+                System.out.println("2 - Hosting");
+                System.out.println("3 - Mantención de redes");
+                for (int j = 0; j == cantSer; j++) {
+
+                }
+                tipoSer = teclado.nextByte();
+                System.out.println("tipoSer: "+ tipoSer);
             } catch (Exception e) {
-                System.out.println("Error: Ingrese número válido");
+                System.out.println("Error: Ingrese número válido "+ e);
+                teclado.next();
+            }
+        }
+
+        while (nivelSer < 0 || nivelSer > 3) {
+            nivelSer = -1;
+            try {
+                System.out.println("Seleccione nivel de servicio");
+                System.out.println("1 - Silver");
+                System.out.println("2 - Gold");
+                System.out.println("3 - Platinum");
+                nivelSer = teclado.nextByte();
+                System.out.println("nivelSer: "+ nivelSer);
+            } catch (Exception e) {
+                System.out.println("Error: Ingrese número válido "+ e);
                 teclado.next();
             }
         }
         
-        for (int i = 1; i <= cantSer+1; i++) {
-            
-            while (tipoSer < 0 || tipoSer > 3) {
-                tipoSer = -1;
-                try {
-                    System.out.println("Seleccione tipo servicio "+ i);
-                    System.out.println("1 - Soporte Web");
-                    System.out.println("2 - Hosting");
-                    System.out.println("3 - Mantención de redes");
-                    tipoSer = teclado.nextByte();
-                    System.out.println("tipoSer "+ i+ ": "+ tipoSer);
-                } catch (Exception e) {
-                    System.out.println("Error: Ingrese número válido "+ e);
-                    teclado.next();
-                }
-            }
-
-            while (nivelSer < 0 || nivelSer > 3) {
-                nivelSer = -1;
-                try {
-                    System.out.println("Seleccione nivel de servicio "+ i);
-                    System.out.println("1 - Silver");
-                    System.out.println("2 - Gold");
-                    System.out.println("3 - Platinum");
-                    nivelSer = teclado.nextByte();
-                    System.out.println("nivelSer "+ i+ ": "+ nivelSer);
-                } catch (Exception e) {
-                    System.out.println("Error: Ingrese número válido "+ e);
-                    teclado.next();
-                }
-            }
+        //añade tipo y nivel de servicio al objeto instanciado servicio
+        servicio.setTipo(tipoSer); 
+        servicio.setNivel(nivelSer);
         
-        } // fin for
+        //setea el tipo y nivel de servicio para fines de cálculo
+        contrato0.setServicio(numSer, tipoSer); //puede ser herencia
+        contrato0.setNivel(numSer, nivelSer);
+        
+        //Añade la info del servicio contratado a un ArrayList en obj.contrato0
+        contrato0.addServicio(servicio.getTipo(tipoSer)
+                , servicio.getNvl(nivelSer));
+        numSer++;
+        
+        while (tiempoContrato < 1 || tiempoContrato > 6) {
+            tiempoContrato = 0;
+            try {
+                System.out.println("\nIngrese meses de contrato (MÁX 6)");
+                tiempoContrato = teclado.nextByte();
+            } catch (Exception e) {
+                System.out.println("Error: Ingrese un número válido");
+                teclado.next();
+            }
+        }
+        
+//        valor += servicio.calcular(tipoSer, nivelSer);
+        
+        ga.saveData(cliente0.getRut()
+                , contrato0.getServicios()
+                , contrato0.getValor() 
+                , tiempoContrato //tiempo de contrato en meses (bytes)
+                , contrato0.getIdContrato());
+        
         // contrato0.setServicio1(servicio.getTipo(tipoSer));
         // contrato0.setS
                   
