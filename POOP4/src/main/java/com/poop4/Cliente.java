@@ -6,7 +6,7 @@ import java.util.Date;
  * @author Jorge M.
  */
 
-public class Cliente {
+public class Cliente extends Contrato {
 
     private String nombre;
     private String rut;

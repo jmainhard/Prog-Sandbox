@@ -1,5 +1,6 @@
 package com.poop4;
 
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -74,7 +75,8 @@ public class Contrato { // extends Cliente
     }
     
     public void setIdContrato(String localDate, String rut) {
-        idContrato = localDate+ "-"+ rut+ ".txt"; 
+        idContrato = localDate+ "-"+ rut;
+        File file = new File("Archvos/Contratos" + idContrato + ".txt");
     }
     
     public void setServicio1() {

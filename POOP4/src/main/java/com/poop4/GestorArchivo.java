@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.io.FileWriter;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class GestorArchivo {
             System.out.println("Error: Archivo no creado "+ e);
         }
     }
+    
     
     public void newFile(String[][] stock){
        StringBuilder builder = new StringBuilder();
@@ -94,15 +96,58 @@ public class GestorArchivo {
         return tablero;    
     }
     
+    // Buscar contrato
     public void readFile() {
-        System.out.println("Ingrese ruta de lectura de archivo");
-        String ruta = teclado.next();
+        System.out.println("Ingrese [ddMMyyy-rutCliente]");
+        String ruta = "Archivos/Contratos/"+ teclado.next() + ".txt";
+        Path archivo = Paths.get(ruta);
+        String texto = "";
+        
+        try {
+            System.out.println("    \n----< Contrato encontrado >----");
+            texto = new String(Files.readAllBytes(archivo));
+            System.out.println("\n"+ texto+ "\n");
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Ese contrato no existe :( "+ e);
+        } catch (NoSuchFileException e) {
+            System.out.println("Error: El archivo no se pudo leer "+ e);
+        } catch (IOException e) {
+            System.out.println("Error: El archivo no se pudo leer "+ e);
+        }
+    }
+    
+    // leer clientes
+    public void readClientes() {
+        String ruta = "Archivos/Clientes.txt";
         Path archivo = Paths.get(ruta);
         String texto = "";
         
         try {
             texto = new String(Files.readAllBytes(archivo));
-            System.out.println("NOMBRE - RUT - DOMICILIO:\n" + texto+ "\n");
+            System.out.println("    \n----< Registro de clientes >----");
+            System.out.println("\n   [NOMBRE, RUT, DOMICILIO]\n" + texto+ "\n");
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Archivo no encontrado :( "+ e);
+        } catch (NoSuchFileException e) {
+            System.out.println("Error: Ese archivo no existe :( "+ e);
+        } catch (IOException e) {
+            System.out.println("Error: El archivo no se pudo leer "+ e);
+        }
+    }
+    
+       public void readServicios() {
+        String ruta = "Archivos/Servicios.txt";
+        Path archivo = Paths.get(ruta);
+        String texto = "";
+        
+        try {
+            System.out.println("          \n----< Servicios disponibles >----");
+            texto = new String(Files.readAllBytes(archivo));
+            System.out.println("\n"+ texto+ "\n");
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Ese contrato no existe :( "+ e);
+        } catch (NoSuchFileException e) {
+            System.out.println("Error: El archivo no se pudo leer "+ e);
         } catch (IOException e) {
             System.out.println("Error: El archivo no se pudo leer "+ e);
         }
@@ -134,6 +179,21 @@ public class GestorArchivo {
             System.out.println("El archivo fué eliminado");
         } catch (FileNotFoundException e) {
             System.out.println("\nArchivo no encotrado");
+        } catch (IOException e) {
+            System.out.println("\nError: El archivo no se pudo eliminar "+ e);
+        }
+    }
+    
+        public void delContrato() {
+        System.out.println("Ingrese nombre del contrato");
+        String ruta = "Archivos/Contratos/"+ teclado.next()+ ".txt";
+        Path archivo = Paths.get(ruta);
+        
+        try {
+            Files.deleteIfExists(archivo);
+            System.out.println("El archivo fué eliminado");
+        } catch (FileNotFoundException e) {
+            System.out.println("\nArchivo no encontrado");
         } catch (IOException e) {
             System.out.println("\nError: El archivo no se pudo eliminar "+ e);
         }

@@ -1,0 +1,7 @@
+                             1            2         3
+   | Servicio           | Silver      | Gold  | Platinum    |
+   +--------------------+-------------+-------+-------------+
+ 1 |Soporte Web         |-10% de Gold |20.000 |+30% de Gold |
+ 2 |Hosting             |-15% de Gold |20.000 |+10% de Gold |
+ 3 |Mantencion de redes |-20% de Gold |20.000 |+40% de Gold |
+   +--------------------+-------------+-------+-------------+
