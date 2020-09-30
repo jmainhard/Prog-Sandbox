@@ -231,6 +231,12 @@ public class Main {
         
         do {
             rutCliente = -1;
+            nombreCliente = "";
+            domCliente = "";
+            cliente0.setRut("");
+            cliente0.setNombre("");
+            cliente0.setDomicilio("");
+            dataClient.clear();
             
             System.out.println("\nIngrese Datos del cliente");
 

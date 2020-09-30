@@ -81,6 +81,7 @@ public class Contrato { // extends Cliente
         
     }
     
+    //getid
     public String setIdContrato(String localDate, String rut) {
         idContrato = localDate+ "-"+ rut;
         
