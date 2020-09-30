@@ -1,5 +1,7 @@
 package com.poop4;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.*;
@@ -26,6 +28,7 @@ public class Main {
     
     public static Cliente cliente0 = new Cliente();
     public static Contrato contrato0 = new Contrato();
+    public static int valorTotalS = 0;
 //    public static Servicios servicio = new Servicios();
     
     public static void menuContrato() {
@@ -45,8 +48,9 @@ public class Main {
                 System.out.println("\nIngrese que acción desea realizar");
                 System.out.println("       ----<>----\n");
                 System.out.println("1 - Crear contrato para este cliente\n");
-                System.out.println("2 - Leer contrato\n");
+                System.out.println("2 - Buscar y leer contrato\n");
                 System.out.println("3 - Ver lista de clientes\n");
+//                System.out.println("4 - Ver list de contratos\n"); no funcional
                 System.out.println("4 - Eliminar contrato\n");
                 System.out.println("5 - Salir\n");
                 opcion = teclado.nextInt();
@@ -57,8 +61,10 @@ public class Main {
                         if (cantSer < 2) {
                             llenarContrato();
                             cantSer++;
+                                    System.out.println("\nContrato guardado como: "+ contrato0.getIdContrato());
+
                         } else  {
-                            System.out.println("\nNo se pudo crear contrato:"
+                            System.out.println("\nNo se pudo crear contrato: "
                                     + "este cliente alcanzó el máximo"
                                     + " de servicios contratados simultáneamente"
                                     + " (2)");
@@ -66,7 +72,7 @@ public class Main {
                         seleccionado = true;
                         break;
                     case 2: // leer contrato
-                        System.out.println(hall+ "Leer contrato");
+                        System.out.println(hall+ "Buscar y leer contrato");
                         ga.readFile();
                         seleccionado = true;
                         break;
@@ -75,15 +81,19 @@ public class Main {
                         ga.readClientes(); // leer clientes
                         seleccionado = true;
                         break;
+                    case 99999999:
+                        System.out.println(hall+ "Ver lista de contratos");
+                        ga.fileList();
+                        seleccionado = true;
+                        break;
                     case 4:
                         System.out.println(hall+ "Eliminar contrato");
                         ga.delContrato(); // Eliminar archivo (contrato)
                         seleccionado = true;
-                        break;
                     case 5:
                         seleccionado = true;
                         repetir = false;
-                        break;  
+                        break;
                     default:
                         seleccionado = false;
                 }
@@ -114,8 +124,6 @@ public class Main {
         byte numSer =  1; // análogo a cantSer en menuContrato()
         byte tiempoContrato = 0;
         int valorServicio = 0;
-        int valorServ1 = 0; // valores de servicio individuales
-        int valorServ2 = 0;
         ga.readServicios(); // mostrar servicios
         Servicios servicio = new Servicios();
         
@@ -163,7 +171,8 @@ public class Main {
         //Añade la info del servicio contratado a un ArrayList en obj.contrato0
         contrato0.addServicio(servicio.getTipo(tipoSer)
                 , servicio.getNvl(nivelSer));
-        numSer++;
+        
+        
         
         while (tiempoContrato < 1 || tiempoContrato > 6) {
             tiempoContrato = 0;
@@ -176,35 +185,35 @@ public class Main {
             }
         }
         
-        valorServicio += contrato0.calcularValorServicio(tipoSer, nivelSer);
-//        valor1 = valorServicio;
+        valorServicio = contrato0.calcularValorServicio(tipoSer, nivelSer);
+        valorTotalS += valorServicio;
         
-//        if (numSer == 1) {
-            ga.saveData(cliente0.getRut()
+//        switch (numSer) {
+//            case 1:
+                ga.saveData(cliente0.getRut()
                 , contrato0.getServicios()
-                , valorServicio 
+                , valorTotalS 
                 , tiempoContrato //tiempo de contrato en meses (bytes)
                 , contrato0.getIdContrato());
-//        } else {
-//            ga.saveData(rut, serviciosContratados, valorServicio, tiempoContrato, idContrato);
+//                break;
+//            case 2:
+//                ga.saveData(contrato0.getServicios()
+//                , valorServicio
+//                , tiempoContrato //tiempo de contrato en meses (bytes)
+//                , valorTotalS
+//                , contrato0.getIdContrato());
+//                break; 
+//                Esta lesera nunca funcionó
+//            default:
+//                throw new AssertionError();
 //        }
         
+//        numSer++;
         
-            
-        }
+        contrato0.clearServicios();
         
+    }
         
-//        cliente0.getRut();
-//        contrato0.getServicio1();
-//        contrato0.getServicio2();
-//i. Rut del Cliente (heredado o got)
-//ii. Servicios contratados (Tabla 1)  Servicios.printServicios
-//                                     switch(selectServicio())
-//                                              1:
-//iii. Valor total del plan
-//iv. Tiempo del contrato
-//        } while (repetir);
-    
 
     public static void main(String[] args) {
         String nombreCliente = "";
@@ -214,6 +223,7 @@ public class Main {
         Scanner teclado = new Scanner(System.in);
         GestorArchivo ga = new GestorArchivo();
         ArrayList<String> dataClient = new ArrayList();
+        String idContrato = "";
         String lcd = LocalDateTime
                 .now()
                 .format(DateTimeFormatter.ofPattern("ddMMyyyy"));
@@ -243,7 +253,6 @@ public class Main {
         
 //        set atributos cliente
         cliente0.setRut(rutString);
-        System.out.println(cliente0.getRut());
         cliente0.setDomicilio(domCliente);
         cliente0.setNombre(nombreCliente);
         
@@ -254,14 +263,16 @@ public class Main {
         //añade al archivo client.txt
         ga.saveData(dataClient);
         
-        //este método creará el archivo de contrato para cada cliente nuevo
-        contrato0.setIdContrato(lcd, cliente0.getRut());
+        //este método creará el archivo de contrato para cada ejecución del programa
+        contrato0.setIdContrato(lcd, cliente0.getRut()); // setea la id del archivo
+        idContrato = contrato0.getIdContrato();
         
-        // genera contrato
+        // crea el archivo
+        ga.newFile(idContrato);
+        
+        // menú de opciones
         menuContrato();
 
-        System.out.println("Contrato guardado como: "+ contrato0.getIdContrato());
-        
     } // fin main
 
 }

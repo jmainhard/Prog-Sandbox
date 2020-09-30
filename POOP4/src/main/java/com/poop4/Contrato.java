@@ -81,9 +81,10 @@ public class Contrato { // extends Cliente
         
     }
     
-    public void setIdContrato(String localDate, String rut) {
+    public String setIdContrato(String localDate, String rut) {
         idContrato = localDate+ "-"+ rut;
-        File file = new File("Archvos/Contratos" + idContrato + ".txt");
+        
+        return idContrato;
     }
     
     public void setServicio(byte numSer, byte tipoSer) {
@@ -125,6 +126,10 @@ public class Contrato { // extends Cliente
     public void addServicio(String servicio, String nivel) {
         listaServicios.add(servicio);
         listaServicios.add(nivel);
+    }
+    
+    public void clearServicios() {
+        listaServicios.clear();
     }
     
     public int calcularValorServicio(byte tipoSer, byte nvlSer) {

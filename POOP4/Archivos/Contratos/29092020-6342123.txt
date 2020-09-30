@@ -1,0 +1,8 @@
+Rut Cliente: 6342123
+Servicios Contratados: [Mantención de redes, Platinum]
+Valor total plan: 28000
+Tiempo vigencia: 6
+Rut Cliente: 6342123
+Servicios Contratados: [Hosting, Gold]
+Valor total plan: 48000
+Tiempo vigencia: 6

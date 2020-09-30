@@ -2,6 +2,7 @@ package com.poop4;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -47,6 +48,17 @@ public class GestorArchivo {
         
         try {
             Files.write(archivo, texto.getBytes());
+        } catch (IOException e) {
+            System.out.println("Error: Archivo no creado "+ e);
+        }
+    }
+    
+    public void newFile(String dir) {
+        String ruta = "Archivos/Contratos/"+ dir + ".txt";
+        Path archivo = Paths.get(ruta);
+        
+        try {
+            Files.createFile(archivo);
         } catch (IOException e) {
             System.out.println("Error: Archivo no creado "+ e);
         }
@@ -209,7 +221,7 @@ public class GestorArchivo {
     
     public void saveData(String rut
             , ArrayList serviciosContratados
-            , int valorTotal
+            , int valorServicio
             , byte tiempoContrato
             , String idContrato) {
             
@@ -220,12 +232,55 @@ public class GestorArchivo {
                     archivo, //dir contrato
                     "Rut Cliente: "+ rut+ "\r\n"
                     + "Servicios Contratados: "+ serviciosContratados.toString() + "\r\n"
-                    + "Valor servicios: "+ String.valueOf(valorTotal)+ "\r\n" //todo, probar total pelao int
+                    + "Valor total plan: "+ String.valueOf(valorServicio)+ "\r\n" //todo, probar total pelao int
                     + "Tiempo vigencia: "+ String.valueOf(tiempoContrato)+ "\r\n",
+                    StandardOpenOption.APPEND); //lo añade al final
+            
+        } catch (IOException e) {
+            System.out.println("Error: No pudo ser añadido "+ e);
+        }
+    }
+    
+    // second save service data, para evitar repetir info
+    public void saveData(ArrayList serviciosContratados
+            , int valorServicio // valor individual
+            , byte tiempoContrato // tiempo en meses
+            , int valorTotalS // agrega valor total servicios
+            , String idContrato) { // id correspondiente 
+            
+        try {
+            String ruta = "Archivos/Contratos/"+ idContrato+ ".txt";
+            Path archivo = Paths.get(ruta);
+            Files.writeString(
+                    archivo, //dir contrato (id)
+                    "\r\nServicios Contratados: "+ serviciosContratados.toString()+ "\r\n"
+                    + "Valor servicio: "+ String.valueOf(valorServicio)+ "\r\n" //todo, probar total pelao int
+                    + "Tiempo vigencia: "+ String.valueOf(tiempoContrato)+ "\r\n"
+                    + "\r\nTotal servicios: "+ String.valueOf(valorTotalS)+ "\r\n",
                     StandardOpenOption.APPEND); //añade al final
             
         } catch (IOException e) {
             System.out.println("Error: No pudo ser añadido "+ e);
+        }
+    }
+    
+    // enlista todos los archivos de un directorio
+    //no funcional java.lang.NullPointerException
+    public void fileList() {
+        // Array para almacenar direcciones de archivo
+        String[] pathnames;
+        String pathname = "";
+        
+        //instanciar File f para convertir el path entregado
+        //en un nombre de path abstracto (y usar sus métodos)
+        File f = new File("Carpeta/Contratos/");
+
+        // llenar el array con los nombres de archivos (y directorios)
+        pathnames = f.list();
+
+        // para cada path en el arreglo de paths
+        for (int i = 0; i < pathnames.length; i++) {
+            System.out.println(pathnames[i] + "\n");
         }
     }
     

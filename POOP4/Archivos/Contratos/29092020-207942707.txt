@@ -2,7 +2,8 @@ Rut Cliente: 207942707
 Servicios Contratados: [Soporte Web, Platinum]
 Valor servicios: 0
 Tiempo vigencia: 2
-Rut Cliente: 207942707
+Rut Cliente: 207942707 //para sacar este rut era el 2do saveData :(
 Servicios Contratados: [Soporte Web, Platinum, Hosting, Platinum]
-Valor servicios: 0
+Valor servicios: 0 //y además dar un valor individual de cada servicio
 Tiempo vigencia: 4
+// y mostrarlos sumados al final
