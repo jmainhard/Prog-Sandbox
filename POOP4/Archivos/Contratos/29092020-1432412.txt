@@ -1,0 +1,8 @@
+Rut Cliente: 1432412
+Servicios Contratados: [Soporte Web, Silver]
+Valor total plan: 18000
+Tiempo vigencia: 2
+Rut Cliente: 1432412
+Servicios Contratados: [Hosting, Platinum]
+Valor total plan: 40000
+Tiempo vigencia: 4
