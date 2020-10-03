@@ -1,7 +1,5 @@
 package com.poop4;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.*;
@@ -61,7 +59,7 @@ public class Main {
                         if (cantSer < 2) {
                             llenarContrato();
                             cantSer++;
-                                    System.out.println("\nContrato guardado como: "+ contrato0.getIdContrato());
+                            System.out.println("\nContrato guardado como: "+ contrato0.getIdContrato());
 
                         } else  {
                             System.out.println("\nNo se pudo crear contrato: "
@@ -134,9 +132,6 @@ public class Main {
                 System.out.println("1 - Soporte Web");
                 System.out.println("2 - Hosting");
                 System.out.println("3 - Mantención de redes");
-                for (int j = 0; j == cantSer; j++) {
-
-                }
                 tipoSer = teclado.nextByte();
                 System.out.println("tipoSer: "+ tipoSer);
             } catch (Exception e) {
@@ -165,14 +160,12 @@ public class Main {
         servicio.setNivel(nivelSer);
         
         //setea el tipo y nivel de servicio para fines de cálculo
-        contrato0.setServicio(numSer, tipoSer); //puede ser herencia
+        contrato0.setServicio(numSer, tipoSer); //podría ser herencia de serv.
         contrato0.setNivel(numSer, nivelSer);
         
         //Añade la info del servicio contratado a un ArrayList en obj.contrato0
         contrato0.addServicio(servicio.getTipo(tipoSer)
                 , servicio.getNvl(nivelSer));
-        
-        
         
         while (tiempoContrato < 1 || tiempoContrato > 6) {
             tiempoContrato = 0;
@@ -184,7 +177,7 @@ public class Main {
                 teclado.next();
             }
         }
-        
+        //AQUI QUEDE REVISANDO
         valorServicio = contrato0.calcularValorServicio(tipoSer, nivelSer);
         valorTotalS += valorServicio;
         
@@ -213,7 +206,6 @@ public class Main {
         contrato0.clearServicios();
         
     }
-        
 
     public static void main(String[] args) {
         String nombreCliente = "";
@@ -237,6 +229,7 @@ public class Main {
             cliente0.setNombre("");
             cliente0.setDomicilio("");
             dataClient.clear();
+            valorTotalS = 0;
             
             System.out.println("\nIngrese Datos del cliente");
 
@@ -277,6 +270,9 @@ public class Main {
          contrato0.setIdContrato(lcd, cliente0.getRut()); // setea la id del archivo
          idContrato = contrato0.getIdContrato();
 
+         // linea 273 bug: si se crea un contrato vació, para cada nueva-
+         // ejecución del programa este no podrá ser llenado
+         
          // crea el archivo
          ga.newFile(idContrato);
 

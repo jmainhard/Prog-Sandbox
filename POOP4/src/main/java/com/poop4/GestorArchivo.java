@@ -64,7 +64,6 @@ public class GestorArchivo {
         }
     }
     
-    
     public void newFile(String[][] stock){
        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < stock.length; i++) {
@@ -148,6 +147,7 @@ public class GestorArchivo {
     }
     
        public void readServicios() {
+   // se podria poner ruta directamente en Path archivo posiblemente. TODO, test
         String ruta = "Archivos/Servicios.txt";
         Path archivo = Paths.get(ruta);
         String texto = "";

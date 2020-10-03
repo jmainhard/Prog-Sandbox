@@ -5,15 +5,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * //Nombre Contrato -> heredado de cliente
- * //Contenido Contrato
+ * //Nombre Contrato -> heredado de cliente //Contenido Contrato
+ *
  * @author Jorge M.
  */
-
 // 
-
 public class Contrato { // extends Cliente
-    
+
     private Date fechaContrato;
     private String idContrato;
     private String rutCliente;
@@ -22,7 +20,7 @@ public class Contrato { // extends Cliente
     private byte lvlService1, lvlService2; // nivel de cada servicio
     private int valor;
     private ArrayList listaServicios;
-    
+
     public Contrato() {
         super();
         this.fechaContrato = fechaContrato;
@@ -35,59 +33,59 @@ public class Contrato { // extends Cliente
         this.valor = 0;
         this.listaServicios = new ArrayList();
     }
-    
+
     public Contrato(Date fechaContrato, String rutCliente) {
 //        super(rutCliente);
         this.rutCliente = rutCliente;
         this.fechaContrato = fechaContrato;
         this.tiempoContrato = -1;
     }
-    
+
     //getters
     public byte getTiempoContrato() { // 1 a 6
         return tiempoContrato;
     }
-    
+
     public byte getServicio1() { // 0, 1, 2
         return servicio1;
     }
-    
+
     public byte getServicio2() {
         return servicio2;
     }
-    
+
     public byte getlvlService1() {
         return lvlService1;
     }
-    
+
     public byte getlvlService2() {
         return lvlService2;
     }
-    
+
     public int getValor() {
         return valor;
     }
-    
+
     public String getIdContrato() {
         return idContrato;
     }
-    
+
     public ArrayList getServicios() {
         return listaServicios;
     }
 
     //setters
     public void setTiempoContrato(byte tiempo) {
-        
+
     }
-    
-    //getid
+
+    //getid, es un getter . TODO cambiar nombre
     public String setIdContrato(String localDate, String rut) {
-        idContrato = localDate+ "-"+ rut;
-        
-        return idContrato;
+        idContrato = localDate + "-" + rut;
+
+        return idContrato; //o eliminar este return enrealidad, me parece
     }
-    
+
     public void setServicio(byte numSer, byte tipoSer) {
         if (numSer == 1) {
             setServicio1(tipoSer);
@@ -95,7 +93,7 @@ public class Contrato { // extends Cliente
             setServicio2(tipoSer);
         }
     }
-    
+
     public void setNivel(byte numSer, byte nivelSer) {
         if (numSer == 1) {
             setLvlService1(nivelSer);
@@ -103,43 +101,42 @@ public class Contrato { // extends Cliente
             setLvlService2(nivelSer);
         }
     }
-    
+
     public void setServicio1(byte tipoSer) {
         this.servicio1 = tipoSer;
     }
-    
+
     public void setServicio2(byte tipoSer) {
         this.servicio2 = tipoSer;
     }
-    
+
     public void setLvlService1(byte nivelSer) {
         this.lvlService1 = nivelSer;
     }
-    
+
     public void setLvlService2(byte nivelSer) {
         this.lvlService2 = nivelSer;
     }
-    
+
     public void setValor() {
 
     }
-    
+
     public void addServicio(String servicio, String nivel) {
         listaServicios.add(servicio);
         listaServicios.add(nivel);
     }
-    
+
     public void clearServicios() {
         listaServicios.clear();
     }
-    
+
     public int calcularValorServicio(byte tipoSer, byte nvlSer) {
         Servicios servicio = new Servicios(tipoSer, nvlSer);
         int valorServicio = 0;
         valorServicio = (int) servicio.getValor();
-        
+
         return valorServicio;
     }
-    
-    
+
 }

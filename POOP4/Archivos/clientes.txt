@@ -1,3 +1,11 @@
 [Pedro Sanchez, 207942707, El Bosque 1234]
 [varios clientes, 1233445436, en su casa]
-
+[Data Client, 123456789, Domicilio cliente]
+[Nombre Cliente, 123456789, Dom Cliente]
+[Mauricio Opazo, 123890760, Temcuo, la frontera]
+[a, 222222222, adom]
+[non, 12333221, nin]
+[felipe, 23421234, vill]
+[dou, 234231345, por la chita]
+[a, 31423113, b]
+[lucero fern, 3243452, los fais]
