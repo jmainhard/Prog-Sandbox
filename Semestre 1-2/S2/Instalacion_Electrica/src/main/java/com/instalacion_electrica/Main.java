@@ -1,6 +1,15 @@
 package com.instalacion_electrica;
 /**
  * @author Jorge M.
+ * Prueba 1 POO
+ * 21-diciembre-2020
+ * Contenidos:
+ *  Fundamentos POO
+ *  Dependencia, Asociación, Agregación, Composición
+ *  Herencia. Abtractas
+ *  Interfaces
+ * 
+ * Modele un programa en java que simule una instalacióneléctrica y los aparatos conectados a ella
  */
 
 public class Main {
@@ -19,7 +28,6 @@ public class Main {
         aparato1.pressPowerButton();
         aparato2.pressPowerButton();
         System.out.println("Consumo de watts aparatos encendidos: "+ instalacion.getConsumoElectrico());
-        // no alcanzo a hacer el resto de las pruebas pero diría que quedó funcional (creo)
         
         aparato1.pressPowerButton();
         aparato2.pressPowerButton();
