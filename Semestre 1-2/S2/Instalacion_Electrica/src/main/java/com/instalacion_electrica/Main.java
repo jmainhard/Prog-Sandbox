@@ -9,7 +9,7 @@ package com.instalacion_electrica;
  *  Herencia. Abtractas
  *  Interfaces
  * 
- * Modele un programa en java que simule una instalacióneléctrica y los aparatos conectados a ella
+ * Modele un programa en java que simule una instalación eléctrica y los aparatos conectados a ella
  */
 
 public class Main {
