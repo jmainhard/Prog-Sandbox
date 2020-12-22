@@ -1,0 +1,7 @@
+com\instalacion_electrica\InstalacionElectrica.class
+com\instalacion_electrica\ObjetoElectrico.class
+com\instalacion_electrica\Main.class
+com\instalacion_electrica\Aparato.class
+com\instalacion_electrica\TieneConsumo.class
+com\instalacion_electrica\Medidor.class
+com\instalacion_electrica\TipoAparato.class
