@@ -21,9 +21,7 @@ public abstract class Producto implements Describible {
     }
 
     @Override
-    public String desc() {
-        return this.toString();
-    }
+    public abstract String desc();
 
     public String getCodigo() {
         return codigo;

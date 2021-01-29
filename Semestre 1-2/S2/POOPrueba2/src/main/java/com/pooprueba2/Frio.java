@@ -16,7 +16,7 @@ public class Frio extends Producto {
     
     @Override
     public String desc() {
-        String descripcion = super.desc(); // equivalente a super.toString();
+        String descripcion = super.toString();
         
         descripcion += ", descripcion=frío a "+
                 this.getTempAlmacenamiento() + "°C}";

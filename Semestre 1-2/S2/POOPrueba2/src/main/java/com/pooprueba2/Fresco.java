@@ -3,7 +3,7 @@ package com.pooprueba2;
  * @author Jorge M.
  */
 
-public class Fresco extends Producto{
+public class Fresco extends Producto {
     private double porcentajeHumedad;
 
     public Fresco(double porcentajeHumedad, String nombre, String codigo,
@@ -18,7 +18,7 @@ public class Fresco extends Producto{
     
     @Override
     public String desc() {
-        String descripcion = super.desc(); // equivalente a super.toString();
+        String descripcion = super.toString();
         
         descripcion += ", descripcion=fresco a "+
                 this.getTempAlmacenamiento() + "°C";
