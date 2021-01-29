@@ -4,26 +4,28 @@ package com.pooprueba2;
  */
 
 public class Congelado extends Producto {
-    TipoCongelacionEnum congelacion;
+    private TipoCongelacionEnum congelacion;
 
     public Congelado(TipoCongelacionEnum congelacion, String nombre,
             String codigo, double tempAlmacenamiento, int precio) {
-        super(nombre, codigo, tempAlmacenamiento, precio);
+        super(nombre, tempAlmacenamiento, precio);
         this.congelacion = congelacion;
     }
 
     @Override
-    public void desc() {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public String desc() {
+        String descripcion = super.desc(); // equivalente a super.toString();
+        
+        descripcion += ", descripcion=congelación lenta a "+
+                this.getTempAlmacenamiento() + "°C}";
+
+        return descripcion;
     }
 
-    @Override
-    public String toString() {
-        return "Congelado{" + "congelacion=" + congelacion + '}';
+    
+    public void asignarCodigo(int num) {
+        this.codigo = "CONG-"+ num;
     }
-    
-    
     
     
     

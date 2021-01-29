@@ -6,11 +6,12 @@ import java.util.ArrayList;
  * Prueba 2 POO 28-enero-2021
  * @author Jorge M.
  * inicio codigo 20.15hrs
+ * fin           22.31hrs
  */
 
 public class Canasta {
-    EstadosCanastaEnum estado;
-    ArrayList<Producto> productos;
+    private EstadosCanastaEnum estado;
+    private ArrayList<Producto> productos;
 
     public Canasta(EstadosCanastaEnum estado) {
         this.estado = estado;
@@ -19,22 +20,35 @@ public class Canasta {
     
     public void addProducto(Producto p) {
         productos.add(p);
+        p.asignarCodigo(productos.indexOf(p));
     }
     
-    public void delProducto(Producto p) {
+    public void delProducto(Producto p) throws NoSuchFieldException {
         try {
+            String codigo = p.getCodigo();
             if (productos.remove(p)) {
-                System.out.println("Producto eliminado de la canasta" + p.codigo);
+                System.out.println("Producto eliminado de la canasta" + p.getCodigo());
             } else {
                 throw new NoSuchFieldException("Producto no encontrado");
             }
         } catch (NoSuchFieldException e) {
             System.err.println(e.getMessage());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
     }
     
-    public void listarProductos() {
-        
+    public void listarProductos(Class claseFiltro) {
+        productos.stream().
+                filter(p -> p.getClass().
+                equals(claseFiltro)).
+                forEach(System.out::println);
     }
+
+    public ArrayList<Producto> getProductos() {
+        return productos;
+    }
+    
+    
     
 }
