@@ -50,6 +50,15 @@ public class Canasta {
         productos.stream().
                 forEach(System.out::println);
     }
+    
+      public int countProductos(Class c) {
+        
+        int contadorProductos = (int) this.productos.stream().
+                filter(t -> t.getClass().equals(c)).
+                count();
+        
+        return contadorProductos;
+    }
 
     public ArrayList<Producto> getProductos() {
         return productos;
