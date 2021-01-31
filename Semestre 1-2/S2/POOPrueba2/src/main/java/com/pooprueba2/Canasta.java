@@ -99,6 +99,12 @@ public class Canasta {
                 );
         // alabada sea la programación funcional
     }
+
+    public EstadosCanastaEnum getEstado() {
+        return estado;
+    }
+    
+    
     
     
     

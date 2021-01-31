@@ -30,6 +30,7 @@ public class Cliente {
     // talvez hacer throw en canasta y solo hacer catch acá
     // realmente si hago throw y catch en Canasta jamás debiera propagarse acá,
     // diría
+    // TODO
     public boolean realizarCompra() {
         Boleta boleta = new Boleta(this);
         
@@ -50,18 +51,23 @@ public class Cliente {
         // si no existen elementos en la canasta, no se pueda comprar
         return false;
     }
-    
-     public void mostrarDetalleCompra() {
-         System.out.println("---- PRODUCTOS ----");
-
-         for (Producto producto : canastaCliente.getProductos()) {
-             System.out.println(producto.toString());
-         }
-     }
 
     public Canasta getCanastaCliente() {
         return canastaCliente;
     }
+
+    public void setCanastaCliente(Canasta canastaCliente) {
+        this.canastaCliente = canastaCliente;
+    }
+    
+    @Override
+    public String toString() {
+        return "Nombre: " + nombre + "\n RUT: " + rut;
+    }
+    
+    
+    
+    
      
     
 }

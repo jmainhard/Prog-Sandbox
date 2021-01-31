@@ -7,7 +7,7 @@ public abstract class Producto  { /* implements Describible */
     protected String nombre;
     protected String codigo;
     protected double tempAlmacenamiento;
-    protected int precio;
+    protected double precio;
 
     public Producto(String nombre, double tempAlmacenamiento, int precio) {
         this.nombre = nombre;
@@ -31,6 +31,10 @@ public abstract class Producto  { /* implements Describible */
 
     public double getTempAlmacenamiento() {
         return tempAlmacenamiento;
+    }
+
+    public double getPrecio() {
+        return precio;
     }
     
     public abstract void asignarCodigo(int num);

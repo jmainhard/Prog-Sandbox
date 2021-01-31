@@ -35,6 +35,8 @@ public class Main {
         
         System.out.println("--------------");
         canasta.listarProductos(Congelado.class);
+        
+        System.out.println(Frio.class.getSimpleName());
 
     }
 
