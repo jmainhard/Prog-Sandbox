@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class Canasta {
     private EstadosCanastaEnum estado;
-    private ArrayList<Producto> productos;
+    private List<Producto> productos;
 
     public Canasta(EstadosCanastaEnum estado) {
         this.estado = estado;
@@ -85,11 +85,11 @@ public class Canasta {
           return groupedProducts;
     }
 
-    public ArrayList<Producto> getProductos() {
+    public List<Producto> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<Producto> productos) {
+    public void setProductos(List<Producto> productos) {
         this.productos = productos;
         this.productos.
                 forEach(
@@ -103,10 +103,7 @@ public class Canasta {
     public EstadosCanastaEnum getEstado() {
         return estado;
     }
-    
-    
-    
-    
+
     
     
     

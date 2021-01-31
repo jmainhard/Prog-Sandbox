@@ -29,6 +29,7 @@ public class Main {
         listaProductos.add(new Congelado(TipoCongelacionEnum.RAPIDA, "Pollo", -23, 3600));
         listaProductos.add(new Congelado(TipoCongelacionEnum.RAPIDA, "Pollo", -23, 3600));
         listaProductos.add(new Congelado(TipoCongelacionEnum.RAPIDA, "Pollo", -23, 3600));
+        listaProductos.add(new Congelado(TipoCongelacionEnum.RAPIDA, "Pollo", -23, 3600));
         
         canasta.setProductos(listaProductos);
         

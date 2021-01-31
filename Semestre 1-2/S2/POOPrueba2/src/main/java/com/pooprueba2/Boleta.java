@@ -39,6 +39,7 @@ public class Boleta implements Imprimible {
     public String mostrarDetalle() {
         String stringBuilder;
         Canasta canasta = cliente.getCanastaCliente();
+        List<Double> precios = new ArrayList<>();
 
         stringBuilder = "---- DATOS CLIENTE ----\n";
         stringBuilder += cliente.toString() + "\n";
@@ -47,19 +48,27 @@ public class Boleta implements Imprimible {
         stringBuilder = canasta.getProductos().stream().
                 map(producto -> producto.toString() + "\n").
                 reduce(stringBuilder, String::concat);
+        
+        // FIXME 
+        canasta.getProductos().forEach(producto -> {
+            precios.add(producto.getPrecio());
+        });
+        
+        stringBuilder += "Total sin descuentos: $ "+ precios.stream().reduce(0.0, Double::sum);
 
         stringBuilder += "\n---- DESCRIPCIÓN ----\n";
         stringBuilder += canasta.getEstado().
-                equals(EstadosCanastaEnum.PARA_SERVIR)
-                ? "Para servir\n" : "Para llevar\n";
+                equals(EstadosCanastaEnum.REGRIGERADOS)
+                ? "Refrigerados\n" : "Para servir\n";
 
-        stringBuilder += "\nDescuento(s) aplicado(s)";
+        stringBuilder += "\nDescuento(s):";
         stringBuilder += "(Aplica para +10 productos del mismo tipo en canasta)\n";
         stringBuilder += getDescuentosAplicados();
-        stringBuilder += "Total descuentos aplicados: " + totalDescuentos;
+        stringBuilder += "\nTotal descuentos aplicados: -" + totalDescuentos+ "%";
+        
 
-        stringBuilder += "\n---- TOTAL ----\n";
-        stringBuilder += '$' + getTotal();
+        stringBuilder += "\n---- TOTAL BOLETA ----\n";
+        stringBuilder += "$ " + getTotal();
 
         return stringBuilder;
     }
@@ -89,7 +98,7 @@ public class Boleta implements Imprimible {
             }
         }
         
-        return strBuilder.isBlank() ? strBuilder : "\nNo aplica\n";
+        return strBuilder.isBlank() ? "No aplica\n" : strBuilder;
     }
 
     public double getTotal() {
@@ -131,14 +140,13 @@ public class Boleta implements Imprimible {
     
     // FIXME
     public void discountTo(Class c) {
-        Canasta canastaDiscounted = cliente.getCanastaCliente();
+        List<Producto> productsDiscounted;
         
-        canastaDiscounted = (Canasta) canastaDiscounted.getProductos().
-                stream().
-                filter(p -> p.getClass().equals(c)).
-                map(p -> p.precio -= p.precio * 0.1);
-        
-        cliente.setCanastaCliente(canastaDiscounted);
+        productsDiscounted = cliente.getCanastaCliente().groupProductos(c);
+        for (Producto producto : productsDiscounted) {
+            producto.precio -= producto.getPrecio() * 0.1;
+        }
+        cliente.getCanastaCliente().setProductos(productsDiscounted);
     }
                 
     
