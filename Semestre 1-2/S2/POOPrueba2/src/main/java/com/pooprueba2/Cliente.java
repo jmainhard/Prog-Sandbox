@@ -30,9 +30,9 @@ public class Cliente {
         if (canastaCliente.getProductos().isEmpty()) {
             throw new CanastaVaciaException("Canasta de cliente vacía");
         } else {
-            int productosCongelados = countProductos(Congelado.class);
-            int productosFrescos = countProductos(Fresco.class);
-            int productosFrios = countProductos(Frio.class);
+            int productosCongelados = canastaCliente.countProductos(Congelado.class);
+            int productosFrescos = canastaCliente.countProductos(Fresco.class);
+            int productosFrios = canastaCliente.countProductos(Frio.class);
         }
         
         // TODO añdair control excepciones
@@ -40,18 +40,6 @@ public class Cliente {
         return false;
     }
     
-    public int countProductos(Class c) {
-        
-        int contadoProductos = (int) canastaCliente.
-                getProductos().
-                stream().
-                filter(t -> t.getClass().equals(c)).
-                count();
-        
-        return contadoProductos;
-    }
-    
-     
      public void mostrarDetalleCompra() {
          System.out.println("---- PRODUCTOS ----");
 
