@@ -62,7 +62,7 @@ public class Cliente {
     
     @Override
     public String toString() {
-        return "Nombre: " + nombre + "\n RUT: " + rut;
+        return "Nombre: " + nombre + "\nRUT: " + rut;
     }
     
     

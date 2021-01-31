@@ -38,14 +38,15 @@ public class Boleta implements Imprimible {
 
     public String mostrarDetalle() {
         String stringBuilder;
-        List<Integer> precios = new ArrayList<>();
         Canasta canasta = cliente.getCanastaCliente();
 
         stringBuilder = "---- DATOS CLIENTE ----\n";
         stringBuilder += cliente.toString() + "\n";
 
         stringBuilder += "\n---- DETALLE ----\n";
-        stringBuilder += canasta.getProductos();
+        stringBuilder = canasta.getProductos().stream().
+                map(producto -> producto.toString() + "\n").
+                reduce(stringBuilder, String::concat);
 
         stringBuilder += "\n---- DESCRIPCIÓN ----\n";
         stringBuilder += canasta.getEstado().
@@ -81,15 +82,13 @@ public class Boleta implements Imprimible {
                 default:
                     throw new AssertionError();
             }
-
             if (cliente.getCanastaCliente().countProductos(claseFiltro) > 10) {
                 strBuilder += "10% de descuento a productos "
                         + claseFiltro.getSimpleName() + "s\n";
                 this.totalDescuentos += 10;
             }
-
         }
-
+        
         return strBuilder.isBlank() ? strBuilder : "\nNo aplica\n";
     }
 
@@ -130,7 +129,7 @@ public class Boleta implements Imprimible {
         this.total = precios.stream().reduce(0.0, Double::sum);
     }
     
-    
+    // FIXME
     public void discountTo(Class c) {
         Canasta canastaDiscounted = cliente.getCanastaCliente();
         
