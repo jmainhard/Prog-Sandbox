@@ -25,16 +25,14 @@ public class Canasta {
         p.asignarCodigo(productos.indexOf(p));
     }
     
-    public void delProducto(Producto p) throws NoSuchFieldException {
+    public void delProducto(Producto p) {
         try {
             String codigo = p.getCodigo();
             if (productos.remove(p)) {
                 System.out.println("Producto eliminado de la canasta" + p.getCodigo());
             } else {
-                throw new NoSuchFieldException("Producto no encontrado");
+                System.err.println("Producto no encontrado");
             }
-        } catch (NoSuchFieldException e) {
-            System.err.println(e.getMessage());
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
