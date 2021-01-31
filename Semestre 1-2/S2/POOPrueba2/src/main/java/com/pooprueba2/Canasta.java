@@ -55,7 +55,7 @@ public class Canasta {
                 forEach(System.out::println);
     }
     
-      public int countProductos(Class c) {
+    public int countProductos(Class c) {
               if (!this.productos.isEmpty()) {
                 int contadorProductos = (int) this.productos.stream().
                 filter(t -> t.getClass().equals(c)).
@@ -96,6 +96,7 @@ public class Canasta {
                                 groupProductos(p.getClass()).indexOf(p)
                         )
                 );
+        // alabada sea la programación funcional
     }
     
     
