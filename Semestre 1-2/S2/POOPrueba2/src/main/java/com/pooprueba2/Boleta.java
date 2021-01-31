@@ -26,10 +26,8 @@ public class Boleta implements Imprimible {
             if (cliente.realizarCompra()) {
                 
             }
-        } catch (CanastaVaciaException e) {
-            System.err.println(e.getMessage());
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            System.err.println(e);
         }
         
         throw new UnsupportedOperationException("TODO."); 

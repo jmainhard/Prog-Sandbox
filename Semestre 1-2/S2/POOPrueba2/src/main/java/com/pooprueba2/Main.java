@@ -25,8 +25,6 @@ public class Main {
         
         canasta.listarProductos();
         
-        canasta.getProductos().clear();
-        
         int productosCongelados = canasta.countProductos(Congelado.class);
         int productosFrescos = canasta.countProductos(Fresco.class);
         int productosFrios = canasta.countProductos(Frio.class);
@@ -37,7 +35,6 @@ public class Main {
         
         System.out.println("--------------");
         canasta.listarProductos(Congelado.class);
-        
 
     }
 

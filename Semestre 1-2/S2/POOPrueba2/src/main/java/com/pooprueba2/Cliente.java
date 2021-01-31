@@ -30,7 +30,7 @@ public class Cliente {
     // talvez hacer throw en canasta y solo hacer catch acá
     // realmente si hago throw y catch en Canasta jamás debiera propagarse acá,
     // diría
-    public boolean realizarCompra() throws CanastaVaciaException {
+    public boolean realizarCompra() {
         Boleta boleta = new Boleta(this);
         
         try {
@@ -41,9 +41,8 @@ public class Cliente {
             System.out.println("Congelados: "+ productosCongelados +
                     "\nFrescos: "+ productosFrescos +
                     "\nFríos: "+ productosFrios);
-        } catch (CanastaVaciaException e) {
-            System.err.println(e.getMessage());
         } catch (Exception e) {
+            System.err.println(e);
         }
         
         
