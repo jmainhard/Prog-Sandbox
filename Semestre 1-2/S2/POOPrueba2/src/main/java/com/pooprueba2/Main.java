@@ -1,5 +1,6 @@
 package com.pooprueba2;
 
+import com.pooprueba2.helper.CanastaVaciaException;
 import com.pooprueba2.helper.EstadosCanastaEnum;
 import com.pooprueba2.helper.TipoCongelacionEnum;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  */
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CanastaVaciaException {
         
         ArrayList<Producto> listaProductos = new ArrayList<>();
         Canasta canasta = new Canasta(EstadosCanastaEnum.REGRIGERADOS);
@@ -24,6 +25,8 @@ public class Main {
         
         canasta.listarProductos();
         
+        canasta.getProductos().clear();
+        
         int productosCongelados = canasta.countProductos(Congelado.class);
         int productosFrescos = canasta.countProductos(Fresco.class);
         int productosFrios = canasta.countProductos(Frio.class);
@@ -32,7 +35,8 @@ public class Main {
                     "\nFrescos: "+ productosFrescos +
                     "\nFríos: "+ productosFrios);
         
-        
+        System.out.println("--------------");
+        canasta.listarProductos(Congelado.class);
         
 
     }

@@ -23,7 +23,7 @@ public class Congelado extends Producto {
     public String toString() {
         String descripcion = super.toString();
         
-        descripcion += ", descripcion=congelación lenta a "+
+        descripcion += ", descripcion=Congelación "+ this.congelacion+" a "+
                 this.getTempAlmacenamiento() + "°C}";
 
         return descripcion;

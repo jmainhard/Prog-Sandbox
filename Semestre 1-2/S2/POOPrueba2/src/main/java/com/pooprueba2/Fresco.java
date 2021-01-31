@@ -20,7 +20,7 @@ public class Fresco extends Producto {
     public String toString() {
         String descripcion = super.toString();
         
-        descripcion += ", descripcion=fresco a "+
+        descripcion += ", descripcion=Fresco a "+
                 this.getTempAlmacenamiento() + "°C";
         descripcion += " y " + this.porcentajeHumedad + "% humedad}";
 
