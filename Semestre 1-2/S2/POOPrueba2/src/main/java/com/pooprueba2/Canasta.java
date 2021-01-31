@@ -24,7 +24,6 @@ public class Canasta {
     
     public void addProducto(Producto p) {
         productos.add(p);
-        int nProducto;
         p.asignarCodigo(groupProductos(p.getClass()).indexOf(p));
     }
     
@@ -32,7 +31,7 @@ public class Canasta {
         try {
             String codigo = p.getCodigo();
             if (productos.remove(p)) {
-                System.out.println("Producto eliminado de la canasta exitosamente (" + p.getCodigo() + ')');
+                System.out.println("Producto eliminado de la canasta exitosamente (" + codigo + ')');
             } else {
                 System.err.println("Producto no encontrado");
             }
@@ -56,7 +55,7 @@ public class Canasta {
     }
     
     public int countProductos(Class c) {
-              if (!this.productos.isEmpty()) {
+            if (!this.productos.isEmpty()) {
                 int contadorProductos = (int) this.productos.stream().
                 filter(t -> t.getClass().equals(c)).
                 count();
@@ -73,7 +72,9 @@ public class Canasta {
         
               if (!this.productos.isEmpty()) {
                 groupedProducts = this.productos.stream().
-                filter(t -> t.getClass().equals(c)).
+                filter(
+                        t -> t.getClass().equals(c)
+                ).
                         collect(Collectors.toList());
                 
                 return groupedProducts;
