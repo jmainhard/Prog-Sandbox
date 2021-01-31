@@ -18,10 +18,19 @@ public class Main {
         listaProductos.add(new Fresco(35, "Longaniza", 24, 3500));
         listaProductos.add(new Frio("Verdura congelada", -15, 4500));
         listaProductos.add(new Congelado(TipoCongelacionEnum.LENTA, "Helado", -10, 400));
+        listaProductos.add(new Congelado(TipoCongelacionEnum.RAPIDA, "Pollo", -23, 3600));
         
         canasta.setProductos(listaProductos);
         
         canasta.listarProductos();
+        
+        int productosCongelados = canasta.countProductos(Congelado.class);
+        int productosFrescos = canasta.countProductos(Fresco.class);
+        int productosFrios = canasta.countProductos(Frio.class);
+        
+        System.out.println("Congelados: "+ productosCongelados +
+                    "\nFrescos: "+ productosFrescos +
+                    "\nFríos: "+ productosFrios);
         
         
         

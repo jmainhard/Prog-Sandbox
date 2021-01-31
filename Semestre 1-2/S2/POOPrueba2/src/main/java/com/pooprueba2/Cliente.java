@@ -33,6 +33,10 @@ public class Cliente {
             int productosCongelados = canastaCliente.countProductos(Congelado.class);
             int productosFrescos = canastaCliente.countProductos(Fresco.class);
             int productosFrios = canastaCliente.countProductos(Frio.class);
+            
+            System.out.println("Congelados: "+ productosCongelados +
+                    "\nFrescos: "+ productosFrescos +
+                    "\nFríos: "+ productosFrios);
         }
         
         // TODO añdair control excepciones
