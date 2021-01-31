@@ -5,20 +5,19 @@ package com.pooprueba2;
 
 public class Frio extends Producto {
 
-    public Frio(String nombre, String codigo, double tempAlmacenamiento,
-            int precio) {
+    public Frio(String nombre, double tempAlmacenamiento, int precio) {
         super(nombre, tempAlmacenamiento, precio);
     }
     
     public void asignarCodigo(int num) {
-        this.codigo = "FRIO-"+ num;
+        this.codigo = "FRIO-"+ (num + 1);
     }
     
     @Override
-    public String desc() {
+    public String toString() {
         String descripcion = super.toString();
         
-        descripcion += ", descripcion=frío a "+
+        descripcion += ", descripción=frío a "+
                 this.getTempAlmacenamiento() + "°C}";
 
         return descripcion;

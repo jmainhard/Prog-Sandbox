@@ -1,5 +1,6 @@
 package com.pooprueba2;
 
+import com.pooprueba2.helper.EstadosCanastaEnum;
 import java.util.ArrayList;
 
 /**
@@ -44,10 +45,22 @@ public class Canasta {
                 equals(claseFiltro)).
                 forEach(System.out::println);
     }
+    
+    public void listarProductos() {
+        productos.stream().
+                forEach(System.out::println);
+    }
 
     public ArrayList<Producto> getProductos() {
         return productos;
     }
+
+    public void setProductos(ArrayList<Producto> productos) {
+        this.productos = productos;
+        this.productos.forEach(p -> p.asignarCodigo(this.productos.indexOf(p)));
+    }
+    
+    
     
     
     

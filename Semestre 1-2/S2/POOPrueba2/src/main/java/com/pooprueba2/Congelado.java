@@ -1,4 +1,7 @@
 package com.pooprueba2;
+
+import com.pooprueba2.helper.TipoCongelacionEnum;
+
 /**
  * @author Jorge M.
  */
@@ -7,17 +10,17 @@ public class Congelado extends Producto {
     private TipoCongelacionEnum congelacion;
 
     public Congelado(TipoCongelacionEnum congelacion, String nombre,
-            String codigo, double tempAlmacenamiento, int precio) {
+            double tempAlmacenamiento, int precio) {
         super(nombre, tempAlmacenamiento, precio);
         this.congelacion = congelacion;
     }
     
     public void asignarCodigo(int num) {
-        this.codigo = "CONG-"+ num;
+        this.codigo = "CONG-"+ (num + 1);
     }
 
     @Override
-    public String desc() {
+    public String toString() {
         String descripcion = super.toString();
         
         descripcion += ", descripcion=congelación lenta a "+

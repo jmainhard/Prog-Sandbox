@@ -1,5 +1,7 @@
 package com.pooprueba2;
 
+import com.pooprueba2.helper.CanastaVaciaException;
+
 
 /**
  * @author Jorge M.

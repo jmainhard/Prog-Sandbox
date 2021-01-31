@@ -6,18 +6,18 @@ package com.pooprueba2;
 public class Fresco extends Producto {
     private double porcentajeHumedad;
 
-    public Fresco(double porcentajeHumedad, String nombre, String codigo,
+    public Fresco(double porcentajeHumedad, String nombre, 
             double tempAlmacenamiento, int precio) {
         super(nombre, tempAlmacenamiento, precio);
         this.porcentajeHumedad = porcentajeHumedad;
     }
     
     public void asignarCodigo(int num) {
-        this.codigo = "FRES-"+ num;
+        this.codigo = "FRES-"+ (num + 1);
     }
     
     @Override
-    public String desc() {
+    public String toString() {
         String descripcion = super.toString();
         
         descripcion += ", descripcion=fresco a "+

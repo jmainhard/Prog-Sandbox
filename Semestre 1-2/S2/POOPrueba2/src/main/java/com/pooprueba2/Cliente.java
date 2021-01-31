@@ -1,4 +1,7 @@
 package com.pooprueba2;
+
+import com.pooprueba2.helper.CanastaVaciaException;
+
 /**
  * @author Jorge M.
  */
@@ -37,15 +40,23 @@ public class Cliente {
         return false;
     }
     
-    // .sream.filter segun clase llegada por param
-    public int countProductos(Class c) {return -1;}
+    public int countProductos(Class c) {
+        
+        int contadoProductos = (int) canastaCliente.
+                getProductos().
+                stream().
+                filter(t -> t.getClass().equals(c)).
+                count();
+        
+        return contadoProductos;
+    }
     
      
      public void mostrarDetalleCompra() {
          System.out.println("---- PRODUCTOS ----");
 
          for (Producto producto : canastaCliente.getProductos()) {
-             System.out.println(producto.desc());
+             System.out.println(producto.toString());
          }
      }
 
