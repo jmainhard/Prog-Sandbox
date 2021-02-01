@@ -20,6 +20,7 @@ public class Boleta implements Imprimible {
         this.idBoleta = cliente.getRut() + " TODO + LocalDateTime";
     }
 
+    // TODO
     @Override
     public void imprimir() {
         // TODO imprimir boleta y guardar archivo
@@ -53,20 +54,23 @@ public class Boleta implements Imprimible {
                 map(producto -> producto.toString() + "\n").
                 reduce(stringBuilder, String::concat);
         
-        // FIXME 
         canasta.getProductos().forEach(producto -> {
             precios.add(producto.getPrecio());
         });
         
-        stringBuilder += "\nTotal sin descuentos: $ "+ precios.stream().reduce(0.0, Double::sum);
+        stringBuilder += "\nTotal sin descuentos: $ "+
+                precios.stream().reduce(0.0, Double::sum);
+        
+        stringBuilder += "\n\n---- DESCUENTOS ----\n";
+        
         precios.clear();
 
-        stringBuilder += "\nDescuento(s):";
+        stringBuilder += "Descuento(s):";
         stringBuilder += "(Aplica para +10 productos del mismo tipo en canasta)\n";
         stringBuilder += getDescuentosAplicados(canasta);
         stringBuilder += "\nTotal descuentos aplicados: -" + totalDescuentos+ "%";
         
-        stringBuilder += "\n---- TOTAL BOLETA ----\n";
+        stringBuilder += "\n\n---- TOTAL BOLETA ----\n";
         calcTotal(canasta);
         
         stringBuilder += "$ " + getTotal(canasta);
