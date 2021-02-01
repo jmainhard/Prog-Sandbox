@@ -4,7 +4,6 @@ import com.pooprueba2.helper.CanastaVaciaException;
 import com.pooprueba2.helper.EstadosCanastaEnum;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 /**
  * @author Jorge M.
@@ -43,6 +42,11 @@ public class Boleta implements Imprimible {
 
         stringBuilder = "---- DATOS CLIENTE ----\n";
         stringBuilder += cliente.toString() + "\n";
+        
+        stringBuilder += "\n---- DESCRIPCIÓN ----\n";
+        stringBuilder += canasta.getEstado().
+                equals(EstadosCanastaEnum.REGRIGERADOS)
+                ? "Refrigerados\n" : "Para servir\n";
 
         stringBuilder += "\n---- DETALLE ----\n";
         stringBuilder = canasta.getProductos().stream().
@@ -54,26 +58,23 @@ public class Boleta implements Imprimible {
             precios.add(producto.getPrecio());
         });
         
-        stringBuilder += "Total sin descuentos: $ "+ precios.stream().reduce(0.0, Double::sum);
-
-        stringBuilder += "\n---- DESCRIPCIÓN ----\n";
-        stringBuilder += canasta.getEstado().
-                equals(EstadosCanastaEnum.REGRIGERADOS)
-                ? "Refrigerados\n" : "Para servir\n";
+        stringBuilder += "\nTotal sin descuentos: $ "+ precios.stream().reduce(0.0, Double::sum);
+        precios.clear();
 
         stringBuilder += "\nDescuento(s):";
         stringBuilder += "(Aplica para +10 productos del mismo tipo en canasta)\n";
-        stringBuilder += getDescuentosAplicados();
+        stringBuilder += getDescuentosAplicados(canasta);
         stringBuilder += "\nTotal descuentos aplicados: -" + totalDescuentos+ "%";
         
-
         stringBuilder += "\n---- TOTAL BOLETA ----\n";
-        stringBuilder += "$ " + getTotal();
+        calcTotal(canasta);
+        
+        stringBuilder += "$ " + getTotal(canasta);
 
         return stringBuilder;
     }
 
-    public String getDescuentosAplicados() {
+    public String getDescuentosAplicados(Canasta canasta) {
         String strBuilder = "\n";
         Class claseFiltro;
 
@@ -91,7 +92,7 @@ public class Boleta implements Imprimible {
                 default:
                     throw new AssertionError();
             }
-            if (cliente.getCanastaCliente().countProductos(claseFiltro) > 10) {
+            if (canasta.countProductos(claseFiltro) > 10) {
                 strBuilder += "10% de descuento a productos "
                         + claseFiltro.getSimpleName() + "s\n";
                 this.totalDescuentos += 10;
@@ -101,15 +102,14 @@ public class Boleta implements Imprimible {
         return strBuilder.isBlank() ? "No aplica\n" : strBuilder;
     }
 
-    public double getTotal() {
-        calcTotal();
+    public double getTotal(Canasta canasta) {
         return total;
     }
 
-    public void calcTotal() {
+    public void calcTotal(Canasta canasta) {
         List<Double> precios = new ArrayList<>();
-        Canasta canasta = cliente.getCanastaCliente();
         Class claseFiltro;
+        
         for (int i = 0; i < 3; i++) {
             switch (i) {
                 case 0:
@@ -125,8 +125,8 @@ public class Boleta implements Imprimible {
                     throw new AssertionError();
             }
 
-            if (cliente.getCanastaCliente().countProductos(claseFiltro) > 10) {
-                discountTo(claseFiltro);
+            if (canasta.countProductos(claseFiltro) > 10) {
+                discountTo(canasta, claseFiltro);
                 this.totalDescuentos += 10;
             }
         }
@@ -138,17 +138,12 @@ public class Boleta implements Imprimible {
         this.total = precios.stream().reduce(0.0, Double::sum);
     }
     
-    // FIXME
-    public void discountTo(Class c) {
-        List<Producto> productsDiscounted;
-        
-        productsDiscounted = cliente.getCanastaCliente().groupProductos(c);
-        for (Producto producto : productsDiscounted) {
-            producto.precio -= producto.getPrecio() * 0.1;
-        }
-        cliente.getCanastaCliente().setProductos(productsDiscounted);
+    public void discountTo(Canasta canasta, Class claseFiltro) {
+        canasta.groupProductos(claseFiltro).stream().
+                forEach(
+                        p -> p.setPrecio( p.getPrecio() - (p.getPrecio() * 0.1) )
+                );
     }
-                
     
 
 }
