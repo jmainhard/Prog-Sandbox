@@ -3,6 +3,7 @@ package cl.ufro.dci.accesodatos;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -26,45 +27,53 @@ import java.util.List;
 
 public class FilleController<E> {
     private TypeToken<Collection<E>> collectionType;
-    private Class<E> tipoElementos;
 
-    public FilleController(TypeToken<Collection<E>> collectionType, Class<E> tipoElementos) {
+    public FilleController(TypeToken<Collection<E>> collectionType) {
         this.collectionType = collectionType;
-        this.tipoElementos = tipoElementos;
-    }
-    
-    public Class<E> getE() { 
-        return tipoElementos; 
     }
 
-    public void setE(Class<E> tipoElementos) { 
-        this.tipoElementos = tipoElementos; 
+    public TypeToken<Collection<E>> getCollectionType() {
+        return collectionType;
+    }
+
+    public void setCollectionType(TypeToken<Collection<E>> collectionType) {
+        this.collectionType = collectionType;
     }
     
-    public void guardarLista(List<E> lista, String ruta) {
+    public boolean guardarLista(List<E> lista, String ruta) throws NullPointerException{
             FileWriter writer;
+            
+            if (lista == null) {
+                throw new NullPointerException("Lista nula o no inicializada\n");
+            }
+            
             try {
                 writer = new FileWriter(ruta);
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 gson.toJson(lista, writer);
                 writer.close();
+                return true;
             } catch (IOException ex) {
-                System.out.println("Error al crear el archivo");
+                System.err.println("Error al crear el archivo");
             } catch (JsonIOException ex) {
                 System.err.println("Error al guardar lista (Json)");
             } catch (Exception e) {
                 System.err.println("Error "+ e);
             }
+            
+            return false;
     }
 
     public ArrayList<E> cargarLista(String ruta) {
-            ArrayList<E> lista = new ArrayList<E>();
+            ArrayList<E> lista = new ArrayList<>();
             try {
                 BufferedReader br = new BufferedReader(new FileReader(ruta));
                 Gson gson = new Gson();
                 lista = gson.fromJson(br, collectionType.getType());
-            }catch (IOException e) {
-                System.err.println("Error "+ e);
+            } catch (IOException ex) {
+                System.err.println("Error "+ ex);
+            } catch (JsonSyntaxException ex) {
+                System.err.println("Error al intentar cargar Json "+ ex);
             }
             return lista;
     }

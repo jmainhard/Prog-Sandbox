@@ -23,22 +23,79 @@ public class Main {
         personas.add(persona);
         personas.add(persona2);
         
+        System.out.println("Lista antes");
+        personas.forEach(System.out::println);
+        
         persona.agregarMascota(new Mascota("Wawa", "Golden Retriever"));
         persona.agregarMascota(new Mascota("Pepe", "Chihuahua"));
         persona.agregarMascota(new Mascota("Roble", "Pastor Alemán"));
         
-        FilleController<Persona> personasJson = new FilleController<>(new TypeToken<Collection<Persona>>(){}, Persona.class);
+        guardarPersonas(personas);
         
-        personasJson.guardarLista(personas, "data/personas.json");
+        personas = cargarPersonas();
         
-        ArrayList<Persona> personasGet = personasJson.cargarLista("data/personas.json");
+        Persona personaNueva = new Persona("12345678-9", "Felipe Juan",
+                "Tapia Acevedo", "12-03-1992");
         
-        personasGet.forEach(System.out::println);
+        personas.add(personaNueva);
         
-        System.out.println(personasGet.get(1).getNombres());
-        System.out.println(personasGet.get(1).getMascotas());
+        System.out.println("Lista después");
+        personas.forEach(System.out::println);
         
+        guardarPersonas(personas);
+        
+        personas.forEach(p -> System.out.println(p.getNombres()));
+        
+        Mascota mascota1 = new Mascota("Pepe", "Gato montés");
+        Mascota mascota2 = new Mascota("Sofía", "Gatito");
+        Mascota mascota3 = new Mascota("Lucero", "Ojos de lucero");
+        
+        ArrayList mascotas = new ArrayList<>();
+        
+        mascotas.add(mascota1);
+        mascotas.add(mascota2);
+        mascotas.add(mascota3);
+        
+        guardarMascotas(mascotas);
         
     }
+    
+    public static void guardarPersonas(ArrayList<Persona> personas) {
+        FilleController<Persona> jsonHandler = new FilleController<>(new TypeToken<Collection<Persona>>(){});
+        try {
+            if ( jsonHandler.guardarLista(personas, "data/personas.json") ) {
+                System.out.println("Lista de personas guardada exitosamente\n");
+            }
+        } catch (NullPointerException ex) {
+            System.err.println("Error al guardar: "+ ex);
+        } catch (Exception ex) {
+            System.err.println("Error al intentar guardar esta lista"+ ex);
+        }
+    }
+    
+    public static ArrayList<Persona> cargarPersonas() {
+        // TODO revisar manejo de inventario específico profe marcelo github
+        FilleController<Persona> jsonHandler = new FilleController<>(new TypeToken<Collection<Persona>>(){});
+        return jsonHandler.cargarLista("data/personas.json");
+    }
+    
+    public static void guardarMascotas(ArrayList<Mascota> mascotas) {
+        FilleController<Mascota> jsonHandler = new FilleController<>(new TypeToken<Collection<Mascota>>(){});
+        try {
+            if ( jsonHandler.guardarLista(mascotas, "data/mascotas.json") ) {
+                System.out.println("Lista de mascotas guardada exitosamente\n");
+            }
+        } catch (NullPointerException ex) {
+            System.err.println("Error al guardar: "+ ex);
+        } catch (Exception ex) {
+            System.err.println("Error al intentar guardar esta lista"+ ex);
+        }
+    }
+    
+    public static ArrayList<Mascota> cargarMascotas() {
+        FilleController<Mascota> jsonHandler = new FilleController<>(new TypeToken<Collection<Mascota>>(){});
+        return jsonHandler.cargarLista("data/mascotas.json");
+    }
+    
 
 }

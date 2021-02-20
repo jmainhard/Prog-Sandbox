@@ -25,5 +25,12 @@
     "apellidos": "Sepulveda Aedo",
     "fechaNacimiento": "30-05-1973",
     "mascotas": []
+  },
+  {
+    "rut": "12345678-9",
+    "nombres": "Felipe Juan",
+    "apellidos": "Tapia Acevedo",
+    "fechaNacimiento": "12-03-1992",
+    "mascotas": []
   }
 ]
