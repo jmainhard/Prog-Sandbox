@@ -6,6 +6,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -40,6 +41,14 @@ public class FilleController<E> {
         this.collectionType = collectionType;
     }
     
+    /**
+     * Guarda una lista de objetos en un archivo con formato JSON
+     * @param lista lista a guardar en formato JSON
+     * @param ruta ruta del archivo
+     * @return {@code true} si se guarda la lista correctamente {@code false}
+     * si la lista no es guardada
+     * @throws NullPointerException 
+     */
     public boolean guardarLista(List<E> lista, String ruta) throws NullPointerException{
             FileWriter writer;
             
@@ -50,7 +59,7 @@ public class FilleController<E> {
             try {
                 writer = new FileWriter(ruta);
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                gson.toJson(lista, writer);
+                gson.toJson(lista, collectionType.getType(), writer);
                 writer.close();
                 return true;
             } catch (IOException ex) {
@@ -64,6 +73,11 @@ public class FilleController<E> {
             return false;
     }
 
+    /**
+     * Carga los objetos de un archivo JSON dado
+     * @param ruta ruta del archivo
+     * @return {@code ArrayList<E>} con los objetos del archivo JSON
+     */
     public ArrayList<E> cargarLista(String ruta) {
             ArrayList<E> lista = new ArrayList<>();
             try {
