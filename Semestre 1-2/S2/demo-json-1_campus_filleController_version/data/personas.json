@@ -1,0 +1,29 @@
+[
+  {
+    "rut": "15.463.861-k",
+    "nombres": "Rodolfo Javier",
+    "apellidos": "Lopez Bravo",
+    "fechaNacimiento": "27-08-2001",
+    "mascotas": [
+      {
+        "nombres": "Wawa",
+        "raza": "Golden Retriever"
+      },
+      {
+        "nombres": "Pepe",
+        "raza": "Chihuahua"
+      },
+      {
+        "nombres": "Roble",
+        "raza": "Pastor Alemán"
+      }
+    ]
+  },
+  {
+    "rut": "10.881.443-8",
+    "nombres": "Paulina Adriana",
+    "apellidos": "Sepulveda Aedo",
+    "fechaNacimiento": "30-05-1973",
+    "mascotas": []
+  }
+]

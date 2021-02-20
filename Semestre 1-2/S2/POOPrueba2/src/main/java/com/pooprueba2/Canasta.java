@@ -42,6 +42,7 @@ public class Canasta {
         }
     }
     
+    // param id
     public void listarProductos(Class claseFiltro) {
         productos.stream().
                 filter(p -> p.getClass().

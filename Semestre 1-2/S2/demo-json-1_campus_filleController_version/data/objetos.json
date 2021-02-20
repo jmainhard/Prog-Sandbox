@@ -1,0 +1,29 @@
+[
+  {
+    "rut": "cen",
+    "nombres": "cen",
+    "apellidos": "cen",
+    "fechaNacimiento": "cen",
+    "mascotas": [
+      {
+        "nombres": "Wawa",
+        "raza": "Golden Retriever"
+      },
+      {
+        "nombres": "Pepe",
+        "raza": "Chihuahua"
+      },
+      {
+        "nombres": "Roble",
+        "raza": "Pastor Alem�n"
+      }
+    ]
+  },
+  {
+    "rut": "cen",
+    "nombres": "cen",
+    "apellidos": "cen",
+    "fechaNacimiento": "cen",
+    "mascotas": []
+  }
+]

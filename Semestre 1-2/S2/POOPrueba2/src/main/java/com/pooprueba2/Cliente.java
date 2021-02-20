@@ -35,19 +35,11 @@ public class Cliente {
         Boleta boleta = new Boleta(this);
         
         try {
-            int productosCongelados = canastaCliente.countProductos(Congelado.class);
-            int productosFrescos = canastaCliente.countProductos(Fresco.class);
-            int productosFrios = canastaCliente.countProductos(Frio.class);
             
-            System.out.println("Congelados: "+ productosCongelados +
-                    "\nFrescos: "+ productosFrescos +
-                    "\nFríos: "+ productosFrios);
         } catch (Exception e) {
             System.err.println(e);
         }
         
-        
-        // TODO añdair control excepciones
         // si no existen elementos en la canasta, no se pueda comprar
         return false;
     }
