@@ -43,13 +43,14 @@ public class FilleController<E> {
     
     /**
      * Guarda una lista de objetos en un archivo con formato JSON
+     * ex guardarLista
      * @param lista lista a guardar en formato JSON
      * @param ruta ruta del archivo
      * @return {@code true} si se guarda la lista correctamente {@code false}
      * si la lista no es guardada
      * @throws NullPointerException 
      */
-    public boolean guardarLista(List<E> lista, String ruta) throws NullPointerException{
+    public boolean saveToJson(List<E> lista, String ruta) throws NullPointerException{
             FileWriter writer;
             
             if (lista == null) {
@@ -75,10 +76,11 @@ public class FilleController<E> {
 
     /**
      * Carga los objetos de un archivo JSON dado
+     * ex cargarLista
      * @param ruta ruta del archivo
      * @return {@code ArrayList<E>} con los objetos del archivo JSON
      */
-    public ArrayList<E> cargarLista(String ruta) {
+    public ArrayList<E> loadFromJson(String ruta) {
             ArrayList<E> lista = new ArrayList<>();
             try {
                 BufferedReader br = new BufferedReader(new FileReader(ruta));

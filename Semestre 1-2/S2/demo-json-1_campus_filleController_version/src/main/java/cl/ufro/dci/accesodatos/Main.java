@@ -14,14 +14,14 @@ import java.util.Collection;
 public class Main {
     public static void main(String[] args) {
 //        // Rescatando Objetos tipo persona desde archivo json (uso de Clase genérica)
-//        ListController<Persona> personasHandler;
-//        personasHandler = new ListController<>("personas.json",
-//                new TypeToken<Collection<Persona>>(){});
-//        ArrayList<Persona> personasGet = new ArrayList<>();
-//        
-//        personasGet = personasHandler.cargarObjetos();
-//        System.out.println("== Personas ==");
-//        personasGet.forEach(p -> System.out.println(p.getNombres()));
+        ListController<Persona> personasHandler;
+        personasHandler = new ListController<>("personas.json",
+                new TypeToken<Collection<Persona>>(){});
+        ArrayList<Persona> personasGet = new ArrayList<>();
+        
+        personasGet = personasHandler.cargarObjetos();
+        System.out.println("== Personas ==");
+        personasGet.forEach(System.out::println);
 //        
 //        // --------------------------------------------------------
 //        // Rescatando objetos de tipo Mascota desde archivo json (uso de Clase genérica)
@@ -39,6 +39,10 @@ public class Main {
 //        personas.add(new Persona("12312321", "asdasd", "aweqeqw", "dd-mm-yyy"));
 //        personas.add(new Persona("54645645", "dsfsdf", "sdfsdf", "dd-mm-yyy"));
 //        personas.add(new Persona("78878768", "bgfhfgbgf", "cbvbcvb", "dd-mm-yyy"));
+//        
+//        personas.get(0).agregarMascota(new Mascota("Prueba con Mascotas", "Raza prueba"));
+//        personas.get(0).agregarMascota(new Mascota("Mascota 2", "Raza 2"));
+//        personas.get(0).agregarMascota(new Mascota("Mascota 3", "Raza 3"));
 //        
 //        personasHandler.guardarObjetos(personas);
 
@@ -86,7 +90,7 @@ public class Main {
     public static void guardarPersonas(ArrayList<Persona> personas) {
         FilleController<Persona> jsonHandler = new FilleController<>(new TypeToken<Collection<Persona>>(){});
         try {
-            if ( jsonHandler.guardarLista(personas, "data/personas.json") ) {
+            if ( jsonHandler.saveToJson(personas, "data/personas.json") ) {
                 System.out.println("Lista de personas guardada exitosamente\n");
             }
         } catch (NullPointerException ex) {
@@ -99,13 +103,13 @@ public class Main {
     public static ArrayList<Persona> cargarPersonas() {
         // TODO revisar manejo de inventario específico profe marcelo github
         FilleController<Persona> jsonHandler = new FilleController<>(new TypeToken<Collection<Persona>>(){});
-        return jsonHandler.cargarLista("data/personas.json");
+        return jsonHandler.loadFromJson("data/personas.json");
     }
     
     public static void guardarMascotas(ArrayList<Mascota> mascotas) {
         FilleController<Mascota> jsonHandler = new FilleController<>(new TypeToken<Collection<Mascota>>(){});
         try {
-            if ( jsonHandler.guardarLista(mascotas, "data/mascotas.json") ) {
+            if ( jsonHandler.saveToJson(mascotas, "data/mascotas.json") ) {
                 System.out.println("Lista de mascotas guardada exitosamente\n");
             }
         } catch (NullPointerException ex) {
@@ -117,7 +121,7 @@ public class Main {
     
     public static ArrayList<Mascota> cargarMascotas() {
         FilleController<Mascota> jsonHandler = new FilleController<>(new TypeToken<Collection<Mascota>>(){});
-        return jsonHandler.cargarLista("data/mascotas.json");
+        return jsonHandler.loadFromJson("data/mascotas.json");
     }
     
 

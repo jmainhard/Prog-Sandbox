@@ -38,7 +38,7 @@ public class ListController<E> {
     public void guardarObjetos(ArrayList<E> listaObjetos) {
         FilleController<E> jsonHandler = new FilleController<>(collectionType);
          try {
-            if ( jsonHandler.guardarLista(listaObjetos, RUTA+archivoJson) ) {
+            if ( jsonHandler.saveToJson(listaObjetos, RUTA+archivoJson) ) {
                 System.out.println("\nLista guardada exitosamente\n");
             }
         } catch (NullPointerException ex) {
@@ -50,10 +50,10 @@ public class ListController<E> {
     
     /**
      * Carga una lista de objetos desde JSON
-     * @return lista de objetos del tipo de {@code this} {@literal <E>}
+     * @return lista de objetos del tipo {@literal <E>}
      */
     public ArrayList<E> cargarObjetos() {
         FilleController<E> jsonHandler = new FilleController<>(collectionType);
-        return jsonHandler.cargarLista(RUTA+archivoJson);
+        return jsonHandler.loadFromJson(RUTA+archivoJson);
     }
 }

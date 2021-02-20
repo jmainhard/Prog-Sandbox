@@ -4,7 +4,20 @@
     "nombres": "asdasd",
     "apellidos": "aweqeqw",
     "fechaNacimiento": "dd-mm-yyy",
-    "mascotas": []
+    "mascotas": [
+      {
+        "nombres": "Prueba con Mascotas",
+        "raza": "Raza prueba"
+      },
+      {
+        "nombres": "Mascota 2",
+        "raza": "Raza 2"
+      },
+      {
+        "nombres": "Mascota 3",
+        "raza": "Raza 3"
+      }
+    ]
   },
   {
     "rut": "54645645",
