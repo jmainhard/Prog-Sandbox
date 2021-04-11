@@ -184,6 +184,6 @@ int main(void)
 {
     const char *rut = ask_rut();
     printf("%s", rut);
-    buscar_fn(rut);
+    buscar_fn("24654848-k");
     return 0;
 }
