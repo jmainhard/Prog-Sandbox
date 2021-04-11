@@ -86,6 +86,7 @@ void buscar_fn()
             break;
         }
     }
+    printf("\t\t\t%s\n", " -- Persona no encontrada --");
     json_object_put(root);
 }
 
@@ -106,7 +107,6 @@ void calc_prom_fn()
     float promEdad;
 
     root = json_object_from_file("datos.json");
-    const char *rut = ask_rut();
 
     json_object *personas = json_object_object_get(root, "personas");
     n_personas = json_object_array_length(personas);
@@ -122,66 +122,6 @@ void calc_prom_fn()
     printf("\t\t\t%s %f\n", "Promedio de la edad:", promEdad);
 
     json_object_put(root);
-}
-
-struct persona get_persona(int idx)
-{
-    struct persona personaOut;
-    json_object *root, *temp;
-    int n_personas;
-
-    root = json_object_from_file("datos.json");
-    if (!root)
-       return personaOut;
-
-    char *rut, *nombre;
-    int edad;
-
-
-    json_object *personas = json_object_object_get(root, "personas");
-    n_personas = json_object_array_length(personas);
-
-
-    for (int i = 0; i < n_personas; i++)
-    {
-        temp = json_object_array_get_idx(personas, i);
-        json_object *rutObj = json_object_object_get(temp, "rut");
-        json_object *nameObj = json_object_object_get(temp, "nombre");
-        json_object *ageObj = json_object_object_get(temp, "edad");
-        printf("\t%d.  Rut: %s,  ", i+1, json_object_get_string(rutObj));
-        printf("Nombre: %s,   ", json_object_get_string(nameObj));
-        printf("Edad: %d\n", json_object_get_int(ageObj));
-    }
-    
-    // convierte cada atributo a un json object
-    json_object *rut_persona = json_object_object_get(root, "rut");
-    json_object *nombre_persona = json_object_object_get(root, "nombre");
-    json_object *edad_persona = json_object_object_get(root, "edad");
-    
-    // Store the string values of these json_objects in our char arrays
-    rut = strdup(json_object_get_string(rut_persona)); 
-    nombre = strdup(json_object_get_string(nombre_persona)); 
-    edad = json_object_get_int(edad_persona); 
-
-    // Lose ownership of our json_objects
-    // json_object_put(root);
-
-    personaOut.rut = rut;
-    personaOut.nombre = nombre;
-    personaOut.edad = edad;
-   
-    // Cleanup
-    // free(rut);
-    // free(nombre);
-
-    return personaOut;
-}
-
-void mostrar_persona(struct persona persona)
-{
-    printf("RUT. %s\n", persona.rut);
-    printf("NOMBRE. %s\n", persona.nombre);
-    printf("EDAD. %d\n", persona.edad);
 }
 
 int menu() 
@@ -205,8 +145,11 @@ int menu()
 			break;
 		case 3:
             calc_prom_fn();
+            opcion = 0;
 			break;
 		case 4:
+            
+            opcion = 0;
 			break;
 		case 5:
 			return 0;
