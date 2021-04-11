@@ -185,7 +185,7 @@ void mostrar_persona(struct persona persona)
 int main(void) 
 {
     const char *rut = ask_rut();
-    printf("%s\n", rut);
+    printf("%s\n", *rut);
     buscar_fn(rut);
     return 0;
 }
