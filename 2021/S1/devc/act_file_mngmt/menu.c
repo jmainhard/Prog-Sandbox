@@ -20,35 +20,35 @@ struct persona
 };
 
 
-int menu() 
-{
-	unsigned short opcion = 0;
-	while (opcion >= 0 && opcion < 5) {
-	  printf("%s\n", "[1] - Buscar por rut");
-	  printf("%s\n", "[2] - Cantidad de registros");
-	  printf("%s\n", "[3] - Promedio de las edades");
-	  printf("%s\n", "[4] - Mayor y menor edad");
-	  printf("%s\n", "[5] - Salir");
-	  scanf("%hu", &opcion);
-	  switch (opcion) {
-		case 1:
-			opcion = 0;
-			break;
-		case 2:
-			opcion = 0;
-			break;
-		case 3:
-			break;
-		case 4:
-			break;
-		case 5:
-			return 0;
-		default:
-			opcion = 0;
-			break;
-	  }
-	}
-}
+// int menu() 
+// {
+// 	unsigned short opcion = 0;
+// 	while (opcion >= 0 && opcion < 5) {
+// 	  printf("%s\n", "[1] - Buscar por rut");
+// 	  printf("%s\n", "[2] - Cantidad de registros");
+// 	  printf("%s\n", "[3] - Promedio de las edades");
+// 	  printf("%s\n", "[4] - Mayor y menor edad");
+// 	  printf("%s\n", "[5] - Salir");
+// 	  scanf("%hu", &opcion);
+// 	  switch (opcion) {
+// 		case 1:
+// 			opcion = 0;
+// 			break;
+// 		case 2:
+// 			opcion = 0;
+// 			break;
+// 		case 3:
+// 			break;
+// 		case 4:
+// 			break;
+// 		case 5:
+// 			return 0;
+// 		default:
+// 			opcion = 0;
+// 			break;
+// 	  }
+// 	}
+// }
 
 // deprecated
 void leer_json()
@@ -80,7 +80,7 @@ void leer_json()
     printf("EDAD. %d\n", json_object_get_int(edad));
 }
 
-void buscar_fn(char *rut)
+void buscar_fn(const char *rut)
 {
     json_object *root, *temp;
     char *rutTemp, *nombre;
