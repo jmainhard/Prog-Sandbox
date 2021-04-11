@@ -19,40 +19,6 @@ struct persona
     int edad;
 };
 
-
-int menu() 
-{
-	unsigned short opcion = 0;
-	while (opcion >= 0 && opcion < 5) {
-	  printf("%s\n", "[1] - Buscar por rut");
-	  printf("%s\n", "[2] - Cantidad de registros");
-	  printf("%s\n", "[3] - Promedio de las edades");
-	  printf("%s\n", "[4] - Mayor y menor edad");
-	  printf("%s\n", "[5] - Salir");
-	  scanf("%hu", &opcion);
-	  switch (opcion) {
-		case 1:
-            buscar_fn();
-			opcion = 0;
-			break;
-		case 2:
-            calc_cant_fn();
-			opcion = 0;
-			break;
-		case 3:
-            calc_prom_fn();
-			break;
-		case 4:
-			break;
-		case 5:
-			return 0;
-		default:
-			opcion = 0;
-			break;
-	  }
-	}
-}
-
 // deprecated
 void leer_json()
 {
@@ -216,6 +182,39 @@ void mostrar_persona(struct persona persona)
     printf("RUT. %s\n", persona.rut);
     printf("NOMBRE. %s\n", persona.nombre);
     printf("EDAD. %d\n", persona.edad);
+}
+
+int menu() 
+{
+	unsigned short opcion = 0;
+	while (opcion >= 0 && opcion < 5) {
+	  printf("%s\n", "[1] - Buscar por rut");
+	  printf("%s\n", "[2] - Cantidad de registros");
+	  printf("%s\n", "[3] - Promedio de las edades");
+	  printf("%s\n", "[4] - Mayor y menor edad");
+	  printf("%s\n", "[5] - Salir");
+	  scanf("%hu", &opcion);
+	  switch (opcion) {
+		case 1:
+            buscar_fn();
+			opcion = 0;
+			break;
+		case 2:
+            calc_cant_fn();
+			opcion = 0;
+			break;
+		case 3:
+            calc_prom_fn();
+			break;
+		case 4:
+			break;
+		case 5:
+			return 0;
+		default:
+			opcion = 0;
+			break;
+	  }
+	}
 }
 
 int main(void) 
