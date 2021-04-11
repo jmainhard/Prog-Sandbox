@@ -85,16 +85,13 @@ void prueba_json()
 
 struct persona get_persona(int idx)
 {
-    json_object *root;
+    struct persona personaOut;
+    json_object *root = json_object_from_file("datos.json");
+    if (!root)
+       return personaOut;
+
     char *rut, *nombre;
     int edad;
-
-    // persona a devolver
-    struct persona personaOut;
-
-   json_object *root = json_object_from_file("datos.json");
-   if (!root)
-       return 1;
 
     // convierte cada atributo a un json object
     json_object *rut_persona = json_object_object_get(root, "rut");
@@ -103,15 +100,15 @@ struct persona get_persona(int idx)
     
     // Store the string values of these json_objects in our char arrays
     rut = strdup(json_object_get_string(rut_persona)); 
-    nombre = strdup(json_object_get_string(nombre)); 
-    edad = json_object_int(edad); 
+    nombre = strdup(json_object_get_string(nombre_persona)); 
+    edad = json_object_get_int(edad); 
 
     // Lose ownership of our json_objects first_name and last_name
     json_object_put(root);
 
-    printf("RUT. %s\n", json_object_get_string(rut));
-    printf("NOMBRE. %s\n", json_object_get_string(nombre));
-    printf("EDAD. %d\n", json_object_get_int(edad));
+    printf("RUT. %s\n", rut);
+    printf("NOMBRE. %s\n", nombre);
+    printf("EDAD. %d\n", edad);
 
     // const char *rutPer = json_object_get_string(rut);
     // const char *nomPer = json_object_get_string(nombre);
