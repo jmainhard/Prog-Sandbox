@@ -9,6 +9,46 @@
             "rut": "17269133-1",
             "nombre": "Ariel  Sandoval",
             "edad": 28
+        },
+        {
+            "rut": "24654848-k",
+            "nombre": "Camila  Sepulveda",
+            "edad": 12
+        },
+        {
+            "rut": "17269133-1",
+            "nombre": "Carla  Silva",
+            "edad": 23
+        },
+        {
+            "rut": "13452301-8",
+            "nombre": "Daniella  Herrera",
+            "edad": 56
+        },
+        {
+            "rut": "14605101-4",
+            "nombre": "David  Vega",
+            "edad": 76
+        },
+        {
+            "rut": "8980099-4",
+            "nombre": "Enzo  Ramirez",
+            "edad": 23
+        },
+        {
+            "rut": "9381553-k",
+            "nombre": "Ariel  Molina",
+            "edad": 99
+        },
+        {
+            "rut": "18759625-4",
+            "nombre": "Claudia  Nunez",
+            "edad": 43
+        },
+        {
+            "rut": "15842018-k",
+            "nombre": "Santiago  Ramirez",
+            "edad": 34
         }
     ]
 }
