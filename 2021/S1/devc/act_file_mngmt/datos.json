@@ -1,5 +1,14 @@
 {
-    "rut": "21651749-0",
-    "nombre": "Marcelo  Vergara",
-    "edad": 19
+    "personas": [
+        {
+            "rut": "21651749-0",
+            "nombre": "Marcelo  Vergara",
+            "edad": 19
+        },
+        {
+            "rut": "17269133-1",
+            "nombre": "Ariel  Sandoval",
+            "edad": 28
+        }
+    ]
 }

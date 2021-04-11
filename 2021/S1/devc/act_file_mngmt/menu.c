@@ -86,13 +86,30 @@ void prueba_json()
 struct persona get_persona(int idx)
 {
     struct persona personaOut;
-    json_object *root = json_object_from_file("datos.json");
+    json_object *root, *temp;
+    int n_personas;
+
+    root = json_object_from_file("datos.json");
     if (!root)
        return personaOut;
 
     char *rut, *nombre;
     int edad;
 
+
+    json_object *personas = json_object_object_get(root, "personas");
+    n_personas = json_object_array_length(personas);
+
+
+    for (int i = 0; i < n_personas; i++)
+    {
+        temp = json_object_array_get_idx(personas, i);
+        json_object *rutObj = json_object_object_get(temp, "rut");
+        json_object *nameObj = json_object_object_get(temp, "nombre");
+        json_object *ageObj = json_object_object_get(temp, "edad");
+        printf("\t%d. Rut: %s, Nombre: %s, Edad: %d\n", i, json_object_get_string(rutObj), json_object_get_string(nameObj), json_object_get_int(ageObj));
+    }
+    
     // convierte cada atributo a un json object
     json_object *rut_persona = json_object_object_get(root, "rut");
     json_object *nombre_persona = json_object_object_get(root, "nombre");
