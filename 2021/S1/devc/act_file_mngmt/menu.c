@@ -104,7 +104,7 @@ void calc_prom_fn()
 {
     json_object *root, *temp;
     int edad, n_personas;
-    float promEdad;
+    float promEdad = 0.0;
 
     root = json_object_from_file("datos.json");
 
@@ -114,12 +114,12 @@ void calc_prom_fn()
     {
         temp = json_object_array_get_idx(personas, i);
         json_object *ageObj = json_object_object_get(temp, "edad");
-        promEdad += json_object_get_int(ageObj);
+        promEdad += (float) json_object_get_int(ageObj);
         break;
     }
 
     promEdad /= n_personas;
-    printf("\t\t\t%s %f\n", "Promedio de la edad:", promEdad);
+    printf("\t\t\t%s %.2f\n", "Promedio de la edad:", promEdad);
 
     json_object_put(root);
 }
