@@ -108,17 +108,17 @@ struct persona get_persona(int idx)
     json_object_object_get_ex(parsed_json, "nombre", &nombre);
     json_object_object_get_ex(parsed_json, "edad", &edad);
 
-    *personaOut.rut = *json_object_get_string(rut);
-    *personaOut.nombre = *json_object_get_string(nombre);
-    personaOut.edad = json_object_get_int(edad);
+    *personaOut.rut = *json_object_get_string(&rut);
+    *personaOut.nombre = *json_object_get_string(&nombre);
+    personaOut.edad = json_object_get_int(&edad);
 
     return personaOut;
 }
 
 void mostrar_persona(struct persona persona)
 {
-    printf("RUT. %s\n", json_object_get_string(persona.rut));
-    printf("NOMBRE. %s\n", json_object_get_string(persona.nombre));
+    printf("RUT. %s\n", json_object_get_string(*persona.rut));
+    printf("NOMBRE. %s\n", json_object_get_string(*persona.nombre));
     printf("EDAD. %d\n", json_object_get_int(persona.edad));
 }
 
