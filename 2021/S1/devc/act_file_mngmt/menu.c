@@ -182,8 +182,8 @@ void mostrar_persona(struct persona persona)
 
 int main(void) 
 {
-    const char *rut = ask_rut();
+    const char *rut = "24654848-k";
     printf("%s", rut);
-    buscar_fn("24654848-k");
+    buscar_fn(rut);
     return 0;
 }
