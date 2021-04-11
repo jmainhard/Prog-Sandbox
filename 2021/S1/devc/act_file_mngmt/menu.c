@@ -75,11 +75,11 @@ void calc_cant_fn()
         json_object *rutObj = json_object_object_get(temp, "rut");
         json_object *nameObj = json_object_object_get(temp, "nombre");
         json_object *ageObj = json_object_object_get(temp, "edad");
-        printf("\t%-3d.  Rut: %-20s,  ", i+1, json_object_get_string(rutObj));
-        printf("Nombre: %-20s,   ", json_object_get_string(nameObj));
+        printf("\t%-3d  Rut: %-11s,  ", i+1, json_object_get_string(rutObj));
+        printf("Nombre: %-20s   ", json_object_get_string(nameObj));
         printf("Edad: %-3d\n", json_object_get_int(ageObj));
     }
-    printf("\t\t\t%s %d\n", "Total registros:", n_personas);
+    printf("\t\t\t\t%s %d\n", "Total registros:", n_personas);
     json_object_put(root);
 }
 
