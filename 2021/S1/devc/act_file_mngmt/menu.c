@@ -20,7 +20,7 @@ struct persona
 };
 
 
-void menu() 
+int menu() 
 {
 	unsigned short opcion = 0;
 	while (opcion >= 0 && opcion < 5) {
