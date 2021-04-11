@@ -75,7 +75,7 @@ void calc_cant_fn()
         json_object *rutObj = json_object_object_get(temp, "rut");
         json_object *nameObj = json_object_object_get(temp, "nombre");
         json_object *ageObj = json_object_object_get(temp, "edad");
-        printf("\t%-3d  Rut: %-11s  ", i+1, json_object_get_string(rutObj));
+        printf("\t%-3d  Rut: %-12s  ", i+1, json_object_get_string(rutObj));
         printf("Nombre: %-20s   ", json_object_get_string(nameObj));
         printf("Edad: %-3d\n", json_object_get_int(ageObj));
     }
@@ -98,11 +98,10 @@ void calc_prom_fn()
         temp = json_object_array_get_idx(personas, i);
         json_object *ageObj = json_object_object_get(temp, "edad");
         promEdad += (float) json_object_get_int(ageObj);
-        break;
     }
     printf("Suma de edades: %f", promEdad);
     promEdad /= (float) n_personas;
-    printf("\t\t\t%s %.2f\n", "Promedio de la edad:", promEdad);
+    printf("\t\t%s %.2f\n", "Promedio de la edad:", promEdad);
     json_object_put(root);
 }
 
