@@ -111,7 +111,7 @@ void buscar_fn(const char *rut)
 
 const char *ask_rut()
 {
-    char *inputRut;
+    const char *inputRut;
     do {
         printf("\nIngrese rut a buscar: (sin puntos, con guion)\n");
         scanf("%s", inputRut);
