@@ -114,6 +114,46 @@ void calc_prom_fn()
     json_object_put(root);
 }
 
+// TODO: testear
+void mostrar_max_min_fn()
+{
+    json_object *root, *temp, *objAge;
+    int n_personas, tempAge;
+    int max = -1;
+    int min = -1;
+
+    root = json_object_from_file("datos.json");
+    
+    json_object *personas = json_object_object_get(root, "personas");
+    n_personas = json_object_array_length(personas);
+
+    temp = json_object_array_get_idx(personas, 1);
+    objAge = json_object_object_get(temp, "edad");
+    max = json_object_get_int(objAge);
+    min = json_object_get_int(objAge);
+
+    for (int i = 0; i < n_personas; i++)
+    {
+        temp = json_object_array_get_idx(personas, i);
+        objAge = json_object_object_get(temp, "edad");
+        tempAge = json_object_get_int(objAge);
+        printf("Edad N°%d, %d\n", i, tempAge); 
+        if (tempAge > max)
+        {
+            max = tempAge;
+            break;
+        }
+        else if (tempAge < min)
+        {
+            min = tempAge;
+            break;
+        }
+    }
+    printf("\t\tMayor edad: %d", max);
+    printf("\t\tMenor edad: %d\n", min);
+    json_object_put(root);
+}
+
 int menu() 
 {
 	unsigned short opcion = 0;
@@ -128,19 +168,20 @@ int menu()
 	  switch (opcion) 
 	  {
 		case 1:
-            		buscar_fn();
+            buscar_fn();
 			opcion = 0;
 			break;
 		case 2:
-            		calc_cant_fn();
+            calc_cant_fn();
 			opcion = 0;
 			break;
 		case 3:
-            		calc_prom_fn();
-            		opcion = 0;
+            calc_prom_fn();
+            opcion = 0;
 			break;
 		case 4:
-            		opcion = 0;
+            mostrar_max_min_fn();
+            opcion = 0;
 			break;
 		case 5:
 			return 0;
