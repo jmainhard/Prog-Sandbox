@@ -150,7 +150,6 @@ void mostrar_max_min_fn()
     json_object_put(root);
 }
 
-// TODO
 // IDEA;:
 // leer archivo, añadir una persona al array_json_object de personas
 void agregar_persona_fn(const char *rut, const char *nombre, int edad)
@@ -223,12 +222,15 @@ int menu()
 
 int main(void) 
 {
-    // después de 3hrs y poco más intentando que ask_rut() me devolviera el string de forma-
+    // después de 2hrs y poco más intentando que ask_rut() me devolviera el string de forma-
     // correcta, abdico, he intentado todo lo que tengo a mi alcance pero-
     // no he podido.
     // Cada vez que utilizo ask_rut() para conseguir el rut desde fuera de buscar_fn() me lanza:
     // Segmentation fault (core dumped)
     //  dejaré la invocación de ask_rut() dentro de buscar_fn() muy a mi pesar
+    // datos para poblar:
+    // 6521638-8, 19167589-4, 9981316-4
+    // Jonathan Vergara, Mauricio Gonzalez, Joel Alvarez
     menu();
     return 0;
 }
