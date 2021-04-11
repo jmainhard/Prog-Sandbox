@@ -96,6 +96,7 @@ void buscar_fn(const char *rut)
         json_object *rutObj = json_object_object_get(temp, "rut");
         rutTemp = strdup(json_object_get_string(rutObj)); 
         printf("%s\n", rutTemp);
+        printf("%s\n", rut);
         if (strcmp(rutTemp,rut) == 0)
         {
             json_object *nameObj = json_object_object_get(temp, "nombre");
