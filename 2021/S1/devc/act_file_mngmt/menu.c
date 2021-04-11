@@ -109,7 +109,7 @@ void buscar_fn(const char *rut)
     json_object_put(root);
 }
 
-char *ask_rut()
+const char *ask_rut()
 {
     char *inputRut;
     do {
@@ -181,6 +181,7 @@ void mostrar_persona(struct persona persona)
 
 int main(void) 
 {
-    buscar_fn("24654848-k");
+    const char *rut = ask_rut();
+    buscar_fn(rut);
     return 0;
 }
