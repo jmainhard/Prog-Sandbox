@@ -58,10 +58,13 @@ void buscar_fn()
             break;
         }
     }
-    printf("\t\t\t%s\n", " -- <> --");
     if (!flag)
     {
         printf("\t\t\t%s\n", " -- Persona no encontrada --");
+    }
+    else // innecesario la verdad
+    {
+        printf("\t\t\t%s\n", " --              <>        --");
     }
     json_object_put(root);
 }
