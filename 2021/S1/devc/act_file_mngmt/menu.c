@@ -64,7 +64,7 @@ void buscar_fn()
     }
     else // innecesario la verdad
     {
-        printf("\t\t\t%s\n", " --              <>        --");
+        printf("\t\t\t%s\n", " --           <>          --");
     }
     json_object_put(root);
 }
