@@ -117,7 +117,8 @@ void calc_prom_fn()
 int menu() 
 {
 	unsigned short opcion = 0;
-	while (opcion >= 0 && opcion < 5) {
+	while (opcion >= 0 && opcion < 5)
+	{
 	  printf("%s\n", "[1] - Buscar por rut");
 	  printf("%s\n", "[2] - Cantidad de registros");
 	  printf("%s\n", "[3] - Promedio de las edades");
