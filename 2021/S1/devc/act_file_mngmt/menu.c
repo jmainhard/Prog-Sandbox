@@ -102,7 +102,7 @@ struct persona get_persona(int idx)
 
     printf("RUT. %s\n", json_object_get_string(rut));
     printf("NOMBRE. %s\n", json_object_get_string(nombre));
-    printf("EDAD. %d\n", json_object_get_string(edad));
+    printf("EDAD. %d\n", json_object_get_int(edad));
 
     // const char *rutPer = json_object_get_string(rut);
     // const char *nomPer = json_object_get_string(nombre);
