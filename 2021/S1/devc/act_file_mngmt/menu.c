@@ -111,8 +111,8 @@ struct persona get_persona(int idx)
     personaOut.edad = edad;
    
     // Cleanup
-    free(rut);
-    free(nombre);
+    // free(rut);
+    // free(nombre);
 
     return personaOut;
 }
