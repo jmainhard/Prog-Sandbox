@@ -110,11 +110,11 @@ struct persona get_persona(int idx)
 
     const char *rutPer = json_object_get_string(rut);
     const char *nomPer = json_object_get_string(nombre);
-    const int *agePer = json_object_get_string(nombre);
+    const int *agePer = json_object_get_int(edad);
 
-    personaOut.rut = *rutPer;
-    personaOut.nombre = *nomPer;
-    personaOut.edad = *agePer;
+    *personaOut.rut = rutPer;
+    *personaOut.nombre = nomPer;
+    personaOut.edad = agePer;
 
     return personaOut;
 }
