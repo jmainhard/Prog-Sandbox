@@ -95,7 +95,7 @@ void buscar_fn(const char *rut)
         temp = json_object_array_get_idx(personas, i);
         json_object *rutObj = json_object_object_get(temp, "rut");
         rutTemp = strdup(json_object_get_string(rutObj)); 
-        if (rutTemp == rut)
+        if (strcmp(rutTemp,rut) == 0)
         {
             json_object *nameObj = json_object_object_get(temp, "nombre");
             json_object *ageObj = json_object_object_get(temp, "edad");
