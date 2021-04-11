@@ -181,14 +181,14 @@ void agregar_persona_fn(const char *rut, const char *nombre, int edad)
 int menu() 
 {
 	unsigned short opcion = 0;
-	while (opcion >= 0 && opcion < 5)
+	while (opcion >= 0 && opcion < 6)
 	{
 	  printf("%s\n", "[1] - Buscar por rut");
 	  printf("%s\n", "[2] - Cantidad de registros");
 	  printf("%s\n", "[3] - Promedio de las edades");
 	  printf("%s\n", "[4] - Mayor y menor edad");
-	  printf("%s\n", "[5] - Agregar persona");
-	  printf("%s\n", "[5] - Salir");
+	  printf("%s\n", "[5] - Agregar persona (hard-coded)");
+	  printf("%s\n", "[6] - Salir");
 	  scanf("%hu", &opcion);
 	  switch (opcion) 
 	  {
