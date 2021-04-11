@@ -108,8 +108,8 @@ struct persona get_persona(int idx)
     json_object_object_get_ex(parsed_json, "nombre", &nombre);
     json_object_object_get_ex(parsed_json, "edad", &edad);
 
-    char *rutPer = json_object_get_string(rut);
-    char *nomPer = json_object_get_string(nombre);
+    char *rutPer = *json_object_get_string(rut);
+    char *nomPer = *json_object_get_string(nombre);
     int agePer = json_object_get_int(edad);
 
     *personaOut.rut = *rutPer;
