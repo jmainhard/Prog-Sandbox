@@ -59,7 +59,7 @@ void buscar_fn()
         }
     }
     printf("\t\t\t%s\n", " -- <> --");
-    if (flag == 1)
+    if (!flag)
     {
         printf("\t\t\t%s\n", " -- Persona no encontrada --");
     }
