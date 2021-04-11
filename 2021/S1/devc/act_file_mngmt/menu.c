@@ -187,6 +187,7 @@ int menu()
 	  printf("%s\n", "[2] - Cantidad de registros");
 	  printf("%s\n", "[3] - Promedio de las edades");
 	  printf("%s\n", "[4] - Mayor y menor edad");
+	  printf("%s\n", "[5] - Agregar persona");
 	  printf("%s\n", "[5] - Salir");
 	  scanf("%hu", &opcion);
 	  switch (opcion) 
@@ -207,7 +208,11 @@ int menu()
             mostrar_max_min_fn();
             opcion = 0;
 			break;
-		case 5:
+        case 5:
+            agregar_persona_fn("14734771-5", "Felipe Soto", 64);
+            opcion = 0;
+            break;
+		case 6:
 			return 0;
 		default:
 			opcion = 0;
@@ -224,9 +229,6 @@ int main(void)
     // Cada vez que utilizo ask_rut() para conseguir el rut desde fuera de buscar_fn() me lanza:
     // Segmentation fault (core dumped)
     //  dejaré la invocación de ask_rut() dentro de buscar_fn() muy a mi pesar
-    
-    // test agregar persona
-    agregar_persona_fn("7787496-8", "Pablo Reyes", 47);
     menu();
     return 0;
 }
