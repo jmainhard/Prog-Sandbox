@@ -100,7 +100,7 @@ void buscar_fn(const char *rut)
         {
             json_object *nameObj = json_object_object_get(temp, "nombre");
             json_object *ageObj = json_object_object_get(temp, "edad");
-            printf("\t\t%s\n", " -- Persona encontrada --");
+            printf("\t\t\t%s\n", " -- Persona encontrada --");
             printf("\t%d.  Rut: %s,  ", i+1, json_object_get_string(rutObj));
             printf("Nombre: %s,   ", json_object_get_string(nameObj));
             printf("Edad: %d\n", json_object_get_int(ageObj));
@@ -116,7 +116,7 @@ const char *ask_rut()
     do {
         printf("\nIngrese rut a buscar: (sin puntos, con guion)\n");
         scanf("%s", inputRut);
-    } while (strlen(inputRut) > 10);
+    } while (strlen(inputRut) > 11);
     return inputRut;
 }
 
@@ -182,8 +182,7 @@ void mostrar_persona(struct persona persona)
 
 int main(void) 
 {
-    const char *rut = "24654848-k";
-    printf("%s", rut);
+    const char *rut = ask_rut();
     buscar_fn(rut);
     return 0;
 }
