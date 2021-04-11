@@ -114,7 +114,6 @@ void calc_prom_fn()
     json_object_put(root);
 }
 
-// TODO: testear
 void mostrar_max_min_fn()
 {
     json_object *root, *temp, *objAge;
@@ -149,6 +148,32 @@ void mostrar_max_min_fn()
     printf("\t\tMayor edad: %d", max);
     printf("\t\tMenor edad: %d\n", min);
     json_object_put(root);
+}
+
+// TODO
+// IDEA;:
+// leer archivo, añadir una persona al array_json_object de personas
+void agregar_persona_fn(const char *rut, const char *nombre, int edad)
+{
+    const char *nombreArchivo = "datos.json";
+    json_object *root = json_object_new_object();
+
+    root = json_object_from_file("datos.json");
+
+    json_object *personas = json_object_object_get(root, "personas");
+    json_object_object_add(personas, "rut", json_object_new_string(rut));
+    json_object_object_add(personas, "nombre", json_object_new_string(nombre));
+    json_object_object_add(personas, "edad", json_object_new_int(edad));
+
+    if (json_object_to_file(nombreArchivo, root)) 
+    {
+        printf("Error: no se pudo guardar %s!!\n", nombreArchivo);
+    }
+    else
+    {
+        printf("%s guardado.\n", nombreArchivo);
+    }
+    json_object_put(root);    
 }
 
 int menu() 
@@ -197,6 +222,9 @@ int main(void)
     // Cada vez que utilizo ask_rut() para conseguir el rut desde fuera de buscar_fn() me lanza:
     // Segmentation fault (core dumped)
     //  dejaré la invocación de ask_rut() dentro de buscar_fn() muy a mi pesar
+    
+    // test agregar persona
+    agregar_persona_fn("7787496-8", "Pablo  Reyes", 47);
     menu();
     return 0;
 }
