@@ -84,37 +84,33 @@ void prueba_json()
 
 struct persona get_persona(int idx)
 {
-    FILE *fp; // file pointer
-    char buffer[1024];
-
-    // estructura con el documento json parseado
-    struct json_object *parsed_json; 
-
-    struct json_object *rut; 
-    struct json_object *nombre; 
-    struct json_object *edad; 
+    json_object *root, *temp;
 
     // persona a devolver
     struct persona personaOut;
 
-    fp = fopen("datos.json", "r");
-    fread(buffer, 1024, 1, fp);
-    fclose(fp);
-
-    parsed_json = json_tokener_parse(buffer);
+    root = json_object_from_file("datos.json");
+    if (!root)
+    {
+        return personaOut;
+    }
 
     // convierte cada atributo a un json object
-    json_object_object_get_ex(parsed_json, "rut", &rut); 
-    json_object_object_get_ex(parsed_json, "nombre", &nombre);
-    json_object_object_get_ex(parsed_json, "edad", &edad);
+    json_object *rut = json_object_object_get(root, "rut");
+    json_object *nombre = json_object_object_get(root, "nombre");
+    json_object *edad = json_object_object_get(root, "edad");
 
-    const char rutPer = json_object_get_string(rut);
-    const char nomPer = json_object_get_string(nombre);
-    int agePer = json_object_get_int(edad);
+    printf("RUT. %s\n", json_object_get_string(rut));
+    printf("NOMBRE. %s\n", json_object_get_string(nombre));
+    printf("EDAD. %d\n", json_object_get_string(edad));
 
-    *personaOut.rut = rutPer;
-    *personaOut.nombre = nomPer;
-    personaOut.edad = agePer;
+    // const char *rutPer = json_object_get_string(rut);
+    // const char *nomPer = json_object_get_string(nombre);
+    // int agePer = json_object_get_int(edad);
+
+    // *personaOut.rut = rutPer;
+    // *personaOut.nombre = nomPer;
+    // personaOut.edad = agePer;
 
     return personaOut;
 }
