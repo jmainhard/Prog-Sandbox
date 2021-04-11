@@ -124,22 +124,22 @@ int menu()
 	  printf("%s\n", "[4] - Mayor y menor edad");
 	  printf("%s\n", "[5] - Salir");
 	  scanf("%hu", &opcion);
-	  switch (opcion) {
+	  switch (opcion) 
+	  {
 		case 1:
-            buscar_fn();
+            		buscar_fn();
 			opcion = 0;
 			break;
 		case 2:
-            calc_cant_fn();
+            		calc_cant_fn();
 			opcion = 0;
 			break;
 		case 3:
-            calc_prom_fn();
-            opcion = 0;
+            		calc_prom_fn();
+            		opcion = 0;
 			break;
 		case 4:
-            
-            opcion = 0;
+            		opcion = 0;
 			break;
 		case 5:
 			return 0;
