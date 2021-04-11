@@ -103,23 +103,17 @@ struct persona get_persona(int idx)
     nombre = strdup(json_object_get_string(nombre_persona)); 
     edad = json_object_get_int(edad_persona); 
 
-    // Lose ownership of our json_objects first_name and last_name
+    // Lose ownership of our json_objects
     json_object_put(root);
 
-    printf("RUT. %s\n", rut);
-    printf("NOMBRE. %s\n", nombre);
-    printf("EDAD. %d\n", edad);
-
-    // const char *rutPer = json_object_get_string(rut);
-    // const char *nomPer = json_object_get_string(nombre);
-    // int agePer = json_object_get_int(edad);
-
-    // *personaOut.rut = rutPer;
-    // *personaOut.nombre = nomPer;
-    // personaOut.edad = agePer;
+    personaOut.rut = rut;
+    personaOut.nombre = nombre;
+    personaOut.edad = edad;
+   
     // Cleanup
     free(rut);
     free(nombre);
+    free(edad);
 
     return personaOut;
 }
@@ -133,6 +127,6 @@ void mostrar_persona(struct persona persona)
 
 int main(void) 
 {
-    get_persona(1);
+    mostrar_persona(get_persona(1));
     return 0;
 }
