@@ -131,7 +131,7 @@ int main(void)
    json_object *rut = json_object_object_get(root, "rut");
    json_object *nombre = json_object_object_get(root, "nombre");
    json_object *edad = json_object_object_get(root, "edad");
-   printf("%s, %s, %d\n", json_object_get_string(edad), json_object_get_string(nombre), json_object_get_int(edad));
+   printf("%s, %s, %d\n", json_object_get_string(rut), json_object_get_string(nombre), json_object_get_int(edad));
 
    json_object_put(root);
    return 0;
