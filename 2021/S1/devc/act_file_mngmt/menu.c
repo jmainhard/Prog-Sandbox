@@ -99,9 +99,9 @@ void calc_prom_fn()
         json_object *ageObj = json_object_object_get(temp, "edad");
         promEdad += (float) json_object_get_int(ageObj);
     }
-    printf("Suma de edades: %f", promEdad);
+    printf("\t\tSuma de edades: %f", promEdad);
     promEdad /= (float) n_personas;
-    printf("\t\t%s %.2f\n", "Promedio de la edad:", promEdad);
+    printf("\t%s %.1f\n", "Promedio de la edad:", promEdad);
     json_object_put(root);
 }
 
