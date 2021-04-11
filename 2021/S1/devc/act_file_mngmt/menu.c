@@ -107,7 +107,9 @@ struct persona get_persona(int idx)
         json_object *rutObj = json_object_object_get(temp, "rut");
         json_object *nameObj = json_object_object_get(temp, "nombre");
         json_object *ageObj = json_object_object_get(temp, "edad");
-        printf("\t%d. Rut: %s, Nombre: %s, Edad: %d\n", i, json_object_get_string(rutObj), json_object_get_string(nameObj), json_object_get_int(ageObj));
+        printf("\t%d. Rut: %s, ", i+1, json_object_get_string(rutObj));
+        printf("Nombre: %s, ", json_object_get_string(nameObj));
+        printf("Edad: %d\n", json_object_get_int(ageObj));
     }
     
     // convierte cada atributo a un json object
