@@ -119,7 +119,7 @@ void calc_prom_fn()
     }
 
     promEdad /= n_personas;
-    printf("\t\t\t%s %d\n", "Promedio de la edad:", promEdad);
+    printf("\t\t\t%s %f\n", "Promedio de la edad:", promEdad);
 
     json_object_put(root);
 }
