@@ -124,5 +124,15 @@ void mostrar_persona(struct persona persona)
 
 int main(void) 
 {
-    mostrar_persona(get_persona(1));
+   json_object *root = json_object_from_file("datos.json");
+   if (!root)
+      return 1;
+
+   json_object *rut = json_object_object_get(root, "rut");
+   json_object *nombre = json_object_object_get(root, "nombre");
+   json_object *edad = json_object_object_get(root, "edad");
+   printf("%s, %s, %d\n", json_object_get_string(edad), json_object_get_string(nombre), json_object_get_string(edad));
+
+   json_object_put(root);
+   return 0;
 }
