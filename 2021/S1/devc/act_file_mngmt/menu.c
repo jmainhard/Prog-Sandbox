@@ -20,41 +20,38 @@ struct persona
 };
 
 
-// void menu() 
-// {
-// 	unsigned short opcion = 0;
-// 	while (opcion >= 0 && opcion < 5) {
-// 	  printf("%s\n", "[1] - USD to EUR");
-// 	  printf("%s\n", "[2] - EUR to USD");
-// 	  printf("%s\n", "[3] - Area y perimetro");
-// 	  printf("%s\n", "[4] - Precio con descuento");
-// 	  printf("%s\n", "[5] - Salir");
-// 	  scanf("%hu", &opcion);
-// 	  switch (opcion) {
-// 		case 1:
-// 			usd_to_eur();
-// 			opcion = 0;
-// 			break;
-// 		case 2:
-// 			eur_to_usd();
-// 			opcion = 0;
-// 			break;
-// 		case 3:
-// 			calc_area_prmtro_rctlo();
-// 			break;
-// 		case 4:
-// 			calc_descuento();
-// 			break;
-// 		case 5:
-// 			return 0;
-// 		default:
-// 			opcion = 0;
-// 			break;
-// 	  }
-// 	}
-// }
+void menu() 
+{
+	unsigned short opcion = 0;
+	while (opcion >= 0 && opcion < 5) {
+	  printf("%s\n", "[1] - Buscar por rut");
+	  printf("%s\n", "[2] - Cantidad de registros");
+	  printf("%s\n", "[3] - Promedio de las edades");
+	  printf("%s\n", "[4] - Mayor y menor edad");
+	  printf("%s\n", "[5] - Salir");
+	  scanf("%hu", &opcion);
+	  switch (opcion) {
+		case 1:
+			opcion = 0;
+			break;
+		case 2:
+			opcion = 0;
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			return 0;
+		default:
+			opcion = 0;
+			break;
+	  }
+	}
+}
 
-void prueba_json()
+// deprecated
+void leer_json()
 {
     FILE *fp; // file pointer
     char buffer[1024];
@@ -81,6 +78,50 @@ void prueba_json()
     printf("RUT. %s\n", json_object_get_string(rut));
     printf("NOMBRE. %s\n", json_object_get_string(nombre));
     printf("EDAD. %d\n", json_object_get_int(edad));
+}
+
+void buscar_fn(char *rut)
+{
+    json_object *root, *temp;
+    char *rutTemp, *nombre;
+    int edad, n_personas;
+
+    root = json_object_from_file("datos.json");
+
+    json_object *personas = json_object_object_get(root, "personas");
+    n_personas = json_object_array_length(personas);
+    for (int i = 0; i < n_personas; i++)
+    {
+        temp = json_object_array_get_idx(personas, i);
+        json_object *rutObj = json_object_object_get(temp, "rut");
+        rutTemp = strdup(json_object_get_string(rutObj)); 
+        if (rutTemp == rut)
+        {
+            json_object *nameObj = json_object_object_get(temp, "nombre");
+            json_object *ageObj = json_object_object_get(temp, "edad");
+            printf("\t\t%s\n", " -- Persona encontrada --");
+            printf("\t%d.  Rut: %s,  ", i+1, json_object_get_string(rutObj));
+            printf("Nombre: %s,   ", json_object_get_string(nameObj));
+            printf("Edad: %d\n", json_object_get_int(ageObj));
+            break;
+        }
+        else
+        {
+            continue;
+        }
+    }
+    
+
+}
+
+char *ask_rut()
+{
+    char *inputRut;
+    do {
+        printf("\nIngrese rut a buscar: (sin puntos, con guion)\n");
+        scanf("%s", inputRut);
+    } while (strlen(inputRut) > 10);
+    return inputRut;
 }
 
 struct persona get_persona(int idx)
@@ -145,6 +186,6 @@ void mostrar_persona(struct persona persona)
 
 int main(void) 
 {
-    mostrar_persona(get_persona(1));
+    buscar_fn(ask_rut());
     return 0;
 }
