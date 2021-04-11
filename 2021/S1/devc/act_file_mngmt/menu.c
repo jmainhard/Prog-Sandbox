@@ -110,8 +110,7 @@ void buscar_fn(char *rut)
             continue;
         }
     }
-    
-
+    json_object_put(root);
 }
 
 char *ask_rut()
@@ -164,7 +163,7 @@ struct persona get_persona(int idx)
     edad = json_object_get_int(edad_persona); 
 
     // Lose ownership of our json_objects
-    json_object_put(root);
+    // json_object_put(root);
 
     personaOut.rut = rut;
     personaOut.nombre = nombre;
