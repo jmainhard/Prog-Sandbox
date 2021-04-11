@@ -167,7 +167,7 @@ void agregar_persona_fn(const char *rut, const char *nombre, int edad)
     json_object_object_add(newPersona, "edad", json_object_new_int(edad));
     json_object_array_add(personas, newPersona);
 
-    if (json_object_to_file(nombreArchivo, root)) 
+    if (json_object_to_file_ext(nombreArchivo, root, JSON_C_TO_STRING_PRETTY)) 
     {
         printf("Error: no se pudo guardar %s!!\n", nombreArchivo);
     }
@@ -226,7 +226,7 @@ int main(void)
     //  dejaré la invocación de ask_rut() dentro de buscar_fn() muy a mi pesar
     
     // test agregar persona
-    agregar_persona_fn("7787496-8", "Pablo  Reyes", 47);
+    agregar_persona_fn("7787496-8", "Pablo Reyes", 47);
     menu();
     return 0;
 }
