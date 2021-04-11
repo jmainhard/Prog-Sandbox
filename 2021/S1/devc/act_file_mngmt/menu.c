@@ -80,7 +80,7 @@ void leer_json()
     printf("EDAD. %d\n", json_object_get_int(edad));
 }
 
-void buscar_fn(char *rut)
+void buscar_fn(const char *rut)
 {
     json_object *root, *temp;
     char *rutTemp, *nombre;
@@ -181,6 +181,6 @@ void mostrar_persona(struct persona persona)
 
 int main(void) 
 {
-    buscar_fn(ask_rut());
+    buscar_fn("24654848-k");
     return 0;
 }
