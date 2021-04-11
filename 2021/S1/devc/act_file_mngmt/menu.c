@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <json-c/json.h>
 // ACTIVIDAD
 // Hacer Menu con las siguientes opciones 
@@ -84,21 +85,29 @@ void prueba_json()
 
 struct persona get_persona(int idx)
 {
-    json_object *root, *temp;
+    json_object *root;
+    char *rut, *nombre;
+    int edad;
 
     // persona a devolver
     struct persona personaOut;
 
-    root = json_object_from_file("datos.json");
-    if (!root)
-    {
-        return personaOut;
-    }
+   json_object *root = json_object_from_file("datos.json");
+   if (!root)
+       return 1;
 
     // convierte cada atributo a un json object
-    json_object *rut = json_object_object_get(root, "rut");
-    json_object *nombre = json_object_object_get(root, "nombre");
-    json_object *edad = json_object_object_get(root, "edad");
+    json_object *rut_persona = json_object_object_get(root, "rut");
+    json_object *nombre_persona = json_object_object_get(root, "nombre");
+    json_object *edad_persona = json_object_object_get(root, "edad");
+    
+    // Store the string values of these json_objects in our char arrays
+    rut = strdup(json_object_get_string(rut_persona)); 
+    nombre = strdup(json_object_get_string(nombre)); 
+    edad = json_object_int(edad); 
+
+    // Lose ownership of our json_objects first_name and last_name
+    json_object_put(root);
 
     printf("RUT. %s\n", json_object_get_string(rut));
     printf("NOMBRE. %s\n", json_object_get_string(nombre));
@@ -111,6 +120,9 @@ struct persona get_persona(int idx)
     // *personaOut.rut = rutPer;
     // *personaOut.nombre = nomPer;
     // personaOut.edad = agePer;
+    // Cleanup
+    free(rut);
+    free(nombre);
 
     return personaOut;
 }
@@ -124,15 +136,6 @@ void mostrar_persona(struct persona persona)
 
 int main(void) 
 {
-   json_object *root = json_object_from_file("datos.json");
-   if (!root)
-      return 1;
-
-   json_object *rut = json_object_object_get(root, "rut");
-   json_object *nombre = json_object_object_get(root, "nombre");
-   json_object *edad = json_object_object_get(root, "edad");
-   printf("%s, %s, %d\n", json_object_get_string(rut), json_object_get_string(nombre), json_object_get_int(edad));
-
-   json_object_put(root);
-   return 0;
+    get_persona(1);
+    return 0;
 }
