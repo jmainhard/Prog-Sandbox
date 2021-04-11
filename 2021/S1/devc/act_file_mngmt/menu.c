@@ -19,36 +19,6 @@ struct persona
     int edad;
 };
 
-// deprecated
-void leer_json()
-{
-    FILE *fp; // file pointer
-    char buffer[1024];
-
-    // estructura con el documento json parseado
-    struct json_object *parsed_json; 
-
-    struct json_object *rut; 
-    struct json_object *nombre; 
-    struct json_object *edad; 
-
-    fp = fopen("datos.json", "r");
-    fread(buffer, 1024, 1, fp);
-    fclose(fp);
-
-    parsed_json = json_tokener_parse(buffer);
-
-    // convierte cada atributo a un json object
-    json_object_object_get_ex(parsed_json, "rut", &rut); 
-    json_object_object_get_ex(parsed_json, "nombre", &nombre);
-    json_object_object_get_ex(parsed_json, "edad", &edad);
-
-    // métodos de json-c para rescatar el valor
-    printf("RUT. %s\n", json_object_get_string(rut));
-    printf("NOMBRE. %s\n", json_object_get_string(nombre));
-    printf("EDAD. %d\n", json_object_get_int(edad));
-}
-
 const char *ask_rut()
 {
     char *inputRut;
@@ -92,10 +62,23 @@ void buscar_fn()
 
 void calc_cant_fn()
 {
-    json_object *root = json_object_from_file("datos.json");
+    json_object *root, *temp;
     int n_personas;
+
+    root = json_object_from_file("datos.json");
+
     json_object *personas = json_object_object_get(root, "personas");
     n_personas = json_object_array_length(personas);
+    for (int i = 0; i < n_personas; i++)
+    {
+        temp = json_object_array_get_idx(personas, i);
+        json_object *rutObj = json_object_object_get(temp, "rut");
+        json_object *nameObj = json_object_object_get(temp, "nombre");
+        json_object *ageObj = json_object_object_get(temp, "edad");
+        printf("\t%d.  Rut: %s,  ", i+1, json_object_get_string(rutObj));
+        printf("Nombre: %s,   ", json_object_get_string(nameObj));
+        printf("Edad: %d\n", json_object_get_int(ageObj));
+    }
     printf("\t\t\t%s %d\n", "Total registros:", n_personas);
     json_object_put(root);
 }
@@ -120,7 +103,6 @@ void calc_prom_fn()
 
     promEdad /= n_personas;
     printf("\t\t\t%s %.2f\n", "Promedio de la edad:", promEdad);
-
     json_object_put(root);
 }
 
