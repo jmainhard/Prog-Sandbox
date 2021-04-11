@@ -137,16 +137,13 @@ void mostrar_max_min_fn()
         temp = json_object_array_get_idx(personas, i);
         objAge = json_object_object_get(temp, "edad");
         tempAge = json_object_get_int(objAge);
-        printf("Edad N°%d, %d\n", i, tempAge); 
         if (tempAge > max)
         {
             max = tempAge;
-            break;
         }
         else if (tempAge < min)
         {
             min = tempAge;
-            break;
         }
     }
     printf("\t\tMayor edad: %d", max);
