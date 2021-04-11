@@ -101,7 +101,7 @@ struct persona get_persona(int idx)
     // Store the string values of these json_objects in our char arrays
     rut = strdup(json_object_get_string(rut_persona)); 
     nombre = strdup(json_object_get_string(nombre_persona)); 
-    edad = json_object_get_int(edad); 
+    edad = json_object_get_int(edad_persona); 
 
     // Lose ownership of our json_objects first_name and last_name
     json_object_put(root);
