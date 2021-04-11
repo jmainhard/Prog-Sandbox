@@ -90,6 +90,7 @@ void buscar_fn(const char *rut)
 
     json_object *personas = json_object_object_get(root, "personas");
     n_personas = json_object_array_length(personas);
+    printf("%s\n", rut);
     for (int i = 0; i < n_personas; i++)
     {
         temp = json_object_array_get_idx(personas, i);
