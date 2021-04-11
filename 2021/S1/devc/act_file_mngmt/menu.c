@@ -80,6 +80,16 @@ void leer_json()
     printf("EDAD. %d\n", json_object_get_int(edad));
 }
 
+const char *ask_rut()
+{
+    char *inputRut;
+    do {
+        printf("\nIngrese rut a buscar: (sin puntos, con guion)\n");
+        scanf("%s", inputRut);
+    } while (strlen(inputRut) > 10);
+    return inputRut;
+}
+
 void buscar_fn()
 {
     json_object *root, *temp;
@@ -111,16 +121,6 @@ void buscar_fn()
         }
     }
     json_object_put(root);
-}
-
-const char *ask_rut()
-{
-    char *inputRut;
-    do {
-        printf("\nIngrese rut a buscar: (sin puntos, con guion)\n");
-        scanf("%s", inputRut);
-    } while (strlen(inputRut) > 10);
-    return inputRut;
 }
 
 struct persona get_persona(int idx)
