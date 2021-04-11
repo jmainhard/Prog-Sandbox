@@ -161,9 +161,11 @@ void agregar_persona_fn(const char *rut, const char *nombre, int edad)
     root = json_object_from_file("datos.json");
 
     json_object *personas = json_object_object_get(root, "personas");
-    json_object_object_add(personas, "rut", json_object_new_string(rut));
-    json_object_object_add(personas, "nombre", json_object_new_string(nombre));
-    json_object_object_add(personas, "edad", json_object_new_int(edad));
+    json_object *newPersona = json_object_new_object();
+    json_object_object_add(newPersona, "rut", json_object_new_string(rut));
+    json_object_object_add(newPersona, "nombre", json_object_new_string(nombre));
+    json_object_object_add(newPersona, "edad", json_object_new_int(edad));
+    json_object_array_add(personas, newPersona);
 
     if (json_object_to_file(nombreArchivo, root)) 
     {
