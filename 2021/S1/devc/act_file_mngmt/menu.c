@@ -116,8 +116,8 @@ const char *ask_rut()
     do {
         printf("\nIngrese rut a buscar: (sin puntos, con guion)\n");
         scanf("%s", inputRut);
-    } while (strlen(inputRut) > 11);
-    return inputRut;
+    } while (strlen(inputRut) > 10);
+    return inputRut+'\0';
 }
 
 struct persona get_persona(int idx)
