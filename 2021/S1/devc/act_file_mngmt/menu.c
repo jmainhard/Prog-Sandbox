@@ -34,6 +34,7 @@ void buscar_fn()
     json_object *root, *temp;
     char *rutTemp, *nombre;
     int edad, n_personas;
+    unsigned short int flag = 0;
 
     root = json_object_from_file("datos.json");
     const char *rut = ask_rut();
@@ -53,10 +54,15 @@ void buscar_fn()
             printf("\t%d.  Rut: %s,  ", i+1, json_object_get_string(rutObj));
             printf("Nombre: %s,   ", json_object_get_string(nameObj));
             printf("Edad: %d\n", json_object_get_int(ageObj));
+            flag = 1;
             break;
         }
     }
-    printf("\t\t\t%s\n", " -- Persona no encontrada --");
+    printf("\t\t\t%s\n", " -- <> --");
+    if (flag)
+    {
+        printf("\t\t\t%s\n", " -- Persona no encontrada --");
+    }
     json_object_put(root);
 }
 
