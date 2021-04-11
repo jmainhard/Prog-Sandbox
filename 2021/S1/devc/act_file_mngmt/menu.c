@@ -80,13 +80,14 @@ void leer_json()
     printf("EDAD. %d\n", json_object_get_int(edad));
 }
 
-void buscar_fn(char *rut)
+void buscar_fn()
 {
     json_object *root, *temp;
     char *rutTemp, *nombre;
     int edad, n_personas;
 
     root = json_object_from_file("datos.json");
+    const char *rut = ask_rut();
 
     json_object *personas = json_object_object_get(root, "personas");
     n_personas = json_object_array_length(personas);
@@ -112,7 +113,7 @@ void buscar_fn(char *rut)
     json_object_put(root);
 }
 
-char *ask_rut()
+const char *ask_rut()
 {
     char *inputRut;
     do {
@@ -184,8 +185,13 @@ void mostrar_persona(struct persona persona)
 
 int main(void) 
 {
-    char *rut = ask_rut();
-    printf("%s\n", rut);
-    buscar_fn(rut);
+    // después de 3hrs y poco más intentando que ask_rut() me devolviera el string de forma-
+    // correcta, abdico, he intentado todo lo que tengo a mi alcance pero-
+    // no he podido.
+    // Cada vez que utilizo ask_rut() para conseguir el rut me lanza:
+    // Segmentation fault (core dumped)
+    //  dejaré el rut hard codeado
+    // const char *rut = "24654848-k";
+    buscar_fn();
     return 0;
 }
