@@ -8,7 +8,7 @@
 void save_persona(const char *nombre, const char *direccion)
 {
     const char *file_name = "datos_agenda.json";
-    char *suffix = (char*) nombre[0]; 
+    char *suffix = (char) nombre[0]; 
     char *prefix = "per_";
     json_object *root = json_object_from_file("datos.json");
 
