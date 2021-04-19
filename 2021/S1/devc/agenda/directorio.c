@@ -11,12 +11,14 @@ void save_persona(const char *nombre, const char *direccion)
     // FIXME: generar key de manera correcta
     // char *suffix = nombre[0]; 
     // char *prefix = "per_";
-    json_object *root = json_object_from_file("datos.json");
+    json_object *root = json_object_new_object();
+    
+    root = json_object_from_file("datos_agenda.json");
 
     // strcat(prefix, suffix);
     const char *key = "per_a";
 
-    json_object *contactos = json_object_object_get(root, key);
+    json_object *contactos = json_object_object_get(root, "per_a");
     json_object *new_persona = json_object_new_object();
 
     json_object_object_add(new_persona, "nombre", json_object_new_string(nombre));
