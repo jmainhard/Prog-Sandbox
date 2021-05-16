@@ -61,15 +61,17 @@ int main()
 	json j;
 	int savedNumber, numToGuess;
 	bool guessed;
+	char* env;
+	string envStr;
 
-	// // cargar archivo
+	// cargar archivo
 	j = deserialize("number.json");
 	savedNumber = j["number"].get<int>();
 
 	// get numToGuess
-	char* env = getenv("QUERY_STRING");
-	string envStr = env;
-	numToGuess = stoi( getElement(envStr, "numtoguess") );
+	env = getenv("QUERY_STRING");
+	envStr = env;
+	numToGuess = stoi( getElement(envStr, "numToGuess") );
 
 	// comparar
 	if (savedNumber == numToGuess)
@@ -79,7 +81,6 @@ int main()
 	
     // html head
 	drawHTMLhead();
-	cout << savedNumber;
 
 	if (guessed)
 	{
@@ -88,7 +89,7 @@ int main()
 	}
 	else
 	{
-		cout << "Número NO adivinado!" << LINE_BR;
+		cout << "Número NO adivinado :(" << LINE_BR;
 		drawHTMLnumGuess(numToGuess, savedNumber);
 	}
 	
