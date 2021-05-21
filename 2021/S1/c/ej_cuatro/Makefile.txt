@@ -1,0 +1,1 @@
+gcc -I"c:\Users\Lekot\Yv\UFRO docs\ING. INFORMATICA 3086\Programacion\PruebaPractica_1\include" -L"c:\Users\Lekot\Yv\UFRO docs\ING. INFORMATICA 3086\Programacion\PruebaPractica_1\lib" agenda.c -ljson-c -o agenda && "c:\Users\Lekot\Yv\UFRO docs\ING. INFORMATICA 3086\Programacion\PruebaPractica_1\Item1-C\ej_cuatro\"agenda
