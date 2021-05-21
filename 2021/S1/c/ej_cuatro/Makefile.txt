@@ -1,1 +1,13 @@
-gcc -I"c:\Users\Lekot\Yv\UFRO docs\ING. INFORMATICA 3086\Programacion\PruebaPractica_1\include" -L"c:\Users\Lekot\Yv\UFRO docs\ING. INFORMATICA 3086\Programacion\PruebaPractica_1\lib" agenda.c -ljson-c -o agenda && "c:\Users\Lekot\Yv\UFRO docs\ING. INFORMATICA 3086\Programacion\PruebaPractica_1\Item1-C\ej_cuatro\"agenda
+
+Para compilar en w10 (en teoría):
+gcc -I"C:RUTA\HACIA\PruebaPractica_1\include" -L"RUTA\HACIA\PruebaPractica_1\lib" agenda.c -ljson-c -o agenda 
+
+Para ejecutar:
+&& "C:RUTA\HACIA\PruebaPractica_1\Item1-C\ej_cuatro\"agenda
+
+ó (ya en el directorio):
+
+agenda.exe
+
+Se pueden concatenar ambas (cmd):
+gcc -I"C:RUTA\HACIA\PruebaPractica_1\include" -L"RUTA\HACIA\PruebaPractica_1\lib" agenda.c -ljson-c -o agenda && "C:RUTA\HACIA\PruebaPractica_1\Item1-C\ej_cuatro\"agenda
