@@ -28,13 +28,20 @@ void buscar_fn()
     json_object *root, *temp;
     char *nameTemp;
     int n_personas;
-    unsigned short int flag = 0;
+    unsigned short int found = 0;
+    unsigned short int isEmpty = 0;
 
     root = json_object_from_file("datos.json");
     const char *name = ask_name();
 
     json_object *personas = json_object_object_get(root, "personas");
     n_personas = json_object_array_length(personas);
+
+    if (n_personas == 0)
+    {
+        isEmpty = 1;
+    }
+    
     for (int i = 0; i < n_personas; i++)
     {
         temp = json_object_array_get_idx(personas, i);
@@ -48,13 +55,18 @@ void buscar_fn()
             printf("\t%d.  Nombre: %s,  ", i+1, nameTemp);
             printf("Celular: %s,   ", json_object_get_string(telObj));
             printf("Correo: %s\n", json_object_get_string(emailObj));
-            flag = 1;
+            found = 1;
             break;
         }
     }
-    if (!flag)
+    if (!found)
     {
         printf("\t\t\t%s\n", " -- No se han encontrado coincidencias para este nombre --");
+        if (isEmpty)
+        {
+            printf("\t\t\t\t\t%s\n", " -- La agenda está vacía --");
+        }
+        
     }
     else // ui
     {
