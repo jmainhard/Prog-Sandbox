@@ -15,15 +15,15 @@ import java.lang.Math;
 // refactor de: https://raw.githubusercontent.com/jlagosobando/ApuntesPrograJava/master/04%20Estructuras%20Avanzadas/0727_CuestionarioV4.java
 public class CuestionarioV5 {
     public static void main(String[] args) {
-        startCuestionario(getCantidadPreguntas());
+        initCuestionario(getCantidadPreguntas());
     }
 
-    private static void startCuestionario(int cantidadPreguntas) {
+    private static void initCuestionario(int cantidadPreguntas) {
         boolean cumple;
         int correctAnswers = 0;
         int operandoUno, operandoDos, operador;
         double userResponse = Double.MIN_VALUE;
-        double answer = Double.MIN_VALUE;
+        double answer;
         Scanner input = new Scanner(System.in);
 
         for (int i = 0; i < cantidadPreguntas; i++) {
@@ -50,7 +50,7 @@ public class CuestionarioV5 {
         System.out.println("Su rendimiento fue " + correctAnswers + " de " + cantidadPreguntas);
     }
 
-    private static double getAnswer(int operandoUno, int operandoDos, int operador) {
+    public static double getAnswer(int operandoUno, int operandoDos, int operador) {
         switch (operador) {
             case 1 -> {
                 printOperacion(operandoUno, " + ", operandoDos);
@@ -72,14 +72,14 @@ public class CuestionarioV5 {
                 return  divTruncated == Double.POSITIVE_INFINITY ? 0 : divTruncated;
             }
         }
-        return Double.MAX_VALUE;
+        return Double.MIN_VALUE;
     }
 
-    private static void printOperacion(int operandoUno, String operador, int operandoDos) {
+    public static void printOperacion(int operandoUno, String operador, int operandoDos) {
         System.out.println(operandoUno + operador + operandoDos + " =");
     }
 
-    private static int getCantidadPreguntas() {
+    public static int getCantidadPreguntas() {
         boolean cumple = false;
         int cantidad = 0;
         Scanner input = new Scanner(System.in);
