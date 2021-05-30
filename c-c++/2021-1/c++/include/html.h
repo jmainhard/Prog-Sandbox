@@ -1,8 +1,6 @@
-/*
-#define only header for HTML file construction
-Jorge Mainhard
-2021-05
-*/
+// #define only header for HTML file construction
+// Jorge Mainhard
+// 2021-05
 
 #ifndef HTML_H
 #define HTML_H
@@ -58,7 +56,7 @@ Jorge Mainhard
 #define SRC " src="
 #define ALT " alt="
 #define STYLE " style="
-// const atr
+// const attr
 #define CHARSET_UTF_8 " charset=\"UTF-8\"" 
 
 // namespace deprecated, 
