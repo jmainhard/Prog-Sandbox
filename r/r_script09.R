@@ -1,4 +1,4 @@
-# 11-06-2021
+# 13-06-2021
 # Informe 2
 library(readxl)
 library(caret)
