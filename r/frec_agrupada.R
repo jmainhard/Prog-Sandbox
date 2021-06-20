@@ -9,11 +9,9 @@ frec_agrupada <- function(x, continua = FALSE) {
   } else {
     breaks <- 1
   }
- 
+  
   # nclass.Sturges(x) casero
   exact_intervals <- trunc(log2(length(x)) + breaks)
-  amplitud <- (max(x) - min(x)) / exact_intervals
-  
   factorx <- factor(cut(x, breaks = exact_intervals))
   table_x <- table(factorx)
   cumsum_table_x <- cumsum(table_x)
