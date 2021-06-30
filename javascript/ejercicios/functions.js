@@ -2,6 +2,7 @@
 // Ejercicios Javascript
 // exportando a ./index.html
 // posible fixme: se está modificando el array original en muchas funciones
+// warning: archivo alto en spanglish
 
 // 1
 export function biggie(arr) {
@@ -50,6 +51,10 @@ export function countPositives(arr) {
     return arr;
 }
 
+// 6
+// Pares e Impares -Crea una función que acepte un array. Cada vez que ese array tenga 3 valores impares seguidos, 
+// imprime (print) “¡Qué imparcial!”, y cada vez que tenga 3 pares seguidos, imprime (print) “¡Es para bien!”.
+
 function initContador() {
     let contador = {
         pares: 0,
@@ -63,10 +68,6 @@ function initContador() {
     };
     return contador;
 }
-
-// 6
-// Pares e Impares -Crea una función que acepte un array. Cada vez que ese array tenga 3 valores impares seguidos, 
-// imprime (print) “¡Qué imparcial!”, y cada vez que tenga 3 pares seguidos, imprime (print) “¡Es para bien!”.
 
 // impares y pares v2 (refactor v1)
 export function oddAndEven(arr) {
@@ -92,7 +93,7 @@ export function oddAndEven(arr) {
     }
 }
 
-// v1
+// v1 enrealidad esta versión es mas limpia pero me gusta la segunda
 // export function oddAndEven(arr) {
 //     let pares = 0, impares = 0;
 //     for (let i = 0; i < arr.length; i++) {
@@ -114,6 +115,53 @@ export function oddAndEven(arr) {
 //     }
 // }
 
+// 7
+export function aumentaImpares(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if (!isEven(i)) {
+            arr[i]++;
+        }
+    }
+    console.log(...arr);
+    return arr;
+}
+
+// 8
+export function longitudesPrevias(arr) {
+    let longitudes = [];
+    arr.forEach(element => longitudes.push(element.length));
+    for (let i = 1; i < arr.length; i++) {
+        arr[i] = longitudes[i - 1];   
+    }
+    return arr;
+}
+
+// 9
+export function agregaSiete(arr) {
+    let newArray = [];
+    arr.forEach(element => newArray.push(element + 7));
+    console.log('Old Array: ' + arr);
+    return newArray;
+}
+
+// 10
+export function invertirArray(arr) {
+    return arr.reverse();
+}
+
+// 11
+export function allNegatives(arr) {
+    let newArray = [];
+    arr.forEach((element) => 
+         element > 0 ? newArray.push(element * -1) : newArray.push(element)
+    );
+    return newArray;
+}
+
+// 12 TODO
+export function verComida(arr) {
+
+}
 
 
 
