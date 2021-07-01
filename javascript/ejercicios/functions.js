@@ -84,7 +84,7 @@ export function oddAndEven(arr) {
         } else {
             contador.impares++;
             // console.log('impar: ' + contador.impares);
-            if(contador.impares === 3) {
+            if (contador.impares === 3) {
                 console.log('!Qué imparcial!');
                 contador.resetImpares();
             }
@@ -106,7 +106,7 @@ export function oddAndEven(arr) {
 //             impares = 0;
 //         } else {
 //             impares++;
-//             if(impares === 3) {
+//             if (impares === 3) {
 //                 console.log('!Qué imparcial!');
 //                 impares = 0;
 //             }
@@ -158,10 +158,45 @@ export function allNegatives(arr) {
     return newArray;
 }
 
-// 12 TODO
+// 12
 export function verComida(arr) {
-
+    let foundFood = false;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].toLowerCase() === 'comida') {
+            console.log('yummy');
+            // FIXME, basta con que encuentre una coincidencia para que esto sea verdadero
+            foundFood = true; 
+        }
+    }
+    if (!foundFood) {
+        console.log('tengo hambre');
+    }
 }
 
+// 13 copia de la misma función hecha previamente en lenguaje C
+export function cambiaHaciaElCentro(arr) {
+    let newArray = [];
+    let i = 0, j = arr.length - 1;
+    let length = arr.length;
 
+    do {
+        newArray[i] = arr[j];
+        newArray[j] = arr[i];
+        newArray[i+1] = arr[i+1];
+        newArray[j-1] = arr[j-1];
+        i += 2;
+        j -= 2;
+    } while (i < length / 2);
 
+    // FIXME
+    j = length - 1;
+    newArray[(j / 2)] = arr[(j / 2) +1];
+    newArray[(j / 2) +1] = arr[(j / 2)];
+    console.log(newArray);
+}
+
+// 14
+export function escalaArray(arr, factor) {
+   let result = arr.map(element => element * factor);
+   return result;
+}
