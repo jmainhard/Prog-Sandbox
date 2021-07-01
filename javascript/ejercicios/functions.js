@@ -138,8 +138,7 @@ export function longitudesPrevias(arr) {
 
 // 9
 export function agregaSiete(arr) {
-    let newArray = [];
-    arr.forEach(element => newArray.push(element + 7));
+    let newArray = arr.map(element => element + 7);
     console.log('Old Array: ' + arr);
     return newArray;
 }
@@ -152,7 +151,7 @@ export function invertirArray(arr) {
 // 11
 export function allNegatives(arr) {
     let newArray = [];
-    arr.forEach((element) => 
+    arr.forEach(element => 
          element > 0 ? newArray.push(element * -1) : newArray.push(element)
     );
     return newArray;
@@ -173,30 +172,27 @@ export function verComida(arr) {
     }
 }
 
-// 13 copia de la misma función hecha previamente en lenguaje C
+// 13 
+// mucho mejor versión hecha en clase de cambiaHaciaElCentro
 export function cambiaHaciaElCentro(arr) {
-    let newArray = [];
-    let i = 0, j = arr.length - 1;
-    let length = arr.length;
-
-    do {
-        newArray[i] = arr[j];
-        newArray[j] = arr[i];
-        newArray[i+1] = arr[i+1];
-        newArray[j-1] = arr[j-1];
-        i += 2;
-        j -= 2;
-    } while (i < length / 2);
-
-    // FIXME
-    j = length - 1;
-    newArray[(j / 2)] = arr[(j / 2) +1];
-    newArray[(j / 2) +1] = arr[(j / 2)];
-    console.log(newArray);
+    let offset = arr.length - 1;
+    for (let i = 0; i < arr.length; i++) {
+        if (isEven(i)) {
+            let aux = arr[i];
+            arr[i] = arr[offset - i];
+            arr[offset - i] = aux;
+        }        
+    }
+    return arr;
 }
 
 // 14
+// export function escalaArray(arr, factor) {
+//    let result = arr.map(element => element * factor);
+//    return result;
+// }
+
+// 14 refactor
 export function escalaArray(arr, factor) {
-   let result = arr.map(element => element * factor);
-   return result;
+    return arr.map(element => element * factor);
 }
