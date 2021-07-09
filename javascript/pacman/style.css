@@ -1,0 +1,29 @@
+div.row div {
+    width: 40px;
+    height: 40px;
+    display: inline-block; /* poner en linea aquellos con display block p.def.*/
+}
+
+div.block {
+    background-color: #d0c8d6;
+}
+
+div.empty {
+    background-color: #ffffff;
+}
+
+div.coin {
+    background: url("img/cherry-icon.png");
+    background-size: contain;
+}
+
+div#pacman {
+    background: url("img/Pac-Man-icon.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 65px;
+    left: 65px;
+    width: 30px;
+    height: 30px;
+}
