@@ -17,6 +17,10 @@ div.coin {
     background-size: contain;
 }
 
+div.pacman-cc div {
+    display: inline-block;
+}
+
 div#pacman {
     background: url("img/Pac-Man-icon.png");
     background-size: contain;
@@ -27,3 +31,4 @@ div#pacman {
     width: 30px;
     height: 30px;
 }
+
