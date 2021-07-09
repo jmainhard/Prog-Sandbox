@@ -19,11 +19,17 @@
     <script>
         function DivObject(id) {
             this.html = document.getElementById(id);
-            this.x = document.getElementById(id).offsetLeft;
-            this.y = document.getElementById(id).offsetTop;
-            this.height = document.getElementById(id).offsetHeight;
-            this.width = document.getElementById(id).offsetWidth;
+            this.x = document.getElementById(id).getBoundingClientRect().x;
+            this.y = document.getElementById(id).getBoundingClientRect().y;
+            this.height = document.getElementById(id).getBoundingClientRect().height;
+            this.width = document.getElementById(id).getBoundingClientRect().width;
             this.speed = 5;
+            this.canMove = {
+                right: true,
+                left: true,
+                up: true,
+                down: true
+            };
             this.moveRight = function () {
                 this.x += this.speed;
                 this.html.style.left = this.x + 'px';
@@ -40,6 +46,26 @@
                 this.y += this.speed;
                 this.html.style.top = this.y + 'px';
             };
+            this.isCollide = function (obj) {
+                let aRect = a.getBoundingClientRect();
+                let bRect = b.getBoundingClientRect();
+                return !(
+                    ((aRect.top + aRect.height) < (bRect.top)) ||
+                    (aRect.top > (bRect.top + bRect.height)) ||
+                    ((aRect.left + aRect.width) < bRect.left) ||
+                    (aRect.left > (bRect.left + bRect.width))
+                );
+            };
+            this.leftCollide = function (obj) {
+                for (let i = 0; i < obj.length; i++) {
+                    if (this.isCollide(blocks[i])) {
+                        blocks[i].setAttribute('style', 'background-color: red;');
+                    }
+                }
+                if (checkSide('left', this.html, obj)) {
+                    obj.setAttribute('style', 'background-color: red;');
+                }
+            }
         }
 
         /* 0 - vacio (empty)
@@ -75,95 +101,51 @@
             }
             document.getElementById('map').innerHTML = output;
         }
-        
+
         function drawCoordinates(x, y) {
             document.getElementById('pacman-cc').innerHTML = 'X: ' + x + '<br>' + 'Y: ' + y;
         }
+        drawCoordinates('undefined', 'undefined');
 
         document.addEventListener('keydown', function (event) {
             let pacman = new DivObject('pacman');
-            let collides = isCollideWithBlock(pacman);
-            console.log(collides);
-            if (event.code === 'ArrowRight' && collides[2] != 2) {
+            if (event.code === 'ArrowRight') {
                 pacman.moveRight();
-            } else if (event.code === 'ArrowLeft' && collides[3] != 3) {
+            } else if (event.code === 'ArrowLeft') {
                 pacman.moveLeft();
-            } else if (event.code === 'ArrowUp' && collides[0] != 0) {
+                if (pacman.leftCollide(document.getElementsByClassName('block'))) {
+                    return console.log('Colisión 2');
+                }
+            } else if (event.code === 'ArrowUp') {
                 pacman.moveUp();
-            } else if (event.code === 'ArrowDown' && collides[1] != 1) {
+            } else if (event.code === 'ArrowDown') {
                 pacman.moveDown();
             }
             drawCoordinates(pacman.x, pacman.y);
         });
-        
 
-        function isCollideWithBlock(obj) {
+        function checkBlockCollissions(divObj) {
             let blocks = document.getElementsByClassName('block');
             for (let i = 0; i < blocks.length; i++) {
-                let block = {
-                    x: blocks[i].offsetLeft,
-                    y: blocks[i].offsetTop,
-                    height: blocks[i].offsetHeight,
-                    width: blocks[i].offsetWidth
-                };
-                if (isCollide(block, obj)) {
-                    console.log(block);
-                    blocks[i].setAttribute('style', 'background-color: red;');
+                if (divObj.isCollide(blocks[i])) {
                     console.log('Colisión detectada!');
-                    return collides(block, obj);
+                    blocks[i].setAttribute('style', 'background-color: red;');
                 }
             }
-            return -1;
         }
 
         /*
+         * detector de colisiones basado en: https://en.wikipedia.org/wiki/Minimum_bounding_rectangle
+         * fuente algoritmo: https://stackoverflow.com/questions/2440377
+         * a y b: html elements
+         * 
          * Colisión superior:   0
          * Colisión inferior:   1
          * Colisión derecha:    2
          * Colisión izquierda:  3
-        */
-        function collides(a, b) {
-            switch (key) {
-                case 'up':
-                    break;
-            
-                default:
-                    break;
-            }
-            let response = [-1, -1, -1, -1];
-            if ( !(a.y > (b.y + b.height)) ) {
-                response[0] = 0; 
-            } 
-            if ( !((a.y + a.height) < (b.y)) ) {
-                response[1] = 1;
-            } 
-            if ( !((a.x + a.width) < b.x) ) {
-                response[2] = 2;  
-            } 
-            if ( !(a.x > (b.x + b.width)) ) {
-                response[3] = 3;  
-            }
-            console.log(response);
-            return response; 
-        }
-
-        function isUp(a, b) {
-            return !(a.y > (b.y + b.height));
-        }
-
-
-        // detector de colisiones basado en: https://en.wikipedia.org/wiki/Minimum_bounding_rectangle
-        // fuente algoritmo: https://stackoverflow.com/questions/2440377
-        // a y b: dos objetos con coordenadas y tamaño
-        // a: bloque 
-        // b: pacman
-        function isCollide(a, b) {
-            return !(
-                ((a.y + a.height) < (b.y)) ||
-                (a.y > (b.y + b.height)) ||
-                ((a.x + a.width) < b.x) ||
-                (a.x > (b.x + b.width))
-            );
+       */
+        function checkSide(side, a, b) {
+            return col
         }
 
         drawMap();
