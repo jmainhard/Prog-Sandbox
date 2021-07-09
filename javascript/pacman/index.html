@@ -17,12 +17,11 @@
     <div id="pacman-cc" style="font-family: sans-serif;"></div>
 
     <script>
-        function DivObject(id) {
-            this.html = document.getElementById(id);
-            this.x = document.getElementById(id).getBoundingClientRect().x;
-            this.y = document.getElementById(id).getBoundingClientRect().y;
-            this.height = document.getElementById(id).getBoundingClientRect().height;
-            this.width = document.getElementById(id).getBoundingClientRect().width;
+        function DivObject(htmlElement) {
+            this.x = htmlElement.getBoundingClientRect().x;
+            this.y = htmlElement.getBoundingClientRect().y;
+            this.height = htmlElement.getBoundingClientRect().height;
+            this.width = htmlElement.getBoundingClientRect().width;
             this.speed = 5;
             this.canMove = {
                 right: true,
@@ -32,40 +31,26 @@
             };
             this.moveRight = function () {
                 this.x += this.speed;
-                this.html.style.left = this.x + 'px';
+                htmlElement.style.left = this.x + 'px';
             };
             this.moveLeft = function () {
                 this.x -= this.speed;
-                this.html.style.left = this.x + 'px';
+                htmlElement.style.left = this.x + 'px';
             };
             this.moveUp = function () {
                 this.y -= this.speed;
-                this.html.style.top = this.y + 'px';
+                htmlElement.style.top = this.y + 'px';
             };
             this.moveDown = function () {
                 this.y += this.speed;
-                this.html.style.top = this.y + 'px';
+                htmlElement.style.top = this.y + 'px';
             };
-            this.isCollide = function (obj) {
-                let aRect = a.getBoundingClientRect();
-                let bRect = b.getBoundingClientRect();
-                return !(
-                    ((aRect.top + aRect.height) < (bRect.top)) ||
-                    (aRect.top > (bRect.top + bRect.height)) ||
-                    ((aRect.left + aRect.width) < bRect.left) ||
-                    (aRect.left > (bRect.left + bRect.width))
-                );
+            this.rightCollide = function (other) {
+                return !((this.x + this.width) < other.x);
             };
-            this.leftCollide = function (obj) {
-                for (let i = 0; i < obj.length; i++) {
-                    if (this.isCollide(blocks[i])) {
-                        blocks[i].setAttribute('style', 'background-color: red;');
-                    }
-                }
-                if (checkSide('left', this.html, obj)) {
-                    obj.setAttribute('style', 'background-color: red;');
-                }
-            }
+            this.leftCollide = function (other) {
+                return !(this.x > (other.x + other.width));
+            };
         }
 
         /* 0 - vacio (empty)
@@ -108,12 +93,12 @@
         drawCoordinates('undefined', 'undefined');
 
         document.addEventListener('keydown', function (event) {
-            let pacman = new DivObject('pacman');
+            let pacman = new DivObject(document.getElementById('pacman'));
             if (event.code === 'ArrowRight') {
                 pacman.moveRight();
             } else if (event.code === 'ArrowLeft') {
                 pacman.moveLeft();
-                if (pacman.leftCollide(document.getElementsByClassName('block'))) {
+                if (pacman.leftCollide(new DivObject(document.getElementsByClassName('block')[10]))) {
                     return console.log('Colisión 2');
                 }
             } else if (event.code === 'ArrowUp') {
