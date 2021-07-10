@@ -18,6 +18,7 @@
 
     <script>
         function DivObject(htmlElement) {
+            this.html = htmlElement;
             this.x = htmlElement.getBoundingClientRect().x;
             this.y = htmlElement.getBoundingClientRect().y;
             this.height = htmlElement.getBoundingClientRect().height;
@@ -45,11 +46,21 @@
                 this.y += this.speed;
                 htmlElement.style.top = this.y + 'px';
             };
-            this.rightCollide = function (other) {
-                return !((this.x + this.width) < other.x);
+            this.rightCollide = function (htmlCollection) {
+                // return !((this.x + this.width) < other.x);
             };
-            this.leftCollide = function (other) {
-                return !(this.x > (other.x + other.width));
+            this.hits = function (className) {
+                let others = elementsToDivObjects(className);
+                let result = others.find(
+                    e => isCollide(this.html, e.html)
+                );
+                if (result) {
+                    console.log('Bloque: x: ' + result.x + ' y: ' + result.y);
+                    console.log('Pacman: x: ' + this.x + ' y: ' + this.y);
+                    result.html.setAttribute('style', 'background-color: red;');
+                    return true;
+                }
+                return false;
             };
         }
 
@@ -96,9 +107,12 @@
             let pacman = new DivObject(document.getElementById('pacman'));
             if (event.code === 'ArrowRight') {
                 pacman.moveRight();
+                if (pacman.rightCollide(new DivObject(document.getElementsByClassName('block')[11]))) {
+                    return console.log('Colisión 1');
+                }
             } else if (event.code === 'ArrowLeft') {
                 pacman.moveLeft();
-                if (pacman.leftCollide(new DivObject(document.getElementsByClassName('block')[10]))) {
+                if (pacman.hits('block')) {
                     return console.log('Colisión 2');
                 }
             } else if (event.code === 'ArrowUp') {
@@ -108,6 +122,15 @@
             }
             drawCoordinates(pacman.x, pacman.y);
         });
+
+        function elementsToDivObjects(className) {
+            let htmlCollection = document.getElementsByClassName(className);
+            let divObjects = new Array();
+            for (let i = 0; i < htmlCollection.length; i++) {
+                divObjects.push(new DivObject(htmlCollection.item(i)));
+            }
+            return divObjects;
+        }
 
         function checkBlockCollissions(divObj) {
             let blocks = document.getElementsByClassName('block');
@@ -119,18 +142,20 @@
             }
         }
 
-        /*
-         * detector de colisiones basado en: https://en.wikipedia.org/wiki/Minimum_bounding_rectangle
-         * fuente algoritmo: https://stackoverflow.com/questions/2440377
-         * a y b: html elements
-         * 
-         * Colisión superior:   0
-         * Colisión inferior:   1
-         * Colisión derecha:    2
-         * Colisión izquierda:  3
-       */
-        function checkSide(side, a, b) {
-            return col
+        // detector de colisiones basado en: https://en.wikipedia.org/wiki/Minimum_bounding_rectangle
+        // fuente algoritmo: https://stackoverflow.com/questions/2440377
+        // a y b: dos objetos con coordenadas y tamaño
+        // a: bloque 
+        // b: pacman
+        function isCollide(a, b) {
+            let aRect = a.getBoundingClientRect();
+            let bRect = b.getBoundingClientRect();
+            return !(
+                ((aRect.y + aRect.height) < (bRect.y)) ||
+                (aRect.y > (bRect.y + bRect.height)) ||
+                ((aRect.x + aRect.width) < bRect.x) ||
+                (aRect.x > (bRect.x + bRect.width))
+            );
         }
 
         drawMap();
