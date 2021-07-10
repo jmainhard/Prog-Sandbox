@@ -52,12 +52,15 @@
             this.hits = function (className) {
                 let others = elementsToDivObjects(className);
                 let result = others.find(
-                    e => isCollide(this.html, e.html)
+                    e => isCollide(this, e)
                 );
                 if (result) {
                     console.log('Bloque: x: ' + result.x + ' y: ' + result.y);
                     console.log('Pacman: x: ' + this.x + ' y: ' + this.y);
                     result.html.setAttribute('style', 'background-color: red;');
+                    if (!((this.y + this.height) < (result.y))) {
+                        this.moveDown();
+                    }
                     return true;
                 }
                 return false;
@@ -107,15 +110,9 @@
             let pacman = new DivObject(document.getElementById('pacman'));
             if (event.code === 'ArrowRight') {
                 pacman.moveRight();
-                if (pacman.rightCollide(new DivObject(document.getElementsByClassName('block')[11]))) {
-                    return console.log('Colisión 1');
-                }
-            } else if (event.code === 'ArrowLeft') {
+            } else if (event.code === 'ArrowLeft' && !pacman.hits('block')) {
                 pacman.moveLeft();
-                if (pacman.hits('block')) {
-                    return console.log('Colisión 2');
-                }
-            } else if (event.code === 'ArrowUp') {
+            } else if (event.code === 'ArrowUp' && !pacman.hits('block')) {
                 pacman.moveUp();
             } else if (event.code === 'ArrowDown') {
                 pacman.moveDown();
@@ -148,13 +145,11 @@
         // a: bloque 
         // b: pacman
         function isCollide(a, b) {
-            let aRect = a.getBoundingClientRect();
-            let bRect = b.getBoundingClientRect();
             return !(
-                ((aRect.y + aRect.height) < (bRect.y)) ||
-                (aRect.y > (bRect.y + bRect.height)) ||
-                ((aRect.x + aRect.width) < bRect.x) ||
-                (aRect.x > (bRect.x + bRect.width))
+                ((a.y + a.height) < (b.y)) ||
+                (a.y > (b.y + b.height)) ||
+                ((a.x + a.width) < b.x) ||
+                (a.x > (b.x + b.width))
             );
         }
 
