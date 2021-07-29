@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lookify!</title>
+</head>
+
+<body>
+
+    <a href="/canciones/nueva">Agregar Canción</a>
+    <a href="#">Top 10 Canciones</a>
+    <input type="text">
+    <input type="button" value="Buscar Artista">
+
+    <table border="1" style="width:100%">
+        <tr>
+            <th>id</th>
+            <th>Nombre de la canción</th>
+            <th>Puntuación</th>
+            <th>Acciones</th>
+        </tr>
+
+        <% for (let i in songs) { %>
+            <tr>
+                <td>
+                    <%= songs[i].id %>
+                </td>
+                <td>
+                    <%= songs[i].title %>
+                </td>
+                <td>
+                    <%= songs[i].rating %>
+                </td>
+                <td>
+                    <a href="/eliminar/<%=songs[i].id %>">Eliminar</a>
+                </td>
+            </tr>
+            <% } %>
+
+    </table>
+
+</body>
+
+</html>
